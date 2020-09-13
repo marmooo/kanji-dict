@@ -16,5 +16,5 @@
 CC BY-SA 4.0
 
 ## Attribution
-- [KanjiVG/kanjivg](https://github.com/KanjiVG/kanjivg) is released under the CC BY-SA 3.0.
-- [MJ文字情報取得API](https://mojikiban.ipa.go.jp/search/help/api) is released under the CC BY-SA 2.1 JP.
+- [KanjiVG/kanjivg](https://github.com/KanjiVG/kanjivg) is released under the [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/).
+- [MJ文字情報取得API](https://mojikiban.ipa.go.jp/search/help/api) is released under the [CC BY-SA 2.1 JP](https://creativecommons.org/licenses/by-sa/2.1/jp/).
