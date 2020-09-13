@@ -9,7 +9,6 @@
 4. ```bash build.sh```
 
 ## References
-- [IPAdic](https://ja.osdn.net/projects/ipadic/)
 - [部首一覧](http://etc.dounokouno.com/bushu-search/bushu-list.html)
 - [常用漢字表](https://www.bunka.go.jp/kokugo_nihongo/sisaku/joho/joho/kakuki/14/tosin02/index.html)
 
