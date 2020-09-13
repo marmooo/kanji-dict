@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ja" class="bg-white">
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142997649-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-142997649-1');
+    </script>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>罠 | こども漢字辞書</title>
+    <meta name="description" content="「罠」の書き順アニメーションや読み方・画数・部首・用例です。">
+    <link rel="apple-touch-icon" sizes="180x180" href="/kanji-dict/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/kanji-dict/favicon/favicon-48x48.png">
+    <link rel="manifest" href="/kanji-dict/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/kanji-dict/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/kanji-dict/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/kanji-dict/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+    <style>
+      @media screen and (min-width: 576px) and (max-width: 768px) {
+        #kanji { width:200px; height:200px; }
+        .table td, .table th { padding:.3rem; }
+      }
+      th { white-space:nowrap; }
+      td { vertical-align:middle; word-break:keep-all; }
+      html[data-theme="dark"] { filter: invert(1) hue-rotate(180deg) brightness(1.5); }
+    </style>
+  </head>
+  <body>
+    <nav id="header" class="navbar navbar-expand navbar-light">
+      <div class="container">
+        <a class="navbar-brand" href="/kanji-dict/">
+          こども<ruby>漢字<rp>(</rp><rt>かんじ</rt><rp>)</rp></ruby><ruby>辞書<rp>(</rp><rt>じしょ</rt><rp>)</rp></ruby>
+        </a>
+        <div class="navbar-nav">
+          <button title="ダークモード切替" onclick="toggleDarkMode()" class="ml-2 close">🌓</button>
+        </div>
+      </div>
+    </nav>
+    <div id="container" class="container text-center">
+      <div class="row">
+        <div class="col-sm">
+          <div id="kakijun">
+            <object onload="init(this)" id="kanji" type="image/svg+xml" data="/kanji/07f60.svg" width="300" height="300"></object>
+          </div>
+          <div id="toolbar" class="pb-4">
+            <button title="戻る" onclick="prev()" class="btn">
+              <svg width="48px" height="48px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M4.5 3.5A.5.5 0 0 0 4 4v8a.5.5 0 0 0 1 0V4a.5.5 0 0 0-.5-.5z"/>
+                <path d="M4.903 8.697l6.364 3.692c.54.313 1.232-.066 1.232-.697V4.308c0-.63-.692-1.01-1.232-.696L4.903 7.304a.802.802 0 0 0 0 1.393z"/>
+              </svg>
+            </button>
+            <button title="停止" onclick="stop()" id="stop" class="btn">
+              <svg width="48px" height="48px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5zm5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5z"/>
+              </svg>
+            </button>
+            <button title="再生" onclick="play()" id="play" class="btn d-none">
+              <svg width="48px" height="48px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+              </svg>
+            </button>
+            <button title="進む" onclick="next()" class="btn">
+              <svg width="48px" height="48px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M12 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z"/>
+                <path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        
+        <div class="col-sm">
+          <table class="table table-striped table-responsive">
+            <tr><th>学年</th><td>常用外漢字</td></tr>
+            <tr><th>音読み</th><td>ビン, ミン</td></tr>
+            <tr><th>訓読み</th><td>あみ, わな</td></tr>
+            <tr><th>画数</th><td>10</td></tr>
+            <tr><th>部首</th><td>网 (あみめ, あみがしら, よんがしら)</td></tr>
+            <tr><th><a href="https://ja.wiktionary.org/wiki/罠">用例</a></th><td>
+<a href="https://www.google.com/search?q=罠とは" target="_blank" rel="noopener noreferer">罠</a>
+</td></tr>
+            <tr><th>熟語</th><td>
+</td></tr>
+            <tr><th>学年例</th><td>
+</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="pt-3">
+        <h5>筆順表</h5>
+        <div id="hitujun"></div>
+      </div>
+    </div>
+    <footer class="pt-4 alert text-center">
+      <div>SVG - <a href="https://github.com/KanjiVG/kanjivg">KanjiVG/kanjivg</a>
+        / <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> by Ulrich Apel
+      </div>
+      <div>文字情報 - <a href="https://mojikiban.ipa.go.jp/search/help/api">MJ文字情報取得API</a>
+        / <a href="https://creativecommons.org/licenses/by-sa/2.1/jp/">CC BY-SA 2.1 JP</a> by IPA
+      </div>
+      <div class="pt-3">
+        <a class="px-1" href="/">Home</a>
+        <a class="px-1" href="/terms/">Terms</a>
+        <a class="px-1" href="https://github.com/marmooo/kanji-dict">Contact</a>
+      </div>
+      <div class="text-muted">&copy; <a href="https://github.com/marmooo">marmooo</a>
+        / <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
+      </div>
+    </footer>
+    <script src="/page.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vivus/0.4.4/vivus.js"></script>
+    <script>
+      const kanjiId = '07f60';
+    </script>
+  </body>
+</html>
