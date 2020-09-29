@@ -4,7 +4,7 @@
 ## Build
 1. install [KanjiVG/kanjivg](https://github.com/KanjiVG/kanjivg)
 2. install [IPAdic](https://ja.osdn.net/projects/ipadic/)
-3. install [marmooo/idiom-generator](https://github.com/marmooo/idiom-generator)
+3. install [marmooo/idiom-generator](https://github.com/marmooo/ngram-idioms)
 4. ```node build.js```
 4. ```bash build.sh```
 
