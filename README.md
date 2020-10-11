@@ -3,10 +3,10 @@
 
 ## Build
 1. install [KanjiVG/kanjivg](https://github.com/KanjiVG/kanjivg)
-2. install [IPAdic](https://ja.osdn.net/projects/ipadic/)
-3. install [marmooo/idiom-generator](https://github.com/marmooo/ngram-idioms)
+2. install [marmooo/ngram-idioms](https://github.com/marmooo/ngram-idioms)
+3. install [marmooo/sudachi-idioms](https://github.com/marmooo/sudachi-idioms)
 4. ```node build.js```
-4. ```bash build.sh```
+5. ```bash build.sh```
 
 ## References
 - [部首一覧](http://etc.dounokouno.com/bushu-search/bushu-list.html)

@@ -160,54 +160,22 @@ function getRegularKanjiInfo() {
   return regularKanjiInfo;
 }
 
-function getIdiomFromIPAdic(line) {
-  var p11 = line.indexOf('見出し語 (') + 6;
-  var p12 = line.slice(p11).indexOf(')');
-  var idiom = line.slice(p11, p11+p12).split(' ')[0];
-  // var p21 = line.indexOf('(読み ') + 4;
-  // var p22 = line.slice(p21).indexOf(')');
-  // var yomi = line.slice(p21, p21+p22).split(' ')[0];
-  return idiom;
-}
-
-// 常用外漢字は N-gram コーパス、文科省の常用漢字表のどちらでも対応できない
-// IPAdic を利用して用例の補完を試みる
-function getIPAdicIdioms() {
-  var ipadicExamples = {};
-  // execSync('iconv --from-code=euc-jp --to-code=utf8 ipadic-2.7.0/Adverb.dic -o ipadic-2.7.0/Adverb.utf8.dic');
-  // execSync('iconv --from-code=euc-jp --to-code=utf8 ipadic-2.7.0/Adnominal.dic -o ipadic-2.7.0/Adnominal.utf8.dic');
-  // execSync('iconv --from-code=euc-jp --to-code=utf8 ipadic-2.7.0/Adj.dic -o ipadic-2.7.0/Adj.utf8.dic');
-  // execSync('iconv --from-code=euc-jp --to-code=utf8 ipadic-2.7.0/Noun.dic -o ipadic-2.7.0/Noun.utf8.dic');
-  // execSync('iconv --from-code=euc-jp --to-code=utf8 ipadic-2.7.0/Noun.adjv.dic -o ipadic-2.7.0/Noun.adjv.utf8.dic');
-  // execSync('iconv --from-code=euc-jp --to-code=utf8 ipadic-2.7.0/Noun.adverbal.dic -o ipadic-2.7.0/Noun.adverbal.utf8.dic');
-  // execSync('iconv --from-code=euc-jp --to-code=utf8 ipadic-2.7.0/Noun.verbal.dic -o ipadic-2.7.0/Noun.verbal.utf8.dic');
-  // execSync('iconv --from-code=euc-jp --to-code=utf8 ipadic-2.7.0/Verb.dic -o ipadic-2.7.0/Verb.utf8.dic');
-  var dicts = [
-    'ipadic-2.7.0/Adverb.utf8.dic',
-    'ipadic-2.7.0/Adnominal.utf8.dic',
-    'ipadic-2.7.0/Noun.utf8.dic',
-    'ipadic-2.7.0/Noun.adjv.utf8.dic',
-    'ipadic-2.7.0/Noun.adverbal.utf8.dic',
-    'ipadic-2.7.0/Noun.verbal.utf8.dic',
-    'ipadic-2.7.0/Verb.utf8.dic',
-  ];
+// 漢字のカバー率が低いのであまり機能しない
+function getNgramExamples() {
+  var examples = {};
   var all = [].concat.apply([], [s1, s2, s3, s4, s5, s6, j2, j3, a1, a2]);
-  dicts.forEach(dict => {
-    readEachLineSync(dict, 'utf-8', (line) => {
-      var idiom = getIdiomFromIPAdic(line);
-      for (var i=0; i<idiom.length; i++) {
-        if (all.includes(idiom[i])) {  // 改訂などを考慮して全件抽出
-          if (ipadicExamples[idiom[i]]) {
-            ipadicExamples[idiom[i]].push(idiom);
-          } else {
-            ipadicExamples[idiom[i]] = [idiom];
-          }
-          break;
+  readEachLineSync('ngram-idioms/hirakanji-all/10.lst', 'utf-8', (idiom) => {
+    for (var i=0; i<idiom.length; i++) {
+      if (all.includes(idiom[i])) {  // 改訂などを考慮して全件抽出
+        if (examples[idiom[i]]) {
+          examples[idiom[i]].push(idiom);
+        } else {
+          examples[idiom[i]] = [idiom];
         }
       }
-    });
+    }
   });
-  return ipadicExamples;
+  return examples;
 }
 
 function uniq(array) {
@@ -216,9 +184,9 @@ function uniq(array) {
 
 // TODO: けがれる,よごれる のような同一パターンを uniq で削除
 // Google 検索で読み方を表示してくれるので許容しているが、ルビを振っても良さそう
-function getExamples(kanji, ipadicExamples, regularKanjiInfo) {
+function getExamples(kanji, regularKanjiInfo, ngramExamples) {
   if (a2.includes(kanji)) {
-    var examples = ipadicExamples[kanji];
+    var examples = ngramExamples[kanji];
     if (examples) {
       return uniq(examples);
     } else {
@@ -226,7 +194,7 @@ function getExamples(kanji, ipadicExamples, regularKanjiInfo) {
     }
   } else {
     if (!regularKanjiInfo[kanji]) {
-      var examples = ipadicExamples[kanji];
+      var examples = ngramExamples[kanji];
       if (examples) {
         return uniq(examples);
       } else {
@@ -253,12 +221,12 @@ function getBuildInfo() {
   } else {
     regularKanjiInfo = JSON.parse(fs.readFileSync('regular-kanji-info.json', 'utf8'));
   }
-  var ipadicExamples;
-  if (!fs.existsSync('ipadic-examples.json')) {
-    ipadicExamples = getIPAdicIdioms();
-    fs.writeFileSync('ipadic-examples.json', JSON.stringify(ipadicExamples));
+  var ngramExamples;
+  if (!fs.existsSync('ngram-examples.json')) {
+    ngramExamples = getNgramExamples();
+    fs.writeFileSync('ngram-examples.json', JSON.stringify(ngramExamples));
   } else {
-    ipadicExamples = JSON.parse(fs.readFileSync('ipadic-examples.json', 'utf8'));
+    ngramExamples = JSON.parse(fs.readFileSync('ngram-examples.json', 'utf8'));
   }
 
   var buildInfo = {};
@@ -294,8 +262,8 @@ function getBuildInfo() {
         var [bushu, bushuName] = bushuInfo[bushuId];
         b['部首'] = bushu;
         b['部首名'] = bushuName;
-        b['用例'] = getExamples(kanji, ipadicExamples, regularKanjiInfo);
-        var examples1 = getProperExamples(kanji, 8);
+        b['用例'] = getExamples(kanji, regularKanjiInfo, ngramExamples);
+        var examples1 = getProperExamples(kanji, 9);
         var examples2 = [];
         if (level < 8) {
           examples2 = getProperExamples(kanji, level);
@@ -316,8 +284,8 @@ function getBuildInfo() {
       var [bushu, bushuName] = bushuInfo[bushuId];
       b['部首'] = bushu;
       b['部首名'] = bushuName;
-      b['用例'] = getExamples(kanji, ipadicExamples, regularKanjiInfo);
-      var examples1 = getProperExamples(kanji, 8);
+      b['用例'] = getExamples(kanji, regularKanjiInfo, ngramExamples);
+      var examples1 = getProperExamples(kanji, 9);
       var examples2 = [];
       if (level < 8) {
         examples2 = getProperExamples(kanji, level);
@@ -335,22 +303,28 @@ function getProperExamples(kanji, level) {
     level = getLevel(kanji);
   }
   var examples = [];
-  var filepath = 'ngram-idioms/kanji-2-10000-non-filtered/' + (level + 1) + '.lst';
+  var filepath = 'ngram-idioms/kanji-2-10000/' + (level + 1) + '.lst';
   readEachLineSync(filepath, 'utf8', (line) => {
-    for (var i=0; i<line.length; i++) {
-      if (line[i] == kanji) {
-        examples.push(line);
-        break;
-      }
+    if (line.includes(kanji)) {
+      examples.push(line);
     }
   });
-  var filepath = 'ngram-idioms/kanji-3-5000-non-filtered/' + (level + 1) + '.lst';
+  filepath = 'ngram-idioms/kanji-3-5000/' + (level + 1) + '.lst';
   readEachLineSync(filepath, 'utf8', (line) => {
-    for (var i=0; i<line.length; i++) {
-      if (line[i] == kanji) {
-        examples.push(line);
-        break;
-      }
+    if (line.includes(kanji)) {
+      examples.push(line);
+    }
+  });
+  filepath = 'sudachi-idioms/kanji-2-all/' + (level + 1) + '.lst';
+  readEachLineSync(filepath, 'utf8', (line) => {
+    if (line.includes(kanji)) {
+      examples.push(line);
+    }
+  });
+  filepath = 'sudachi-idioms/kanji-3-all/' + (level + 1) + '.lst';
+  readEachLineSync(filepath, 'utf8', (line) => {
+    if (line.includes(kanji)) {
+      examples.push(line);
     }
   });
   return examples;
