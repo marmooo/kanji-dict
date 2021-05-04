@@ -354,8 +354,8 @@ for (var i=0; i<kodomoKanjis.length; i++) {
     var kanji = kodomoKanjis[i][j];
     if (buildInfo[kanji]) {
       var kanjiId = toKanjiId(kanji);
-      // if (!fs.existsSync('src/kanji/' + kanjiId + '.svg')) {
-      //   fs.copyFileSync('kanji/' + kanjiId + '.svg', 'src/kanji/' + kanjiId + '.svg');  // kanjivg
+      // if (!fs.existsSync('src/kanjivg/' + kanjiId + '.svg')) {
+      //   fs.copyFileSync('kanjivg/' + kanjiId + '.svg', 'src/kanjivg/' + kanjiId + '.svg');  // kanjivg
       // }
       var html = ejs.render(template, { kanji: kanji, kanjiId: kanjiId, info: buildInfo[kanji] });
       var kanjiDir = dir + '/' + kanji
