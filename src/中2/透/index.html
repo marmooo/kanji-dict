@@ -35,17 +35,19 @@
     </style>
   </head>
   <body>
-    <nav id="header" class="navbar navbar-expand navbar-light">
-      <div class="container">
-        <a class="navbar-brand" href="/kanji-dict/">
-          こども<ruby>漢字<rp>(</rp><rt>かんじ</rt><rp>)</rp></ruby><ruby>辞書<rp>(</rp><rt>じしょ</rt><rp>)</rp></ruby>
-        </a>
-        <div class="navbar-nav">
-          <button title="ダークモード切替" onclick="toggleDarkMode()" class="ml-2 close">🌓</button>
+    <header>
+      <nav id="header" class="navbar navbar-expand navbar-light">
+        <div class="container">
+          <a class="navbar-brand" href="/kanji-dict/">
+            こども<ruby>漢字<rp>(</rp><rt>かんじ</rt><rp>)</rp></ruby><ruby>辞書<rp>(</rp><rt>じしょ</rt><rp>)</rp></ruby>
+          </a>
+          <div class="navbar-nav">
+            <button title="ダークモード切替" onclick="toggleDarkMode()" class="ml-2 close">🌓</button>
+          </div>
         </div>
-      </div>
-    </nav>
-    <div id="container" class="container text-center">
+      </nav>
+    </header>
+    <main id="container" class="container text-center">
       <div class="row">
         <div class="col-sm">
           <div id="kakijun">
@@ -125,7 +127,7 @@
         <h5>筆順表</h5>
         <div id="hitujun"></div>
       </div>
-    </div>
+    </main>
     <footer class="pt-4 alert text-center">
       <div>SVG - <a href="https://github.com/KanjiVG/kanjivg">KanjiVG/kanjivg</a>
         / <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> by Ulrich Apel
