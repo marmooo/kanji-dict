@@ -1,3 +1,3 @@
-dir=docs
-minify --match="\.(js|html)" -r src -o docs
-cp -r src/favicon docs
+mkdir -p docs
+cp -r src/* docs
+minify -r src -o docs
