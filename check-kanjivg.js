@@ -43,7 +43,7 @@ function checkStatus(kanjiList, arr, name) {
 }
 
 var kanjiList = [];
-glob.sync('kanji/*.svg', {}).forEach(filepath => {
+glob.sync('kanjivg/*.svg', {}).forEach(filepath => {
   var arr = filepath.split('/');
   var basename = arr[arr.length - 1].split('.')[0];
   var kanjiId = basename.split('-')[0];
