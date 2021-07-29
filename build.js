@@ -107,7 +107,7 @@ function getLevel(kanji) {
       return i;
     }
   }
-  throw kanji + ' is not defined.';
+  return -1;
 }
 
 // http://etc.dounokouno.com/bushu-search/bushu-list.html
@@ -237,14 +237,18 @@ function getBuildInfo() {
     buildInfo[kanji] = {};
     var b = buildInfo[kanji];
     var level = getLevel(kanji);
+    if (level < 0) {
+      console.log('error: ' + kanji);
+      continue;
+    }
     b['dir'] = dirNames[level];
     b['学年'] = grades[level];
-    // results には正字体と異体字が含まれる
-    // 異体字には読みがないことを利用して、読みが出る＝正字体になるまで検索
-    var itaijiOnly = true;
+    // 字体によって読み方や画数が異なるため、基準となる漢字 (包摂区分 "0") を参照するようにする
     var results = kanjiInfo[kanji][1]['results'];
+    var nodata = true;
     for (var i=0; i<results.length; i++) {
-      if (results[i]['読み']) {
+      var jisx0213 = results[i]['JISX0213'];
+      if (jisx0213 && jisx0213['包摂区分'] == "0") {
         var onyomi = results[i]['読み']['音読み'];
         var kunyomi = results[i]['読み']['訓読み'];
         if (onyomi) {
@@ -270,29 +274,28 @@ function getBuildInfo() {
         }
         b['熟語'] = examples1;
         b['学年例'] = examples2;
-        itaijiOnly = false;
+        nodata = false;
         break;
       }
     }
-    // 異体字しかない特殊な漢字はサイト生成時にエラーが出ないよう空データを入れる
-    if (itaijiOnly) {
-      var result = kanjiInfo[kanji][1]['results'][0];
-      b['音読み'] = [];
-      b['訓読み'] = [];
-      b['総画数'] = result['総画数'];
-      var bushuId = info[1]['results'][0]['部首内画数'][0]['部首'];
-      var [bushu, bushuName] = bushuInfo[bushuId];
-      b['部首'] = bushu;
-      b['部首名'] = bushuName;
-      b['用例'] = getExamples(kanji, regularKanjiInfo, ngramExamples);
-      var examples1 = getProperExamples(kanji, 9);
-      var examples2 = [];
-      if (level < 8) {
-        examples2 = getProperExamples(kanji, level);
-      }
-      b['熟語'] = examples1;
-      b['学年例'] = examples2;
-    }
+    // if (nodata) {
+    //   var result = kanjiInfo[kanji][1]['results'][0];
+    //   b['音読み'] = [];
+    //   b['訓読み'] = [];
+    //   b['総画数'] = result['総画数'];
+    //   var bushuId = info[1]['results'][0]['部首内画数'][0]['部首'];
+    //   var [bushu, bushuName] = bushuInfo[bushuId];
+    //   b['部首'] = bushu;
+    //   b['部首名'] = bushuName;
+    //   b['用例'] = getExamples(kanji, regularKanjiInfo, ngramExamples);
+    //   var examples1 = getProperExamples(kanji, 9);
+    //   var examples2 = [];
+    //   if (level < 8) {
+    //     examples2 = getProperExamples(kanji, level);
+    //   }
+    //   b['熟語'] = examples1;
+    //   b['学年例'] = examples2;
+    // }
   }
   return buildInfo;
 }
