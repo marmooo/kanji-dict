@@ -166,4 +166,3 @@ document.getElementById("next").onclick = next;
 document.getElementById("play").onclick = play;
 document.getElementById("stop").onclick = stop;
 document.getElementById("prev").onclick = prev;
-
