@@ -2,15 +2,14 @@
 [使いやすい漢字辞書](https://marmooo.github.io/kanji-dict/)です。
 
 ## Build
-1. install [KanjiVG/kanjivg](https://github.com/KanjiVG/kanjivg)
-2. install [marmooo/ngram-idioms](https://github.com/marmooo/ngram-idioms)
-3. install [marmooo/sudachi-idioms](https://github.com/marmooo/sudachi-idioms)
-4. ```node build.js```
-5. ```bash build.sh```
+- install [KanjiVG/kanjivg](https://github.com/KanjiVG/kanjivg) licensed under the CC-BY-SA 3.0
+- install [marmooo/graded-vocab-ja](https://github.com/marmooo/graded-vocab-ja) licensed under the CC-BY 4.0
+- install [marmooo/graded-idioms-ja](https://github.com/marmooo/graded-idioms-ja) licensed under the CC-BY 4.0
+- ```node build.js```
+- ```bash build.sh```
 
 ## References
 - [部首一覧](http://etc.dounokouno.com/bushu-search/bushu-list.html)
-- [常用漢字表](https://www.bunka.go.jp/kokugo_nihongo/sisaku/joho/joho/kakuki/14/tosin02/index.html)
 
 ## License
 CC BY-SA 4.0
