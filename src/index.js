@@ -71,7 +71,7 @@ for (let i = 0; i < 8; i++) {
     const a = document.createElement("a");
     a.href = "/kanji-dict/" + dirNames[i] + "/" + kanji + "/";
     a.className = "px-1";
-    a.innerText = kanji;
+    a.textContent = kanji;
     e.appendChild(a);
   }
 }
