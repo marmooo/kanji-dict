@@ -2,5 +2,5 @@ const s1=Array.from("一右雨円王音下火花貝学気九休玉金空月犬�
 loadConfig();function toggleDarkMode(){if(localStorage.getItem("darkMode")==1){localStorage.setItem("darkMode",0);delete document.documentElement.dataset.theme;}else{localStorage.setItem("darkMode",1);document.documentElement.dataset.theme="dark";}}
 function search(){let kanji=document.getElementById("search").value;if(kanji)kanji=kanji[0];let included=false;for(let i=0;i<kodomoKanjis.length;i++){if(kodomoKanjis[i].includes(kanji)){included=true;location.href="/kanji-dict/"+dirNames[i]+"/"+kanji+"/";break;}}
 if(!included){location.href="/kanji-dict/常用外/"+kanji+"/";}}
-for(let i=0;i<8;i++){const e=document.getElementById(dirNames[i]);for(let j=0;j<kodomoKanjis[i].length;j++){const kanji=kodomoKanjis[i][j];const a=document.createElement("a");a.href="/kanji-dict/"+dirNames[i]+"/"+kanji+"/";a.className="px-1";a.innerText=kanji;e.appendChild(a);}}
+for(let i=0;i<8;i++){const e=document.getElementById(dirNames[i]);for(let j=0;j<kodomoKanjis[i].length;j++){const kanji=kodomoKanjis[i][j];const a=document.createElement("a");a.href="/kanji-dict/"+dirNames[i]+"/"+kanji+"/";a.className="px-1";a.textContent=kanji;e.appendChild(a);}}
 document.getElementById("toggleDarkMode").onclick=toggleDarkMode;document.addEventListener("keydown",function(event){if(event.key=="Enter"){search();}},false);
