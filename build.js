@@ -184,7 +184,8 @@ async function getBuildInfo() {
   const bushuInfo = await getBushuInfo();
   if (!Deno.statSync("kanji-info.json")) {
     getKanjiInfoFromIPA().then((kanjiInfo) => {
-      Deno.writeTextFileSync("kanji-info.json", JSON.stringify(kanjiInfo));
+      const json = JSON.stringify(kanjiInfo, null, "\t");
+      Deno.writeTextFileSync("kanji-info.json", json);
     });
   }
   const kanjiInfo = JSON.parse(Deno.readTextFileSync("kanji-info.json"));
@@ -247,10 +248,8 @@ async function getBuildInfo() {
 let buildInfo;
 if (!existsSync("build-info.json")) {
   buildInfo = await getBuildInfo();
-  Deno.writeTextFileSync(
-    "build-info.json",
-    JSON.stringify(buildInfo, null, "\t"),
-  );
+  const json = JSON.stringify(buildInfo, null, "\t");
+  Deno.writeTextFileSync("build-info.json", json);
 } else {
   buildInfo = JSON.parse(Deno.readTextFileSync("build-info.json"));
 }
