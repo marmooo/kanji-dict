@@ -1,6 +1,6 @@
+const kanji = document.getElementById("kanji");
 let animator;
 let currPos = 1;
-const kanji = document.getElementById("kanji");
 let kanjiSvg;
 loadConfig();
 
@@ -137,13 +137,13 @@ function addAnimation() {
     animator = new Vivus(
       "kanji",
       { type: "oneByOne", duration: kakusu * 50 },
-      function () {
+      () => {
         setTimeout(kanjiAnimation, 2000);
       },
     );
   }
   kanjiAnimation();
-  document.getElementById("kanji").addEventListener("click", function () {
+  document.getElementById("kanji").addEventListener("click", () => {
     if (kanji.dataset.active == "false") {
       animator.play();
       kanji.dataset.active = "true";
