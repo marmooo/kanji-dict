@@ -49,7 +49,7 @@ function toggleDarkMode() {
 }
 
 function search() {
-  let kanji = document.getElementById("search").value;
+  let kanji = document.getElementById("searchText").value;
   if (kanji) kanji = kanji[0];
   let included = false;
   for (let i = 0; i < kodomoKanjis.length; i++) {
@@ -78,7 +78,7 @@ for (let i = 0; i < 8; i++) {
 
 document.getElementById("toggleDarkMode").onclick = toggleDarkMode;
 document.getElementById("search").onclick = search;
-document.addEventListener("keydown", function (event) {
+document.addEventListener("keydown", (event) => {
   if (event.key == "Enter") {
     search();
   }
