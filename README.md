@@ -15,7 +15,7 @@
 ## Build
 
 ```
-deno run --allow-read --allow-write build.js > build.log
+deno run --allow-read --allow-write --allow-env build.js > build.log
 bash build.sh
 ```
 

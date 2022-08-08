@@ -1,7 +1,7 @@
 import { readLines } from "https://deno.land/std/io/mod.ts";
 import { existsSync } from "https://deno.land/std/fs/mod.ts";
 import { sleep } from "https://deno.land/x/sleep/mod.ts";
-import * as dejs from "https://deno.land/x/dejs@0.10.2/mod.ts";
+import ejs from "https://esm.sh/ejs@3.1.8";
 
 const w1_ = Array.from(
   "一右雨円王音下火花貝学気九休玉金空月犬見五口校左三山子四糸字耳七車手十出女小上森人水正生青夕石赤千川先早草足村大男竹中虫町天田土二日入年白八百文木本名目立力林六",
@@ -261,7 +261,7 @@ for (let level = 1; level < gradeByKanjis.length; level++) {
   for (const kanji of gradeByKanjis[level]) {
     if (buildInfo[kanji]) {
       const kanjiId = toKanjiId(kanji);
-      const html = await dejs.renderToString(template, {
+      const html = ejs.render(template, {
         kanji: kanji,
         kanjiId: kanjiId,
         info: buildInfo[kanji],
