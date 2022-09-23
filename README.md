@@ -11,6 +11,7 @@
 - install
   [marmooo/graded-idioms-ja](https://github.com/marmooo/graded-idioms-ja)
   licensed under the CC-BY 4.0
+- `bash install-fonts.sh`
 
 ## Build
 
@@ -29,6 +30,7 @@ CC BY-SA 4.0
 
 ## Attribution
 
+- 古代文字フォント [春秋-tsu](http://www.tarojiro.co.jp/kanji/shunju-tsu/)
 - [KanjiVG/kanjivg](https://github.com/KanjiVG/kanjivg) is licensed under the
   [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/).
 - [MJ文字情報取得API](https://mojikiban.ipa.go.jp/search/help/api) is licensed under

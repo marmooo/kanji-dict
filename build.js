@@ -1,6 +1,7 @@
 import { readLines } from "https://deno.land/std/io/mod.ts";
 import { existsSync } from "https://deno.land/std/fs/mod.ts";
 import { sleep } from "https://deno.land/x/sleep/mod.ts";
+import ttf2svg from "https://esm.sh/@marmooo/ttf2svg@0.0.4";
 import ejs from "https://esm.sh/ejs@3.1.8";
 
 const w1_ = Array.from(
@@ -244,6 +245,38 @@ async function getBuildInfo() {
   return buildInfo;
 }
 
+function notFoundSvg() {
+  return `
+<svg role="img" aria-label="未発見" xmlns="http://www.w3.org/2000/svg" fill="red" width="64" height="64" viewBox="0 0 16 16">
+  <title>未発見</title>
+  <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+</svg>
+`;
+}
+
+function replaceSize(text, width, height) {
+  return text
+    .replace('width="100"', `width="${width}"`)
+    .replace('height="100"', `height="${height}"`);
+}
+
+function getAncientSvgs(kanji) {
+  const kinbun = ttf2svg("fonts/syunju102/Shunju-tsu-kyoiku.ttf", kanji) ||
+    notFoundSvg();
+  const reisho = ttf2svg("fonts/aoyagireisyosimo_ttf_2_01.ttf", kanji) ||
+    notFoundSvg();
+  const sousho = ttf2svg("fonts/KouzanBrushFontSousyo.ttf", kanji) ||
+    notFoundSvg();
+  const gyousho = ttf2svg("fonts/衡山毛筆フォント行書.ttf", kanji) ||
+    notFoundSvg();
+  return {
+    "古代文字": replaceSize(kinbun, 64, 64),
+    "隷書": replaceSize(reisho, 64, 64),
+    "草書": replaceSize(sousho, 64, 64),
+    "行書": replaceSize(gyousho, 64, 64),
+  };
+}
+
 // TODO: ルビ
 let buildInfo;
 if (!existsSync("build-info.json")) {
@@ -261,10 +294,12 @@ for (let level = 1; level < gradeByKanjis.length; level++) {
   for (const kanji of gradeByKanjis[level]) {
     if (buildInfo[kanji]) {
       const kanjiId = toKanjiId(kanji);
+      const ancientSvgs = getAncientSvgs(kanji);
       const html = ejs.render(template, {
         kanji: kanji,
         kanjiId: kanjiId,
         info: buildInfo[kanji],
+        ancientSvgs: ancientSvgs,
       });
       const kanjiDir = dir + "/" + kanji;
       Deno.mkdirSync(kanjiDir, { recursive: true });
