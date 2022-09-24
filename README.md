@@ -1,6 +1,6 @@
 # こども漢字辞書
 
-[使いやすい漢字辞書](https://marmooo.github.io/kanji-dict/)です。
+[漢字の書き順(筆順)・読み方・画数・部首・用例・成り立ちを調べるためのシンプルな漢字辞書](https://marmooo.github.io/kanji-dict/)です。
 
 ## Installation
 
