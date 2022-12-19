@@ -1,3 +1,4 @@
+# sudo apt install fontforge
 cd fonts
 wget http://www.tarojiro.co.jp/wp-content/uploads/2015/07/syunju101.zip
 unzip -O cp932 syunju101.zip
