@@ -1,6 +1,5 @@
 import { readLines } from "https://deno.land/std/io/mod.ts";
 import { existsSync } from "https://deno.land/std/fs/mod.ts";
-import { sleep } from "https://deno.land/x/sleep/mod.ts";
 import ttf2svg from "https://esm.sh/@marmooo/ttf2svg@0.0.4";
 import ejs from "https://esm.sh/ejs@3.1.8";
 
@@ -69,6 +68,10 @@ const grades = [
   "常用漢字",
   "常用外漢字",
 ];
+
+function sleep(msec) {
+  return new Promise((resolve) => setTimeout(resolve, msec));
+}
 
 function toKanjiId(str) {
   const hex = str.codePointAt(0).toString(16);
