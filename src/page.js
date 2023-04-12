@@ -1,9 +1,3 @@
-const kanji = document.getElementById("kanji");
-let animator;
-let currPos = 1;
-let kanjiSvg;
-loadConfig();
-
 function loadConfig() {
   if (localStorage.getItem("darkMode") == 1) {
     document.documentElement.dataset.theme = "dark";
@@ -77,7 +71,6 @@ function play() {
 
 function next() {
   animator.stop().finish();
-  const kakusu = getKakusu();
   if (currPos < kakusu) {
     currPos += 1;
   }
@@ -114,7 +107,6 @@ function getKakusu() {
 
 function addHitujun() {
   const hitujun = document.getElementById("hitujun");
-  const kakusu = getKakusu();
   for (let i = 1; i <= kakusu; i++) {
     const svg = kanjiSvg.cloneNode(true);
     svg.setAttribute("width", 64);
@@ -132,35 +124,35 @@ function addHitujun() {
 }
 
 function addAnimation() {
-  function kanjiAnimation() {
-    const kakusu = getKakusu();
-    animator = new Vivus(
-      "kanji",
-      { type: "oneByOne", duration: kakusu * 50 },
-      () => {
-        setTimeout(kanjiAnimation, 2000);
-      },
-    );
-  }
-  kanjiAnimation();
-  document.getElementById("kanji").addEventListener("click", () => {
-    if (kanji.dataset.active == "false") {
-      animator.play();
-      kanji.dataset.active = "true";
-    } else {
-      animator.stop();
-      kanji.dataset.active = "false";
-    }
-  });
+  animator = new Vivus(
+    "kanji",
+    { type: "oneByOne", duration: kakusu * 50 },
+    () => {
+      setTimeout(addAnimation, 2000);
+    },
+  );
 }
 
-function init() {
-  kanjiSvg = kanji.contentDocument.getElementsByTagName("svg")[0];
-  addHitujun();
-  addAnimation();
+function init(kanji, kanjiId) {
+  kanji.onload = () => {
+    kanjiSvg = kanji.contentDocument.querySelector("svg");
+    kakusu = getKakusu();
+    addHitujun();
+    addAnimation();
+  };
+  kanji.data = `/kanjivg/${kanjiId}.svg`;
+  kanji.classList.remove("d-none");
 }
 
-document.getElementById("kanji").onload = init;
+loadConfig();
+const kanji = document.getElementById("kanji");
+const kanjiId = kanji.dataset.id;
+let animator;
+let kanjiSvg;
+let kakusu;
+let currPos = 1;
+init(kanji, kanjiId);
+
 document.getElementById("toggleDarkMode").onclick = toggleDarkMode;
 document.getElementById("next").onclick = next;
 document.getElementById("play").onclick = play;
