@@ -1,7 +1,7 @@
 import { readLines } from "https://deno.land/std/io/mod.ts";
 import { existsSync } from "https://deno.land/std/fs/mod.ts";
-import ttf2svg from "https://esm.sh/@marmooo/ttf2svg@0.0.4";
-import ejs from "https://esm.sh/ejs@3.1.8";
+import ttf2svg from "npm:@marmooo/ttf2svg@0.0.4";
+import * as Eta from "npm:eta@2.2.0";
 
 const w1_ = Array.from(
   "一右雨円王音下火花貝学気九休玉金空月犬見五口校左三山子四糸字耳七車手十出女小上森人水正生青夕石赤千川先早草足村大男竹中虫町天田土二日入年白八百文木本名目立力林六",
@@ -260,11 +260,12 @@ function notFoundSvg() {
 function replaceSize(text, width, height) {
   return text
     .replace('width="100"', `width="${width}"`)
-    .replace('height="100"', `height="${height}"`);
+    .replace('height="100"', `height="${height}"`) + "\n";
 }
 
 function getAncientSvgs(kanji) {
-  const kinbun = ttf2svg("fonts/syunju102/Shunju-tsu-kyoiku.ttf", kanji) ||
+  const kinbun =
+    ttf2svg("fonts/syunju102/Shunju-tsu-kyoiku.ttf", kanji) ||
     notFoundSvg();
   const reisho = ttf2svg("fonts/aoyagireisyosimo_ttf_2_01.ttf", kanji) ||
     notFoundSvg();
@@ -280,6 +281,17 @@ function getAncientSvgs(kanji) {
   };
 }
 
+function toLinks(idioms) {
+  let html = "\n";
+  for (let i = 0; i < idioms.length; i++) {
+    const url = "https://www.google.com/search?q=" + idioms[i] + "とは";
+    html += `<a href="${url}" target="_blank" rel="noopener noreferer">${
+      idioms[i]
+    }</a>\n`;
+  }
+  return html;
+}
+
 // TODO: ルビ
 let buildInfo;
 if (!existsSync("build-info.json")) {
@@ -290,7 +302,7 @@ if (!existsSync("build-info.json")) {
   buildInfo = JSON.parse(Deno.readTextFileSync("build-info.json"));
 }
 
-const template = Deno.readTextFileSync("page.ejs");
+const template = Deno.readTextFileSync("page.eta");
 for (let level = 1; level < gradeByKanjis.length; level++) {
   const dir = "src/" + dirNames[level];
   Deno.mkdirSync(dir, { recursive: true });
@@ -298,11 +310,15 @@ for (let level = 1; level < gradeByKanjis.length; level++) {
     if (buildInfo[kanji]) {
       const kanjiId = toKanjiId(kanji);
       const ancientSvgs = getAncientSvgs(kanji);
-      const html = ejs.render(template, {
+      const info = buildInfo[kanji];
+      const html = Eta.render(template, {
         kanji: kanji,
         kanjiId: kanjiId,
-        info: buildInfo[kanji],
+        info: info,
         ancientSvgs: ancientSvgs,
+        examples1: toLinks(info["用例"].slice(0, 10)),
+        examples2: toLinks(info["熟語"].slice(0, 10)),
+        examples3: toLinks(info["学年例"].slice(0, 10)),
       });
       const kanjiDir = dir + "/" + kanji;
       Deno.mkdirSync(kanjiDir, { recursive: true });
