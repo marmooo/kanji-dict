@@ -1,5 +1,4 @@
 import { readLines } from "https://deno.land/std/io/mod.ts";
-import { existsSync } from "https://deno.land/std/fs/mod.ts";
 import ttf2svg from "npm:@marmooo/ttf2svg@0.0.4";
 import * as Eta from "npm:eta@2.2.0";
 
@@ -264,8 +263,7 @@ function replaceSize(text, width, height) {
 }
 
 function getAncientSvgs(kanji) {
-  const kinbun =
-    ttf2svg("fonts/syunju102/Shunju-tsu-kyoiku.ttf", kanji) ||
+  const kinbun = ttf2svg("fonts/syunju102/Shunju-tsu-kyoiku.ttf", kanji) ||
     notFoundSvg();
   const reisho = ttf2svg("fonts/aoyagireisyosimo_ttf_2_01.ttf", kanji) ||
     notFoundSvg();
@@ -294,12 +292,12 @@ function toLinks(idioms) {
 
 // TODO: ルビ
 let buildInfo;
-if (!existsSync("build-info.json")) {
+try {
+  buildInfo = JSON.parse(Deno.readTextFileSync("build-info.json"));
+} catch {
   buildInfo = await getBuildInfo();
   const json = JSON.stringify(buildInfo, null, "\t");
   Deno.writeTextFileSync("build-info.json", json);
-} else {
-  buildInfo = JSON.parse(Deno.readTextFileSync("build-info.json"));
 }
 
 const template = Deno.readTextFileSync("page.eta");
