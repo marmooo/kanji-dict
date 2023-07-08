@@ -1,16 +1,21 @@
 function loadConfig() {
   if (localStorage.getItem("darkMode") == 1) {
-    document.documentElement.dataset.theme = "dark";
+    document.documentElement.setAttribute("data-bs-theme", "dark");
   }
 }
 
 function toggleDarkMode() {
+  const svg = document.getElementById("kanji").contentDocument.rootElement;
   if (localStorage.getItem("darkMode") == 1) {
     localStorage.setItem("darkMode", 0);
-    delete document.documentElement.dataset.theme;
+    document.documentElement.setAttribute("data-bs-theme", "light");
+    svg.style.background = "#fff";
+    svg.firstElementChild.style.stroke = "#000";
   } else {
     localStorage.setItem("darkMode", 1);
-    document.documentElement.dataset.theme = "dark";
+    document.documentElement.setAttribute("data-bs-theme", "dark");
+    svg.style.background = "#212529";
+    svg.firstElementChild.style.stroke = "#fff";
   }
 }
 
@@ -23,7 +28,7 @@ function prev() {
     const path = kanjiSvg.getElementById("kvg:" + kanjiId + "-s" + i);
     if (path) {
       if (i < currPos) {
-        path.setAttribute("stroke", "black");
+        path.setAttribute("stroke", "inherit");
       } else if (i == currPos) {
         path.setAttribute("stroke", "red");
       } else {
@@ -43,7 +48,7 @@ function stop() {
   while (true) {
     const path = kanjiSvg.getElementById("kvg:" + kanjiId + "-s" + i);
     if (path) {
-      path.setAttribute("stroke", "black");
+      path.setAttribute("stroke", "inherit");
     } else {
       break;
     }
@@ -59,7 +64,7 @@ function play() {
   while (true) {
     const path = kanjiSvg.getElementById("kvg:" + kanjiId + "-s" + i);
     if (path) {
-      path.setAttribute("stroke", "black");
+      path.setAttribute("stroke", "inherit");
     } else {
       break;
     }
@@ -79,7 +84,7 @@ function next() {
     const path = kanjiSvg.getElementById("kvg:" + kanjiId + "-s" + i);
     if (path) {
       if (i < currPos) {
-        path.setAttribute("stroke", "black");
+        path.setAttribute("stroke", "inherit");
       } else if (i == currPos) {
         path.setAttribute("stroke", "red");
       } else {
@@ -105,8 +110,8 @@ function getKakusu() {
   return kakusu - 1;
 }
 
-function addHitujun() {
-  const hitujun = document.getElementById("hitujun");
+function addHitsujun() {
+  const hitsujun = document.getElementById("hitsujun");
   for (let i = 1; i <= kakusu; i++) {
     const svg = kanjiSvg.cloneNode(true);
     svg.setAttribute("width", 64);
@@ -115,11 +120,11 @@ function addHitujun() {
     for (let j = i + 1; j <= kakusu; j++) {
       // cloneNode した要素は Safari だけ getElementById が動かない
       const id = "kvg:" + kanjiId + "-s" + j;
-      const path = svg.querySelector('[id="' + id + '"]');
+      const path = svg.querySelector(`[id="${id}"]`);
       path.setAttribute("stroke", "lightgray");
       path.removeAttribute("id");
     }
-    hitujun.appendChild(svg);
+    hitsujun.appendChild(svg);
   }
 }
 
@@ -133,25 +138,46 @@ function addAnimation() {
   );
 }
 
-function init(kanji, kanjiId) {
-  kanji.onload = () => {
-    kanjiSvg = kanji.contentDocument.querySelector("svg");
-    kakusu = getKakusu();
-    addHitujun();
-    addAnimation();
-  };
-  kanji.data = `/kanjivg/${kanjiId}.svg`;
-  kanji.classList.remove("d-none");
+function isLoaded(object) {
+  const doc = object.contentDocument;
+  if (!doc) return false;
+  const svg = doc.rootElement;
+  if (!svg) return false;
+  if (svg.getCurrentTime() <= 0) return false;
+  return true;
+}
+
+function initPage(object) {
+  kanjiSvg = object.contentDocument.rootElement;
+  kakusu = getKakusu();
+  addHitsujun();
+  addAnimation();
+
+  if (localStorage.getItem("darkMode") == 1) {
+    const svg = document.getElementById("kanji").contentDocument.rootElement;
+    svg.style.background = "#212529";
+    svg.firstElementChild.style.stroke = "#fff";
+  }
+}
+
+function init(object) {
+  if (isLoaded(object)) {
+    initPage(object);
+  } else {
+    object.onload = () => {
+      initPage(object);
+    };
+  }
 }
 
 loadConfig();
-const kanji = document.getElementById("kanji");
-const kanjiId = kanji.dataset.id;
+const object = document.getElementById("kanji");
+const kanjiId = object.data.split("/").at(-1).split(".")[0];
 let animator;
 let kanjiSvg;
 let kakusu;
 let currPos = 1;
-init(kanji, kanjiId);
+init(object);
 
 document.getElementById("toggleDarkMode").onclick = toggleDarkMode;
 document.getElementById("next").onclick = next;
