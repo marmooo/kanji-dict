@@ -5,7 +5,7 @@ function loadConfig() {
 }
 
 function toggleDarkMode() {
-  const svg = document.getElementById("kanji").contentDocument.rootElement;
+  const svg = document.getElementById("kanji").contentDocument.documentElement;
   if (localStorage.getItem("darkMode") == 1) {
     localStorage.setItem("darkMode", 0);
     document.documentElement.setAttribute("data-bs-theme", "light");
@@ -141,20 +141,21 @@ function addAnimation() {
 function isLoaded(object) {
   const doc = object.contentDocument;
   if (!doc) return false;
-  const svg = doc.rootElement;
+  const svg = doc.documentElement;
   if (!svg) return false;
   if (svg.getCurrentTime() <= 0) return false;
   return true;
 }
 
 function initPage(object) {
-  kanjiSvg = object.contentDocument.rootElement;
+  kanjiSvg = object.contentDocument.documentElement;
   kakusu = getKakusu();
   addHitsujun();
   addAnimation();
 
   if (localStorage.getItem("darkMode") == 1) {
-    const svg = document.getElementById("kanji").contentDocument.rootElement;
+    const svg = document.getElementById("kanji")
+      .contentDocument.documentElement;
     svg.style.background = "#212529";
     svg.firstElementChild.style.stroke = "#fff";
   }
