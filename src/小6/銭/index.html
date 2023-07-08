@@ -33,8 +33,9 @@
       .tile { width:84px; padding-bottom:1rem; line-height:1.1rem; padding:.25rem; }
       th { white-space:nowrap; }
       td { vertical-align:middle; word-break:keep-all; }
-      html[data-theme="dark"] { filter: invert(1) hue-rotate(180deg); }
-      @-moz-document url-prefix() { html[data-theme="dark"] { background-color:black; } }
+      html[data-bs-theme="dark"] .navbar-brand > img { filter: invert(1) hue-rotate(180deg); }
+      html[data-bs-theme="dark"] #hitsujun svg { filter: invert(1) hue-rotate(180deg); }
+      html[data-bs-theme="dark"] #origin svg { filter: invert(1) hue-rotate(180deg); }
     </style>
   </head>
   <body>
@@ -57,31 +58,26 @@
       </noscript>
       <div class="row">
         <div class="col-sm">
-          <div id="kakijun">
-            <object title="銭" id="kanji" class="d-none" type="image/svg+xml" data-id="092ad" width="300" height="300"></object>
-            <noscript>
-              <object title="銭" id="kanji" type="image/svg+xml" data="/kanjivg/092ad.svg" width="300" height="300"></object>
-            </noscript>
-          </div>
+          <object id="kanji" data="/kanjivg/092ad.svg" type="image/svg+xml" width="300" height="300"></object>
           <div id="toolbar" class="pb-4">
             <button title="戻る" id="prev" class="btn" type="button">
-              <svg width="48px" height="48px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 16 16" fill="currentColor">
                 <path fill-rule="evenodd" d="M4.5 3.5A.5.5 0 0 0 4 4v8a.5.5 0 0 0 1 0V4a.5.5 0 0 0-.5-.5z"/>
                 <path d="M4.903 8.697l6.364 3.692c.54.313 1.232-.066 1.232-.697V4.308c0-.63-.692-1.01-1.232-.696L4.903 7.304a.802.802 0 0 0 0 1.393z"/>
               </svg>
             </button>
             <button title="停止" id="stop" class="btn" type="button">
-              <svg width="48px" height="48px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 16 16" fill="currentColor">
                 <path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5zm5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5z"/>
               </svg>
             </button>
             <button title="再生" id="play" class="btn d-none" type="button">
-              <svg width="48px" height="48px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 16 16" fill="currentColor">
                 <path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
               </svg>
             </button>
             <button title="進む" id="next" class="btn" type="button">
-              <svg width="48px" height="48px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 16 16" fill="currentColor">
                 <path fill-rule="evenodd" d="M12 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z"/>
                 <path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
               </svg>
@@ -133,11 +129,11 @@
       </div>
       <div class="pt-3">
         <h5>筆順表</h5>
-        <div id="hitujun"></div>
+        <div id="hitsujun"></div>
       </div>
       <div class="pt-3">
         <h5>成り立ち</h5>
-        <div class="d-flex flex-wrap justify-content-center">
+        <div id="origin" class="d-flex flex-wrap justify-content-center">
           <div class="tile">
             <svg xmlns="http://www.w3.org/2000/svg"
   width="64" height="64"
