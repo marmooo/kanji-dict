@@ -141,7 +141,7 @@ function addAnimation() {
 function isLoaded(object) {
   const doc = object.contentDocument;
   if (!doc) return false;
-  const svg = doc.documentElement;
+  const svg = doc.querySelector("svg");
   if (!svg) return false;
   if (svg.getCurrentTime() <= 0) return false;
   return true;
