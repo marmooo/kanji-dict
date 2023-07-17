@@ -143,7 +143,7 @@ function isLoaded(object) {
   if (!doc) return false;
   const svg = doc.querySelector("svg");
   if (!svg) return false;
-  if (svg.getCurrentTime() <= 0) return false;
+  if (svg.getCurrentTime() < 0) return false;
   return true;
 }
 
