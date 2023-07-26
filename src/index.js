@@ -90,7 +90,5 @@ for (let i = 0; i < 8; i++) {
 document.getElementById("toggleDarkMode").onclick = toggleDarkMode;
 document.getElementById("search").onclick = search;
 document.addEventListener("keydown", (event) => {
-  if (event.key == "Enter") {
-    search();
-  }
-}, false);
+  if (event.key == "Enter") search();
+});
