@@ -1,5 +1,5 @@
 import { readLines } from "https://deno.land/std/io/mod.ts";
-import { Eta } from "https://deno.land/x/eta@v3.1.0/src/index.ts";
+import { Eta } from "https://deno.land/x/eta@v3.1.1/src/index.ts";
 import ttf2svg from "npm:@marmooo/ttf2svg@0.0.4";
 
 const w1_ = Array.from(
