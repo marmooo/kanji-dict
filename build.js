@@ -1,6 +1,6 @@
 import { readLines } from "https://deno.land/std/io/mod.ts";
 import { Eta } from "https://deno.land/x/eta@v3.1.1/src/index.ts";
-import ttf2svg from "npm:@marmooo/ttf2svg@0.0.4";
+import { ttf2svg } from "npm:@marmooo/ttf2svg@0.1.2";
 
 const w1_ = Array.from(
   "一右雨円王音下火花貝学気九休玉金空月犬見五口校左三山子四糸字耳七車手十出女小上森人水正生青夕石赤千川先早草足村大男竹中虫町天田土二日入年白八百文木本名目立力林六",
@@ -256,26 +256,25 @@ function notFoundSvg() {
 `;
 }
 
-function replaceSize(text, width, height) {
-  return text
-    .replace('width="100"', `width="${width}"`)
-    .replace('height="100"', `height="${height}"`) + "\n";
-}
-
 function getAncientSvgs(kanji) {
-  const kinbun = ttf2svg("fonts/syunju102/Shunju-tsu-kyoiku.ttf", kanji) ||
+  const options = { width: 64, height: 64 };
+  const kinbun =
+    ttf2svg("fonts/syunju102/Shunju-tsu-kyoiku.ttf", kanji, options)[0].svg ||
     notFoundSvg();
-  const reisho = ttf2svg("fonts/aoyagireisyosimo_ttf_2_01.ttf", kanji) ||
+  const reisho =
+    ttf2svg("fonts/aoyagireisyosimo_ttf_2_01.ttf", kanji, options)[0].svg ||
     notFoundSvg();
-  const sousho = ttf2svg("fonts/KouzanBrushFontSousyo.ttf", kanji) ||
+  const sousho =
+    ttf2svg("fonts/KouzanBrushFontSousyo.ttf", kanji, options)[0].svg ||
     notFoundSvg();
-  const gyousho = ttf2svg("fonts/衡山毛筆フォント行書.ttf", kanji) ||
+  const gyousho =
+    ttf2svg("fonts/衡山毛筆フォント行書.ttf", kanji, options)[0].svg ||
     notFoundSvg();
   return {
-    "古代文字": replaceSize(kinbun, 64, 64),
-    "隷書": replaceSize(reisho, 64, 64),
-    "草書": replaceSize(sousho, 64, 64),
-    "行書": replaceSize(gyousho, 64, 64),
+    "古代文字": kinbun,
+    "隷書": reisho,
+    "草書": sousho,
+    "行書": gyousho,
   };
 }
 
