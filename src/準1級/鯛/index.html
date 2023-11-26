@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="ja">
+  <head prefix="og: http://ogp.me/ns#">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="漢字「鯛」の書き順(筆順)・読み方・画数・部首・用例・成り立ちをまとめたページです。">
+    <title>鯛 | こども漢字辞書</title>
+    <meta property="og:title" content="鯛 | こども漢字辞書">
+    <meta property="og:site_name" content="こども漢字辞書">
+    <meta property="og:description" content="漢字「鯛」の書き順(筆順)・読み方・画数・部首・用例・成り立ちをまとめたページです。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://marmooo.github.io/kanji-dict/">
+    <meta property="og:image" content="https://marmooo.github.io/kanji-dict/favicon/apple-touch-icon.png">
+    <meta name="twitter:card" content="summary">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F2179JXDYY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-F2179JXDYY');
+    </script>
+    <link rel="icon" type="image/png" href="/kanji-dict/favicon/favicon.png">
+    <link rel="icon" type="image/svg+xml" href="/kanji-dict/favicon/favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="/kanji-dict/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="/kanji-dict/favicon/site.webmanifest">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+      @media screen and (min-width: 576px) and (max-width: 768px) {
+        #kanji { width:200px; height:200px; }
+        .table td, .table th { padding:.3rem; }
+      }
+      .tile { width:84px; padding-bottom:1rem; line-height:1.1rem; padding:.25rem; }
+      th { white-space:nowrap; }
+      td { vertical-align:middle; word-break:keep-all; }
+      html[data-bs-theme="dark"] .favicon { filter: invert(1) hue-rotate(180deg); }
+      html[data-bs-theme="dark"] #hitsujun svg { filter: invert(1) hue-rotate(180deg); }
+      html[data-bs-theme="dark"] #origin svg { filter: invert(1) hue-rotate(180deg); }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand">
+        <div class="container flex-wrap">
+          <a class="navbar-brand" href="/kanji-dict/">
+            <img class="favicon" alt="" src="/kanji-dict/favicon/favicon.svg" width="32" height="32">
+            こども漢字辞書
+          </a>
+          <div class="navbar-nav">
+            <button title="ダークモード切替" id="toggleDarkMode" class="fs-4 btn p-0" type="button">🌓</button>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="container text-center">
+      <noscript>
+        <div class="alert alert-warning">JavaScript を ON にしてください</div>
+      </noscript>
+      <div class="row">
+        <div class="col-sm">
+          <object id="kanji" data="/kanjivg/09bdb.svg" type="image/svg+xml" width="300" height="300"></object>
+          <div id="toolbar" class="pb-4">
+            <button title="戻る" id="prev" class="btn" type="button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 16 16" fill="currentColor">
+                <path fill-rule="evenodd" d="M4.5 3.5A.5.5 0 0 0 4 4v8a.5.5 0 0 0 1 0V4a.5.5 0 0 0-.5-.5z"/>
+                <path d="M4.903 8.697l6.364 3.692c.54.313 1.232-.066 1.232-.697V4.308c0-.63-.692-1.01-1.232-.696L4.903 7.304a.802.802 0 0 0 0 1.393z"/>
+              </svg>
+            </button>
+            <button title="停止" id="stop" class="btn" type="button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5zm5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5z"/>
+              </svg>
+            </button>
+            <button title="再生" id="play" class="btn d-none" type="button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+              </svg>
+            </button>
+            <button title="進む" id="next" class="btn" type="button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 16 16" fill="currentColor">
+                <path fill-rule="evenodd" d="M12 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z"/>
+                <path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="col-sm">
+          <table class="table table-striped table-responsive">
+            <tbody>
+              <tr><th>学年</th><td>漢検準1級</td></tr>
+              <tr><th>音読み</th><td class="notranslate">チョウ</td></tr>
+              <tr><th>訓読み</th><td class="notranslate">たい</td></tr>
+              <tr><th>画数</th><td class="notranslate">19</td></tr>
+              <tr><th>214部首</th><td>魚部</td></tr>
+              <tr><th>部首</th><td> (魚)</td></tr>
+              <tr><th><a href="https://ja.wiktionary.org/wiki/鯛">用例</a></th><td class="notranslate">
+<a href="https://www.google.com/search?q=真鯛とは" target="_blank" rel="noopener noreferer">真鯛</a>
+<a href="https://www.google.com/search?q=黒鯛とは" target="_blank" rel="noopener noreferer">黒鯛</a>
+<a href="https://www.google.com/search?q=石鯛とは" target="_blank" rel="noopener noreferer">石鯛</a>
+<a href="https://www.google.com/search?q=甘鯛とは" target="_blank" rel="noopener noreferer">甘鯛</a>
+<a href="https://www.google.com/search?q=鯛焼とは" target="_blank" rel="noopener noreferer">鯛焼</a>
+<a href="https://www.google.com/search?q=連子鯛とは" target="_blank" rel="noopener noreferer">連子鯛</a>
+<a href="https://www.google.com/search?q=あこう鯛とは" target="_blank" rel="noopener noreferer">あこう鯛</a>
+<a href="https://www.google.com/search?q=干鯛とは" target="_blank" rel="noopener noreferer">干鯛</a>
+</td></tr>
+              <tr><th>熟語</th><td class="notranslate">
+<a href="https://www.google.com/search?q=真鯛とは" target="_blank" rel="noopener noreferer">真鯛</a>
+<a href="https://www.google.com/search?q=黒鯛とは" target="_blank" rel="noopener noreferer">黒鯛</a>
+<a href="https://www.google.com/search?q=石鯛とは" target="_blank" rel="noopener noreferer">石鯛</a>
+<a href="https://www.google.com/search?q=甘鯛とは" target="_blank" rel="noopener noreferer">甘鯛</a>
+<a href="https://www.google.com/search?q=小鯛とは" target="_blank" rel="noopener noreferer">小鯛</a>
+<a href="https://www.google.com/search?q=桜鯛とは" target="_blank" rel="noopener noreferer">桜鯛</a>
+<a href="https://www.google.com/search?q=鯛焼とは" target="_blank" rel="noopener noreferer">鯛焼</a>
+<a href="https://www.google.com/search?q=鯛飯とは" target="_blank" rel="noopener noreferer">鯛飯</a>
+<a href="https://www.google.com/search?q=塩鯛とは" target="_blank" rel="noopener noreferer">塩鯛</a>
+<a href="https://www.google.com/search?q=連子鯛とは" target="_blank" rel="noopener noreferer">連子鯛</a>
+</td></tr>
+              <tr><th>学習例</th><td class="notranslate">
+<a href="https://www.google.com/search?q=真鯛とは" target="_blank" rel="noopener noreferer">真鯛</a>
+<a href="https://www.google.com/search?q=黒鯛とは" target="_blank" rel="noopener noreferer">黒鯛</a>
+<a href="https://www.google.com/search?q=石鯛とは" target="_blank" rel="noopener noreferer">石鯛</a>
+<a href="https://www.google.com/search?q=甘鯛とは" target="_blank" rel="noopener noreferer">甘鯛</a>
+<a href="https://www.google.com/search?q=鯛焼とは" target="_blank" rel="noopener noreferer">鯛焼</a>
+<a href="https://www.google.com/search?q=連子鯛とは" target="_blank" rel="noopener noreferer">連子鯛</a>
+<a href="https://www.google.com/search?q=あこう鯛とは" target="_blank" rel="noopener noreferer">あこう鯛</a>
+<a href="https://www.google.com/search?q=干鯛とは" target="_blank" rel="noopener noreferer">干鯛</a>
+<a href="https://www.google.com/search?q=真鯛とは" target="_blank" rel="noopener noreferer">真鯛</a>
+<a href="https://www.google.com/search?q=黒鯛とは" target="_blank" rel="noopener noreferer">黒鯛</a>
+</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="pt-3">
+        <h5>筆順表</h5>
+        <div id="hitsujun"></div>
+      </div>
+      <div class="pt-3">
+        <h5>成り立ち</h5>
+        <div id="origin" class="d-flex flex-wrap justify-content-center">
+          <div class="tile">
+            
+<svg role="img" aria-label="未発見" xmlns="http://www.w3.org/2000/svg" fill="red" width="64" height="64" viewBox="0 0 16 16">
+  <title>未発見</title>
+  <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+</svg>
+            <br>
+            <small>古代文字</small>
+          </div>
+          <div class="tile">
+            <svg xmlns="http://www.w3.org/2000/svg"
+  width="64" height="64" viewBox="0 0 1024 1024">
+  <!--
+simo
+しも
+aoyagireisyosimo2
+青柳隷書SIMO2_T
+  -->
+<path d="M107 886L88 890Q80 879 73 863 66 847 66 828.5 66 810 63 793 60 776 61 758L61 758Q70 754 75 747.5 80 741 86.5 740.5 93 740 102 740 111 740 119 740L119 740 147 772 148 804 107 886ZM942 861L924 871 897 863 869 764 882 759 881 744 870 716 875 717 890 708 890 465 877 466 878 493 846 495 681 498 619 517Q611 551 603 581 595 611 592 644.5 589 678 581.5 709.5 574 741 567 770L567 770 542 804 520 804Q509 796 506 787.5 503 779 503 767.5 503 756 502 744.5 501 733 500 718L500 718Q516 675 535 630 554 585 562.5 535 571 485 569.5 434.5 568 384 566 333L566 333 557 301 547 297 540 241 558 222 575 202Q586 197 603 191 620 185 633.5 183 647 181 662 177.5 677 174 696 173L696 173 697 181Q728 180 761 178.5 794 177 823 182.5 852 188 884.5 188.5 917 189 939 208L939 208Q950 220 953 236 956 252 957.5 268 959 284 959 300 959 316 961 335L961 335Q949 387 947.5 441 946 495 946.5 551.5 947 608 949.5 665.5 952 723 955 778L955 778 962 806 950 848 941 848 942 861ZM221 877L221 877Q201 869 199.5 853 198 837 191 820.5 184 804 181 788 178 772 175 753L175 753 192 726 205 726Q215 730 224 732 233 734 240.5 739.5 248 745 252 754 256 763 260 772L260 772 261 795Q256 809 251.5 818 247 827 247.5 841 248 855 238.5 863.5 229 872 221 877ZM324 868L297 873Q293 860 282 848 271 836 271 819.5 271 803 270.5 787 270 771 271 757L271 757 274 748 284 748 288 734 305 735 341 775 347 818 324 868ZM438 864L415 872 415 864 402 854Q392 845 385 835.5 378 826 372 814.5 366 803 363 791.5 360 780 360 767L360 767 370 744 414 734 442 752 441 771 451 770 457 817 438 864ZM720 721L661 742Q652 725 642 709 632 693 633 670 634 647 630.5 628.5 627 610 623 591L623 591 647 549 747 529 830 534 830 544 852 552 864 579 856 607 839 608 824 698 829 719 793 725 720 721ZM866 726L870 722 866 718 861 722 866 726ZM152 661L147 666Q137 652 128 640.5 119 629 118.5 613 118 597 116.5 580.5 115 564 114 546L114 546 119 523 114 509 119 466 109 443 100 443 96 401 104 373 117 359Q141 354 161.5 345 182 336 202 327 222 318 240.5 306.5 259 295 282 284L282 284 303 253 290 252Q271 261 255.5 268.5 240 276 224.5 285.5 209 295 190.5 301.5 172 308 153 308L153 308 153 318 105 345 78 286Q67 280 60.5 276 54 272 47 267.5 40 263 36 256.5 32 250 33 240L33 240Q35 235 37.5 228.5 40 222 47 216.5 54 211 60.5 206.5 67 202 72 199L72 199Q85 199 96.5 196 108 193 117.5 188.5 127 184 136 177 145 170 158 170L158 170 158 160 176 160 176 152 263 109 307 142 308 152 317 151 317 159Q331 159 342.5 159 354 159 365 161.5 376 164 385 173 394 182 404 182L404 182 417 225 412 247Q404 252 395 252 386 252 376.5 254 367 256 362.5 266 358 276 349 279L349 279 345 289 337 289 337 298 314 331Q332 335 350 335 368 335 386.5 335 405 335 422.5 339.5 440 344 455 352L455 352Q454 362 458.5 369 463 376 465.5 385 468 394 468 405.5 468 417 468 426L468 426Q455 450 455 475.5 455 501 455 529.5 455 558 448 583.5 441 609 433 632L433 632Q419 647 398.5 649 378 651 358 651 338 651 317 651.5 296 652 278 651L278 651 255 648 155 666 152 661ZM739 654L770 636Q775 630 777.5 625.5 780 621 780 616.5 780 612 779.5 605 779 598 780 594L780 594 696 594 674 599 675 636 680 654 739 654ZM200 583L224 582 224 568 220 560 228 526 215 527 200 583ZM296 574L315 573 315 559Q323 559 330 556.5 337 554 343.5 552 350 550 357 547.5 364 545 359 536L359 536 309 537 296 574ZM359 479L382 484 382 432 377 423 364 414 364 404 318 400 287 414 287 432 309 466 360 470 359 479ZM196 466L232 465 232 447 209 433Q204 438 200 438.5 196 439 196 445.5 196 452 196 457 196 462 196 466L196 466ZM876 456L889 455 881 289 851 252 727 250 629 278Q620 288 620.5 297.5 621 307 621.5 316 622 325 623 336.5 624 348 624 357L624 357 629 375 638 374 645 333 668 328 708 330 705 271 724 269 759 304 758 314 803 311 827 305 860 326 862 372 822 380 772 377 769 428Q783 427 796 426.5 809 426 823.5 428 838 430 851.5 433.5 865 437 875 441L875 441 876 456ZM651 449L678 437 712 423 717 391 694 391 677 418 649 426Q649 421 644.5 413.5 640 406 640 399.5 640 393 637 386 634 379 625 385L625 385 623 450 651 449Z"/>
+</svg>            <br>
+            <small>隷書</small>
+          </div>
+          <div class="tile">
+            <svg xmlns="http://www.w3.org/2000/svg"
+  width="64" height="64" viewBox="0 0 1024 1024">
+  <!--
+KouzanAoyagi
+青柳衡山
+KouzanBrushFontSousyo
+衡山毛筆フォント草書
+  -->
+<path d="M873 780L866 858 816 818Q804 795 800 770 796 745 791 721L791 721 794 721Q799 738 804 755.5 809 773 816 788L816 788 821 788 824 800 834 800 841 758 839 755 841 753 841 618 839 616 839 516 836 459 839 432 836 424 839 417 836 414 836 307 834 297 836 290Q834 270 834 246 834 222 824 205L824 205 794 197 741 212 736 307Q749 307 757.5 312 766 317 776 322L776 322 789 347 791 347 789 347 764 374 756 377 744 394 721 417 716 417 706 461 734 471 739 486 746 486 721 526Q711 531 707.5 541 704 551 696 559L696 559Q692 576 685.5 592 679 608 679 628L679 628 684 628Q704 618 724 609.5 744 601 769 603L769 603 799 618Q804 626 810 633.5 816 641 814 653L814 653 776 691Q766 688 760 695.5 754 703 744 706L744 706 739 711 729 708 724 716 714 716 714 721 701 723 701 721 714 698 719 698 756 633 751 633Q729 641 709 653.5 689 666 669 676L669 676Q659 673 655.5 665.5 652 658 644 653L644 653 637 621Q642 593 654.5 569.5 667 546 674 521L674 521 654 509 644 469 649 459 644 447 649 447 659 451Q677 427 685.5 400.5 694 374 694 342L694 342 689 342 627 359 622 352 617 352 617 339Q634 324 655.5 315.5 677 307 699 304L699 304 704 230 699 230 667 240 652 237 652 235Q664 225 678 215 692 205 706 200L706 200 706 192 694 157 679 153 677 138 679 133 709 130Q721 140 727.5 152.5 734 165 736 180L736 180 741 180Q759 172 779 171 799 170 821 170L821 170 863 187 876 210Q881 217 882 224.5 883 232 883 242L883 242Q871 304 866 370.5 861 437 861 504L861 504 873 656 873 780ZM233 838L221 843 208 838 201 813 196 810 186 793 196 780Q206 780 216 779 226 778 233 768L233 768Q253 740 264 708 275 676 280 641L280 641 246 616 233 564 236 564Q246 559 257 555 268 551 280 549L280 549Q288 544 286.5 535 285 526 285 519L285 519 278 464 293 461 300 466 323 531 333 531 345 529 348 519 368 519 375 521 378 464Q375 442 372.5 420.5 370 399 363 379L363 379 358 379 315 402 315 407Q280 439 253 475 226 511 201 549L201 549 196 589 183 591 176 574 171 574 166 576 143 541Q153 521 158 501 163 481 171 461L171 461 176 461Q201 377 234.5 296 268 215 300 133L300 133 305 133 310 135 315 187Q303 255 279.5 316 256 377 236 439L236 439 231 439 231 451 236 451 273 404 278 404 288 387 333 352 365 352 405 374Q415 389 415 406.5 415 424 417 442L417 442Q417 499 408.5 551 400 603 373 648L373 648 340 663 318 658Q308 673 301.5 689.5 295 706 288 723L288 723 295 723 447 621 417 658 318 745 318 750 295 765 290 775 280 785 265 798 243 810 243 815 238 815Q238 823 238 828 238 833 233 838L233 838ZM472 820L472 820 472 818Q517 696 533 566.5 549 437 552 302L552 302 547 262 554 262 577 290 589 334 589 454Q579 536 560.5 616 542 696 515 773L515 773 507 775 507 783 502 783 502 788Q492 793 488.5 805.5 485 818 472 820ZM345 611L348 608Q358 593 363 578.5 368 564 370 546L370 546 365 546Q358 554 349 559 340 564 330 564L330 564 328 603 345 611Z"/>
+</svg>            <br>
+            <small>草書</small>
+          </div>
+          <div class="tile">
+            <svg xmlns="http://www.w3.org/2000/svg"
+  width="64" height="64" viewBox="0 0 1024 1024">
+  <!--
+KouzanAoyagi
+青柳衡山
+KouzanBrushFontGyousyo
+衡山毛筆フォント行書
+  -->
+<path d="M898 833L884 838Q845 819 801 810 757 801 720 777L720 777 719 770 715 770 699 743 701 743 726 761 726 765Q750 778 777.5 786.5 805 795 837 796L837 796 848 782 853 782 854 739 825 394 828 282 824 195 801 195Q764 205 727 215.5 690 226 651 228L651 228 653 228 653 223 658 224 658 217Q696 194 736.5 177 777 160 822 161L822 161Q841 162 855 168.5 869 175 883 183L883 183 893 220 888 261 883 261 883 270 886 279 878 343 879 350 877 350 873 416 875 451 872 462Q882 552 889 641.5 896 731 900 822L900 822 898 833ZM132 777L132 777 121 770 122 765 117 765 96 740Q101 729 111.5 726.5 122 724 132 722L132 722 175 693 175 688 197 676 201 669 208 660 213 660Q217 648 227 638.5 237 629 237 615L237 615Q223 616 211.5 607 200 598 192 589L192 589 180 563Q187 555 186.5 543.5 186 532 186 520L186 520 173 496 148 479 164 477Q176 479 187 483 198 487 208 495L208 495 210 502 221 507Q229 521 232.5 535 236 549 238 565L238 565 242 565 251 556 259 549 264 549Q268 537 276 528.5 284 520 283 506L283 506 276 506Q269 511 259.5 512.5 250 514 239 514L239 514 226 500 283 473 286 439 277 437 277 432 268 429 268 424 260 422 260 415 253 415 220 432 220 430 239 399 244 399 246 388Q263 369 277.5 349 292 329 305 309L305 309 311 293 315 294 318 280 322 280 325 255 298 233Q298 240 292.5 241 287 242 287 247L287 247 280 247 280 252 267 264 258 269 254 269 238 292 229 294 205 327 196 330 190 339 158 351 158 349 184 303 189 304 242 189 251 177 249 168 253 168Q274 176 294.5 182.5 315 189 336 195L336 195 338 205 347 209 346 214 342 225Q358 233 375 236.5 392 240 408 245L408 245 409 261 407 268 393 270 389 279 379 281 360 313 337 328 337 333 333 333 320 351 327 351 339 349 371 359 403 348 407 348Q428 351 446 354.5 464 358 483 368L483 368 485 375 477 388 456 390Q426 444 421 508.5 416 573 399 633L399 633Q408 637 418.5 638.5 429 640 437 644L437 644 439 654 430 656 430 662Q353 687 279.5 715.5 206 744 132 777ZM478 732L453 746 451 739Q496 660 519 571 542 482 551 390L551 390 550 381 555 338Q553 308 553 279.5 553 251 544 226L544 226 530 216 537 216 538 207 552 207 585 224Q594 243 594.5 265.5 595 288 594 311L594 311 592 316 594 318 592 325 594 327 591 345 593 348 591 375 596 375 667 341 668 299 662 267 675 263 682 265Q689 261 699.5 261.5 710 262 719 262L719 262 725 305Q741 307 757 310 773 313 786 321L786 321 786 328 773 343 768 343 767 347 721 369 709 419 718 419Q727 415 738.5 415.5 750 416 757 407L757 407Q771 411 788 412.5 805 414 816 426L816 426 818 433Q815 440 808.5 443 802 446 795 451L795 451Q774 457 752 464.5 730 472 709 476L709 476 699 472 581 506 581 504 565 499Q549 560 531 619 513 678 478 732L478 732ZM658 719L654 721 617 699Q609 666 608 631 607 596 604 561L604 561 615 514 638 512 644 555 651 555Q672 547 692.5 536 713 525 736 521L736 521 736 519 778 515 800 527 802 537Q802 548 797 557 792 566 787 575L787 575 780 577 773 595 769 595Q766 606 755.5 616.5 745 627 740 638L740 638Q745 641 753 641 761 641 760 648L760 648Q744 659 725.5 665.5 707 672 689 675L689 675 655 652 655 659Q657 675 662.5 690 668 705 670 721L670 721 661 721 658 719ZM237 693L251 686 320 660 325 644 358 627 358 623 353 620 353 613 346 610Q346 606 346.5 600 347 594 340 596L340 596 298 627 298 632 270 650 270 655 263 661 252 665 249 672 235 686 228 693 237 693ZM654 641L660 641 660 634 688 614 712 560 707 560Q691 561 676 565.5 661 570 650 581L650 581 648 599 654 641ZM356 561L370 565 370 559 374 487 365 487 365 491 335 521 314 542 313 560 336 560 336 555 332 535 339 535 339 537 357 554 356 561ZM332 458L378 466 378 432 381 409 376 391 370 391Q358 395 345.5 399 333 403 322 413L322 413 319 422 321 463 327 463 327 458 332 458ZM598 460L600 457Q612 455 622 451 632 447 644 440L644 440 659 398 652 397 631 401Q622 397 611.5 394 601 391 596 384L596 384 596 380 589 380 580 448 575 448 575 460 598 460Z"/>
+</svg>            <br>
+            <small>行書</small>
+          </div>
+        </div>
+      </div>
+      <div class="pt-4">
+        <h5>練習する</h5>
+        <div class="d-flex flex-wrap justify-content-center">
+          <div class="tile">
+            <a href="https://marmooo.github.io/touch-kanji/drill/?q=鯛">
+              <img alt="" src="https://marmooo.github.io/touch-kanji/favicon/favicon.svg" width="64" height="64" loading="lazy">
+              <br>
+              <small>タッチ漢字ドリル</small>
+            </a>
+          </div>
+          <div class="tile">
+            <a href="https://marmooo.github.io/touch-shuji/drill/?q=鯛">
+              <img alt="" src="https://marmooo.github.io/touch-shuji/favicon/favicon.svg" width="64" height="64" loading="lazy">
+              <br>
+              <small>タッチ習字ドリル</small>
+            </a>
+          </div>
+          <div class="tile">
+            <a href="https://marmooo.github.io/touch-shodo/drill/?q=鯛">
+              <img alt="" src="https://marmooo.github.io/touch-kanji/favicon/favicon.svg" width="64" height="64" loading="lazy">
+              <br>
+              <small>タッチ書道ドリル</small>
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="pt-4 alert text-center">
+      <div>SVG - <a href="https://github.com/KanjiVG/kanjivg">KanjiVG/kanjivg</a>
+        / <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> by Ulrich Apel
+      </div>
+      <div>語彙 - <a href="https://github.com/marmooo/graded-vocab-ja">graded-vocab-ja</a>
+        / <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> by
+        <a href="https://github.com/marmooo">marmooo</a>
+      </div>
+      <div>熟語 - <a href="https://github.com/marmooo/graded-idioms-ja">graded-idioms-ja</a>
+        / <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> by
+        <a href="https://github.com/marmooo">marmooo</a>
+      </div>
+      <div class="pt-3">
+        <a class="px-1" href="/">Home</a>
+        <a class="px-1" href="/terms/">Terms</a>
+        <a class="px-1" href="https://github.com/marmooo/kanji-dict">Contact</a>
+      </div>
+      <div class="text-muted">&copy; <a href="https://github.com/marmooo">marmooo</a>
+        / <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/vivus@0.4.6/dist/vivus.min.js" integrity="sha256-DSPDv+rS5PAURHc6mTaH9/kBinkq/DA+KRuXganawp4=" crossorigin="anonymous"></script>
+    <script src="/kanji-dict/page.js"></script>
+  </body>
+</html>

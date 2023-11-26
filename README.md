@@ -31,6 +31,3 @@ CC BY-SA 4.0
 ## Attribution
 
 - 古代文字フォント [春秋-tsu](http://www.tarojiro.co.jp/kanji/shunju-tsu/)
-- [MJ文字情報取得API](https://mojikiban.ipa.go.jp/search/help/api) is licensed
-  under the
-  [CC BY-SA 2.1 JP](https://creativecommons.org/licenses/by-sa/2.1/jp/)

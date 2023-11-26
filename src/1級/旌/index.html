@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="ja">
+  <head prefix="og: http://ogp.me/ns#">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="漢字「旌」の書き順(筆順)・読み方・画数・部首・用例・成り立ちをまとめたページです。">
+    <title>旌 | こども漢字辞書</title>
+    <meta property="og:title" content="旌 | こども漢字辞書">
+    <meta property="og:site_name" content="こども漢字辞書">
+    <meta property="og:description" content="漢字「旌」の書き順(筆順)・読み方・画数・部首・用例・成り立ちをまとめたページです。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://marmooo.github.io/kanji-dict/">
+    <meta property="og:image" content="https://marmooo.github.io/kanji-dict/favicon/apple-touch-icon.png">
+    <meta name="twitter:card" content="summary">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F2179JXDYY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-F2179JXDYY');
+    </script>
+    <link rel="icon" type="image/png" href="/kanji-dict/favicon/favicon.png">
+    <link rel="icon" type="image/svg+xml" href="/kanji-dict/favicon/favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="/kanji-dict/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="/kanji-dict/favicon/site.webmanifest">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+      @media screen and (min-width: 576px) and (max-width: 768px) {
+        #kanji { width:200px; height:200px; }
+        .table td, .table th { padding:.3rem; }
+      }
+      .tile { width:84px; padding-bottom:1rem; line-height:1.1rem; padding:.25rem; }
+      th { white-space:nowrap; }
+      td { vertical-align:middle; word-break:keep-all; }
+      html[data-bs-theme="dark"] .favicon { filter: invert(1) hue-rotate(180deg); }
+      html[data-bs-theme="dark"] #hitsujun svg { filter: invert(1) hue-rotate(180deg); }
+      html[data-bs-theme="dark"] #origin svg { filter: invert(1) hue-rotate(180deg); }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand">
+        <div class="container flex-wrap">
+          <a class="navbar-brand" href="/kanji-dict/">
+            <img class="favicon" alt="" src="/kanji-dict/favicon/favicon.svg" width="32" height="32">
+            こども漢字辞書
+          </a>
+          <div class="navbar-nav">
+            <button title="ダークモード切替" id="toggleDarkMode" class="fs-4 btn p-0" type="button">🌓</button>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="container text-center">
+      <noscript>
+        <div class="alert alert-warning">JavaScript を ON にしてください</div>
+      </noscript>
+      <div class="row">
+        <div class="col-sm">
+          <object id="kanji" data="/kanjivg/065cc.svg" type="image/svg+xml" width="300" height="300"></object>
+          <div id="toolbar" class="pb-4">
+            <button title="戻る" id="prev" class="btn" type="button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 16 16" fill="currentColor">
+                <path fill-rule="evenodd" d="M4.5 3.5A.5.5 0 0 0 4 4v8a.5.5 0 0 0 1 0V4a.5.5 0 0 0-.5-.5z"/>
+                <path d="M4.903 8.697l6.364 3.692c.54.313 1.232-.066 1.232-.697V4.308c0-.63-.692-1.01-1.232-.696L4.903 7.304a.802.802 0 0 0 0 1.393z"/>
+              </svg>
+            </button>
+            <button title="停止" id="stop" class="btn" type="button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5zm5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5z"/>
+              </svg>
+            </button>
+            <button title="再生" id="play" class="btn d-none" type="button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+              </svg>
+            </button>
+            <button title="進む" id="next" class="btn" type="button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 16 16" fill="currentColor">
+                <path fill-rule="evenodd" d="M12 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z"/>
+                <path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="col-sm">
+          <table class="table table-striped table-responsive">
+            <tbody>
+              <tr><th>学年</th><td>漢検1級</td></tr>
+              <tr><th>音読み</th><td class="notranslate">セイ, ショウ</td></tr>
+              <tr><th>訓読み</th><td class="notranslate">あらわす, はた</td></tr>
+              <tr><th>画数</th><td class="notranslate">11</td></tr>
+              <tr><th>214部首</th><td>方部</td></tr>
+              <tr><th>部首</th><td>方 (かたへん ほうへん)</td></tr>
+              <tr><th><a href="https://ja.wiktionary.org/wiki/旌">用例</a></th><td class="notranslate">
+<a href="https://www.google.com/search?q=旌旗とは" target="_blank" rel="noopener noreferer">旌旗</a>
+</td></tr>
+              <tr><th>熟語</th><td class="notranslate">
+<a href="https://www.google.com/search?q=旌旗とは" target="_blank" rel="noopener noreferer">旌旗</a>
+</td></tr>
+              <tr><th>学習例</th><td class="notranslate">
+<a href="https://www.google.com/search?q=旌旗とは" target="_blank" rel="noopener noreferer">旌旗</a>
+<a href="https://www.google.com/search?q=旌旗とは" target="_blank" rel="noopener noreferer">旌旗</a>
+</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="pt-3">
+        <h5>筆順表</h5>
+        <div id="hitsujun"></div>
+      </div>
+      <div class="pt-3">
+        <h5>成り立ち</h5>
+        <div id="origin" class="d-flex flex-wrap justify-content-center">
+          <div class="tile">
+            
+<svg role="img" aria-label="未発見" xmlns="http://www.w3.org/2000/svg" fill="red" width="64" height="64" viewBox="0 0 16 16">
+  <title>未発見</title>
+  <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+</svg>
+            <br>
+            <small>古代文字</small>
+          </div>
+          <div class="tile">
+            <svg xmlns="http://www.w3.org/2000/svg"
+  width="64" height="64" viewBox="0 0 1024 1024">
+  <!--
+simo
+しも
+aoyagireisyosimo2
+青柳隷書SIMO2_T
+  -->
+<path d="M271 893L208 922 167 893 160 842Q188 835 212 816.5 236 798 261 787 286 776 306.5 754 327 732 348 710L348 710Q362 689 379.5 663.5 397 638 407.5 612 418 586 424.5 556.5 431 527 431 498L431 498 362 477 342 506Q299 527 271 564 243 601 205 634 167 667 143 707 119 747 84 776L84 776 49 776Q41 769 34.5 758 28 747 21 739.5 14 732 11 721 8 710 8 696L8 696Q49 667 84 638 119 609 157 579.5 195 550 229.5 513.5 264 477 286 432L286 432 299 352 271 352 84 432 84 381 119 344 279 301 279 272 264 221 320 177 348 192 348 206 369 214 375 280Q397 280 421.5 280 446 280 470 280 494 280 519 283 544 286 557 301L557 301 564 323 544 352 438 352 375 344 348 352 348 367 369 403 431 432 481 463 494 506Q473 557 452 608 431 659 400 707 369 755 337.5 802 306 849 271 893L271 893ZM1010 849L939 864Q905 849 870 842 835 835 800.5 827.5 766 820 727.5 816.5 689 813 648 813L648 813Q627 820 609.5 823.5 592 827 571 831 550 835 533 849.5 516 864 494 856L494 856 487 835 516 769 661 726 676 644 640 644 557 667 557 652 585 593Q599 586 613 582.5 627 579 644 575.5 661 572 672 561 683 550 696 543L696 543 703 506 668 506Q655 513 637.5 517 620 521 606 535.5 592 550 581.5 561 571 572 550 572L550 572 529 557 522 484 529 469 564 440 577 381 592 381Q599 389 606 392.5 613 396 616.5 403 620 410 620 421 620 432 620 440L620 440 640 440 689 418 711 367 738 367 759 410 850 418 863 498 843 506 766 498 766 564Q780 564 790 568 800 572 811 572 822 572 828.5 579 835 586 843 601L843 601 843 644 815 644 759 638 731 659 717 740Q759 740 793.5 747.5 828 755 866.5 762 905 769 939.5 779.5 974 790 1010 806L1010 806 1010 849ZM703 286L599 315 599 309Q592 301 584.5 293.5 577 286 577 279 577 272 577 261 577 250 577 243L577 243Q585 228 595 217 605 206 605 195 605 184 609 169.5 613 155 613 140L613 140 655 133 655 147 668 147 676 214 689 214 828 206 891 228 905 309 891 309 703 286Z"/>
+</svg>            <br>
+            <small>隷書</small>
+          </div>
+          <div class="tile">
+            <svg xmlns="http://www.w3.org/2000/svg"
+  width="64" height="64" viewBox="0 0 1024 1024">
+  <!--
+KouzanAoyagi
+青柳衡山
+KouzanBrushFontSousyo
+衡山毛筆フォント草書
+  -->
+<path d="M316 846L309 848 309 846 284 835Q267 810 243.5 796.5 220 783 199 761L199 761 195 761 191 755Q184 757 179 754 174 751 168 749L168 749 165 736 157 736 157 732 155 732 155 727 161 715 155 715 144 725 144 723 157 712Q168 708 177 699.5 186 691 195 681L195 681 261 602 265 602Q271 545 276.5 488 282 431 288 375L288 375 280 375Q261 382 241 389.5 221 397 201 399L201 399 172 395 153 397 127 380 121 358Q168 361 209 350 250 339 288 320L288 320 288 303Q284 259 276.5 216.5 269 174 263 130L263 130 269 130Q293 168 305.5 210 318 252 320 297L320 297 326 299 326 297 329 297Q331 291 336 291 341 291 346 291L346 291 360 295 373 293 380 297 388 316 324 354Q320 403 312.5 450.5 305 498 303 547L303 547 307 547 309 543 312 543Q345 496 380 450.5 415 405 452 359L452 359 456 359 496 308 500 308 524 276 528 276 574 227 581 219Q615 193 649 168.5 683 144 725 140L725 140 734 144 734 147 740 149 740 155Q736 172 727.5 189 719 206 710 221L710 221 706 221 685 274Q700 282 718 282 736 282 750 293L750 293 751 312 733 354 716 380 700 399Q695 412 688 424.5 681 437 674 448L674 448 670 448 651 490 674 490Q700 479 725 464.5 750 450 778 443L778 443 786 435 789 435 789 433 793 433Q804 435 815.5 437 827 439 839 443L839 443 842 452 835 475 823 526 818 530Q810 553 800.5 572.5 791 592 784 615L784 615 786 636Q774 670 761 703 748 736 736 770L736 770 746 770Q765 766 785.5 763.5 806 761 827 763L827 763 884 782 886 789 884 793 850 829 846 829 844 835 839 836 833 844 827 844 823 842 823 835 839 795 816 793 719 808Q710 802 701.5 794.5 693 787 687 776L687 776 687 757Q697 736 705.5 715 714 694 719 674L719 674 717 668 706 660Q700 653 698.5 645.5 697 638 697 628L697 628Q700 617 703 606.5 706 596 716 587L716 587Q723 581 732.5 581 742 581 751 581L751 581 767 588Q774 562 780.5 533.5 787 505 789 475L789 475 786 475Q751 484 722 504 693 524 655 522L655 522 636 520 636 517 630 515Q628 505 619.5 496.5 611 488 613 477L613 477Q627 456 639 434 651 412 666 392L666 392 678 380Q685 361 696.5 344 708 327 712 308L712 308Q702 306 692.5 302.5 683 299 676 291L676 291Q672 284 667.5 275.5 663 267 664 257L664 257Q668 235 676.5 214 685 193 691 172L691 172 689 172Q668 183 648 197.5 628 212 608 225L608 225 608 229 604 229 604 233Q575 257 550.5 285.5 526 314 502 342L502 342 498 342 485 363 443 412 439 412 433 428 428 433 420 439Q413 452 403.5 464.5 394 477 386 490L386 490 382 490Q362 532 328.5 569 295 606 293 655L293 655Q295 702 303.5 747.5 312 793 320 838L320 838 316 846ZM278 797L280 795 280 785Q273 755 270 722 267 689 265 655L265 655 257 655 254 664Q239 679 223.5 696 208 713 199 732L199 732 216 744Q229 759 245 772 261 785 278 797L278 797Z"/>
+</svg>            <br>
+            <small>草書</small>
+          </div>
+          <div class="tile">
+            <svg xmlns="http://www.w3.org/2000/svg"
+  width="64" height="64" viewBox="0 0 1024 1024">
+  <!--
+KouzanAoyagi
+青柳衡山
+KouzanBrushFontGyousyo
+衡山毛筆フォント行書
+  -->
+<path d="M317 883L300 887 274 872Q258 836 250.5 798.5 243 761 242 720L242 720 243 737Q250 755 256.5 774 263 793 275 810L275 810 280 812 304 829 311 826Q336 766 350.5 698.5 365 631 369 561L369 561 366 551 349 552 319 557 304 550 285 580 281 580 278 594 273 594 255 633 248 635Q248 645 244.5 651.5 241 658 236 665L236 665 229 667 224 672 225 679 215 689 215 693 211 693 203 708 199 717 191 720 180 750 173 752 173 757 159 774 154 786 145 790 144 786 166 735 171 735Q193 665 224.5 597 256 529 274 456L274 456 267 456 259 461 247 459 243 467Q214 474 187.5 485.5 161 497 131 499L131 499 115 495Q108 488 105.5 478.5 103 469 103 459L103 459 113 452 118 464 130 466Q202 441 269.5 406.5 337 372 406 339L406 339 432 348 432 346 437 346 440 362 444 362 444 365 449 365 452 355 449 353 459 358 459 362 456 374 459 379 453 389 450 384 445 384Q443 389 437 390 431 391 426 391L426 391 426 394Q419 394 412 398 405 402 397 404L397 404 397 406 397 404 388 404 339 439Q331 460 325.5 481.5 320 503 313 526L313 526 328 526 363 519Q375 522 385 527 395 532 404 542L404 542 410 575Q387 652 367 730.5 347 809 317 883L317 883ZM547 839L547 839 528 796 534 782Q558 779 577 762.5 596 746 616 734L616 734 618 727 623 727 622 715 619 708 633 660 628 660 590 666 558 637 570 637 582 640 640 622 648 555 639 555Q617 564 597 576.5 577 589 550 592L550 592 550 599 541 599Q533 590 527 578 521 566 520 554L520 554Q535 534 539 512 543 490 546 466L546 466 536 459 527 445 536 444 577 466Q584 473 585.5 482.5 587 492 588 502L588 502 573 539 580 539 647 506 647 496 642 455 627 450 627 446 622 446 622 441 634 438 633 434 650 433 673 445 692 466Q704 459 717 452.5 730 446 747 448L747 448 750 456 786 462 798 467 812 474 812 476 805 479 802 486 805 486 806 493Q779 500 753 506.5 727 513 703 524L703 524Q693 542 690 562 687 582 684 602L684 602 696 602 740 596 774 621 781 624 784 638 777 655 755 660 755 665 720 684 720 689 663 733 659 753 647 754 635 746 575 781 573 788 583 788Q611 780 642 776 673 772 702 767L702 767 807 765Q812 758 820.5 758.5 829 759 836 759L836 759 843 764 843 769 848 769 848 774Q858 771 865 776 872 781 880 783L880 783 880 788Q887 787 893 788 899 789 899 797L899 797 892 797 892 801 897 809 904 809 911 816 909 816 909 825 904 825 902 823 899 825 890 823 890 825 883 825 823 813Q808 815 794 817.5 780 820 765 826L765 826 765 819 772 803 736 800Q688 805 641.5 819 595 833 547 839ZM674 681L677 678 707 642 700 642 676 652 670 681 674 681ZM331 446L334 443 338 429 333 429 333 431 323 431 323 436 331 446ZM537 360L537 360 537 358Q541 348 542.5 336 544 324 543 312L543 312 540 274Q542 255 545.5 234.5 549 214 546 192L546 192 529 165 531 164 597 208 599 215 604 215 604 232 607 232 607 239 604 239 604 242 602 242 588 281 579 284 558 334 549 344Q549 348 545 353 541 358 537 360ZM709 329L606 357Q599 347 592 339.5 585 332 584 320L584 320 586 310 588 310 591 319 605 319 675 284 677 279 694 274 699 277 711 273 732 281 732 285 747 285 747 293 756 293 756 295 761 295 761 300 754 302 754 307 759 319 766 318 766 313 771 313 774 325 772 325 772 330 767 330 752 329 733 331 709 329ZM314 300L314 300 304 295 304 292 309 292Q312 285 318 276.5 324 268 320 259L320 259 236 222 236 218Q251 212 263.5 209.5 276 207 294 209L294 209Q308 213 322.5 220.5 337 228 349 237L349 237 358 246 362 275 359 279Q345 278 334.5 285 324 292 314 300Z"/>
+</svg>            <br>
+            <small>行書</small>
+          </div>
+        </div>
+      </div>
+      <div class="pt-4">
+        <h5>練習する</h5>
+        <div class="d-flex flex-wrap justify-content-center">
+          <div class="tile">
+            <a href="https://marmooo.github.io/touch-kanji/drill/?q=旌">
+              <img alt="" src="https://marmooo.github.io/touch-kanji/favicon/favicon.svg" width="64" height="64" loading="lazy">
+              <br>
+              <small>タッチ漢字ドリル</small>
+            </a>
+          </div>
+          <div class="tile">
+            <a href="https://marmooo.github.io/touch-shuji/drill/?q=旌">
+              <img alt="" src="https://marmooo.github.io/touch-shuji/favicon/favicon.svg" width="64" height="64" loading="lazy">
+              <br>
+              <small>タッチ習字ドリル</small>
+            </a>
+          </div>
+          <div class="tile">
+            <a href="https://marmooo.github.io/touch-shodo/drill/?q=旌">
+              <img alt="" src="https://marmooo.github.io/touch-kanji/favicon/favicon.svg" width="64" height="64" loading="lazy">
+              <br>
+              <small>タッチ書道ドリル</small>
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="pt-4 alert text-center">
+      <div>SVG - <a href="https://github.com/KanjiVG/kanjivg">KanjiVG/kanjivg</a>
+        / <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> by Ulrich Apel
+      </div>
+      <div>語彙 - <a href="https://github.com/marmooo/graded-vocab-ja">graded-vocab-ja</a>
+        / <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> by
+        <a href="https://github.com/marmooo">marmooo</a>
+      </div>
+      <div>熟語 - <a href="https://github.com/marmooo/graded-idioms-ja">graded-idioms-ja</a>
+        / <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> by
+        <a href="https://github.com/marmooo">marmooo</a>
+      </div>
+      <div class="pt-3">
+        <a class="px-1" href="/">Home</a>
+        <a class="px-1" href="/terms/">Terms</a>
+        <a class="px-1" href="https://github.com/marmooo/kanji-dict">Contact</a>
+      </div>
+      <div class="text-muted">&copy; <a href="https://github.com/marmooo">marmooo</a>
+        / <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/vivus@0.4.6/dist/vivus.min.js" integrity="sha256-DSPDv+rS5PAURHc6mTaH9/kBinkq/DA+KRuXganawp4=" crossorigin="anonymous"></script>
+    <script src="/kanji-dict/page.js"></script>
+  </body>
+</html>
