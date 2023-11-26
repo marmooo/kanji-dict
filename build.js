@@ -135,9 +135,16 @@ function getYomis(kanji, grade) {
   if (grade <= 5) {
     return onkun["小学"];
   } else if (grade <= 7) {
-    return onkun["中学"];
+    const yomis = [];
+    yomis.push(...onkun["小学"]);
+    yomis.push(...onkun["中学"]);
+    return yomis;
   } else if (grade <= 9){
-    return onkun["高校"];
+    const yomis = [];
+    yomis.push(...onkun["小学"]);
+    yomis.push(...onkun["中学"]);
+    yomis.push(...onkun["高校"]);
+    return yomis;
   } else if (onkun) {
     return onkun["Unihan"];
   } else {
