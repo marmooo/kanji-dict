@@ -4,4 +4,5 @@ drop-inline-css -i src/小1/一/index.html > inline.css
 drop-inline-css -r src -o docs -c inline.css
 drop-inline-css src/index.html -o docs/index.html
 rm inline.css
+deno run -A bundle.js ./src/index.js > docs/index.js
 minify -r docs -o .
