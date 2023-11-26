@@ -2,7 +2,7 @@ import { TextLineStream } from "https://deno.land/std/streams/mod.ts";
 import { basename } from "https://deno.land/std/path/mod.ts";
 import { expandGlobSync } from "https://deno.land/std/fs/expand_glob.ts";
 import { parse } from "npm:node-html-parser@6.1.11";
-import { Kanji, JKAT } from "../kanji/src/mod.js";
+import { Kanji, JKAT } from "npm:@marmooo/kanji@0.0.2";
 
 // https://github.com/KanjiVG/kanjivg
 // perfect quality
