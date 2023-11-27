@@ -3,7 +3,7 @@ import { basename } from "https://deno.land/std/path/mod.ts";
 import { expandGlobSync } from "https://deno.land/std/fs/expand_glob.ts";
 import { Eta } from "https://deno.land/x/eta@v3.1.1/src/index.ts";
 import { ttf2svg } from "npm:@marmooo/ttf2svg@0.1.2";
-import { Onkun } from "https://raw.githubusercontent.com/marmooo/onkun/v0.2.3/mod.js";
+import { Onkun } from "https://raw.githubusercontent.com/marmooo/onkun/v0.2.5/mod.js";
 import {
   JIS4UnihanStrokes,
   JKAT,
@@ -219,10 +219,11 @@ const onkunDict = new Onkun();
 const gradedVocabs = initGradedVocabs();
 const gradedIdioms = initGradedIdioms();
 await onkunDict.fetchJoyo(
-  "https://raw.githubusercontent.com/marmooo/onkun/v0.2.3/data/joyo-2017.csv",
+  "https://raw.githubusercontent.com/marmooo/onkun/v0.2.5/data/joyo-2017.csv",
 );
-await onkunDict.fetchUnihan(
-  "https://raw.githubusercontent.com/marmooo/onkun/v0.2.3/data/Unihan-2023-07-15.csv",
+await onkunDict.fetch(
+  "Unihan",
+  "https://raw.githubusercontent.com/marmooo/onkun/v0.2.5/data/Unihan-2023-07-15.csv",
 );
 const kinbun = loadSvgs("fonts/syunju102/Shunju-tsu-kyoiku.ttf");
 const reisho = loadSvgs("fonts/aoyagireisyosimo_ttf_2_01.ttf");
