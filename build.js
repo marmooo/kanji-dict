@@ -63,7 +63,7 @@ function getGradedIdioms(kanji, grade) {
 function getStudyVocabs(words, grade) {
   const examples = [];
   words.forEach((word) => {
-    const grades = word.split("").map((str) => jkat.getGrade(str));
+    const grades = Array.from(word).map((str) => jkat.getGrade(str));
     const difficulty = grades.filter((g) => grade <= g).length;
     if (difficulty == 1) examples.push(word);
   });
@@ -167,12 +167,66 @@ function getOnkun(kanji, grade) {
   return [on, kun];
 }
 
+function initGradedVocabs() {
+  const db = {};
+  const kanjiRegexp = /[\u3400-\u9FFF\uF900-\uFAFF\u{20000}-\u{2FFFF}]/u
+  const filepath = "graded-vocab-ja/dist/all.csv";
+  const text = Deno.readTextFileSync(filepath);
+  for (const line of text.trimEnd().split("\n")) {
+    const word = line.split(",")[0];
+    if (word.includes("々")) continue;
+    const kanjis = Array.from(word).filter((char) => kanjiRegexp.test(char));
+    const wordGrades = kanjis.map((kanji) => jkat.getGrade(kanji));
+    if (wordGrades.includes(-1)) continue;
+    const wordGrade = Math.max(...wordGrades);
+    for (const char of kanjis) {
+      const charGrade = jkat.getGrade(char);
+      if (charGrade < 0) continue;
+      if (charGrade != wordGrade) continue;
+      if (char in db) {
+        db[char].add(word)
+      } else {
+        db[char] = new Set([word]);
+      }
+    }
+  }
+  return db;
+}
+
+function initGradedIdioms() {
+  const db = {};
+  const kanjiRegexp = /[\u3400-\u9FFF\uF900-\uFAFF\u{20000}-\u{2FFFF}]/u
+  const filepath = "graded-idioms-ja/dist/all.csv";
+  const text = Deno.readTextFileSync(filepath);
+  for (const line of text.trimEnd().split("\n")) {
+    const word = line.split(",")[0];
+    if (word.includes("々")) continue;
+    const kanjis = Array.from(word).filter((char) => kanjiRegexp.test(char));
+    const wordGrades = kanjis.map((kanji) => jkat.getGrade(kanji));
+    if (wordGrades.includes(-1)) continue;
+    const wordGrade = Math.max(...wordGrades);
+    for (const char of kanjis) {
+      const charGrade = jkat.getGrade(char);
+      if (charGrade < 0) continue;
+      if (charGrade != wordGrade) continue;
+      if (char in db) {
+        db[char].add(word)
+      } else {
+        db[char] = new Set([word]);
+      }
+    }
+  }
+  return db;
+}
+
 const eta = new Eta({ views: ".", cache: true });
 const jkat = new Kanji(JKAT);
 const joyoStrokes = new Kanji(JoyoStrokes);
 const jis4UnihanStrokes = new Kanji(JIS4UnihanStrokes);
 const radicalDB = initRadicalDB();
 const onkunDict = new Onkun();
+const gradedVocabs = initGradedVocabs();
+const gradedIdioms = initGradedIdioms();
 await onkunDict.fetchJoyo("https://raw.githubusercontent.com/marmooo/onkun/v0.2.3/data/joyo-2017.csv");
 await onkunDict.fetchUnihan("https://raw.githubusercontent.com/marmooo/onkun/v0.2.3/data/Unihan-2023-07-15.csv");
 
@@ -185,9 +239,11 @@ for (const file of expandGlobSync("kanjivg/*.svg")) {
   if (grade < 0) continue;
 
   const [on, kun] = getOnkun(kanji, grade);
-  const vocabs = getGradedVocabs(kanji, grade + 1);
-  const idioms = getGradedIdioms(kanji, grade + 1);
-  const studyVocabs = getStudyVocabs(vocabs.concat(idioms), grade);
+  const vocabs = gradedVocabs[kanji];
+  const idioms = gradedIdioms[kanji];
+  // const vocabs = getGradedVocabs(kanji, grade + 1);
+  // const idioms = getGradedIdioms(kanji, grade + 1);
+  // const studyVocabs = getStudyVocabs(vocabs.concat(idioms), grade);
   const info = {};
   info["dir"] = dirNames[grade];
   info["学年"] = grades[grade];
@@ -195,8 +251,9 @@ for (const file of expandGlobSync("kanjivg/*.svg")) {
   info["訓読み"] = kun;
   info["総画数"] = getStrokes(kanji, grade);
   info["部首"] = radicalDB[kanji];
-  info["用例"] = vocabs;
-  info["熟語"] = idioms;
+  info["用例"] = vocabs ? [...vocabs] : [];
+  info["熟語"] = idioms ? [...idioms] : [];
+  const studyVocabs = getStudyVocabs(info["用例"].concat(info["熟語"]), grade);
   info["学習例"] = studyVocabs;
 
   const dir = "src/" + dirNames[grade];
