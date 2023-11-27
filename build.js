@@ -44,22 +44,6 @@ function toKanjiId(str) {
 //   return String.fromCodePoint(parseInt("0x" + kanjiId));
 // }
 
-function getGradedVocabs(kanji, grade) {
-  const filepath = "graded-vocab-ja/dist/" + grade + ".csv";
-  const examples = Deno.readTextFileSync(filepath).toString().split("\n")
-    .map((line) => line.split(",")[0])
-    .filter((word) => word.includes(kanji));
-  return examples;
-}
-
-function getGradedIdioms(kanji, grade) {
-  const filepath = "graded-idioms-ja/dist/" + grade + ".csv";
-  const examples = Deno.readTextFileSync(filepath).toString().split("\n")
-    .map((line) => line.split(",")[0])
-    .filter((word) => word.includes(kanji));
-  return examples;
-}
-
 function getStudyVocabs(words, grade) {
   const examples = [];
   words.forEach((word) => {
@@ -241,9 +225,6 @@ for (const file of expandGlobSync("kanjivg/*.svg")) {
   const [on, kun] = getOnkun(kanji, grade);
   const vocabs = gradedVocabs[kanji];
   const idioms = gradedIdioms[kanji];
-  // const vocabs = getGradedVocabs(kanji, grade + 1);
-  // const idioms = getGradedIdioms(kanji, grade + 1);
-  // const studyVocabs = getStudyVocabs(vocabs.concat(idioms), grade);
   const info = {};
   info["dir"] = dirNames[grade];
   info["学年"] = grades[grade];
