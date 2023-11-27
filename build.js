@@ -4,7 +4,12 @@ import { expandGlobSync } from "https://deno.land/std/fs/expand_glob.ts";
 import { Eta } from "https://deno.land/x/eta@v3.1.1/src/index.ts";
 import { ttf2svg } from "npm:@marmooo/ttf2svg@0.1.2";
 import { Onkun } from "https://raw.githubusercontent.com/marmooo/onkun/v0.2.3/mod.js";
-import { Kanji, JKAT, JoyoStrokes, JIS4UnihanStrokes } from "npm:@marmooo/kanji@0.0.2";
+import {
+  JIS4UnihanStrokes,
+  JKAT,
+  JoyoStrokes,
+  Kanji,
+} from "npm:@marmooo/kanji@0.0.2";
 
 const dirNames = [
   "小1",
@@ -110,7 +115,7 @@ function getYomis(kanji, grade) {
     yomis.push(...onkun["小学"]);
     yomis.push(...onkun["中学"]);
     return yomis;
-  } else if (grade <= 9){
+  } else if (grade <= 9) {
     const yomis = [];
     yomis.push(...onkun["小学"]);
     yomis.push(...onkun["中学"]);
@@ -140,7 +145,7 @@ function getOnkun(kanji, grade) {
 
 function initGradedVocabs() {
   const db = {};
-  const kanjiRegexp = /[\u3400-\u9FFF\uF900-\uFAFF\u{20000}-\u{2FFFF}]/u
+  const kanjiRegexp = /[\u3400-\u9FFF\uF900-\uFAFF\u{20000}-\u{2FFFF}]/u;
   const filepath = "graded-vocab-ja/dist/all.csv";
   const text = Deno.readTextFileSync(filepath);
   for (const line of text.trimEnd().split("\n")) {
@@ -155,7 +160,7 @@ function initGradedVocabs() {
       if (charGrade < 0) continue;
       if (charGrade != wordGrade) continue;
       if (char in db) {
-        db[char].add(word)
+        db[char].add(word);
       } else {
         db[char] = new Set([word]);
       }
@@ -166,7 +171,7 @@ function initGradedVocabs() {
 
 function initGradedIdioms() {
   const db = {};
-  const kanjiRegexp = /[\u3400-\u9FFF\uF900-\uFAFF\u{20000}-\u{2FFFF}]/u
+  const kanjiRegexp = /[\u3400-\u9FFF\uF900-\uFAFF\u{20000}-\u{2FFFF}]/u;
   const filepath = "graded-idioms-ja/dist/all.csv";
   const text = Deno.readTextFileSync(filepath);
   for (const line of text.trimEnd().split("\n")) {
@@ -181,7 +186,7 @@ function initGradedIdioms() {
       if (charGrade < 0) continue;
       if (charGrade != wordGrade) continue;
       if (char in db) {
-        db[char].add(word)
+        db[char].add(word);
       } else {
         db[char] = new Set([word]);
       }
@@ -213,8 +218,12 @@ const radicalDB = initRadicalDB();
 const onkunDict = new Onkun();
 const gradedVocabs = initGradedVocabs();
 const gradedIdioms = initGradedIdioms();
-await onkunDict.fetchJoyo("https://raw.githubusercontent.com/marmooo/onkun/v0.2.3/data/joyo-2017.csv");
-await onkunDict.fetchUnihan("https://raw.githubusercontent.com/marmooo/onkun/v0.2.3/data/Unihan-2023-07-15.csv");
+await onkunDict.fetchJoyo(
+  "https://raw.githubusercontent.com/marmooo/onkun/v0.2.3/data/joyo-2017.csv",
+);
+await onkunDict.fetchUnihan(
+  "https://raw.githubusercontent.com/marmooo/onkun/v0.2.3/data/Unihan-2023-07-15.csv",
+);
 const kinbun = loadSvgs("fonts/syunju102/Shunju-tsu-kyoiku.ttf");
 const reisho = loadSvgs("fonts/aoyagireisyosimo_ttf_2_01.ttf");
 const sousho = loadSvgs("fonts/KouzanBrushFontSousyo.ttf");
