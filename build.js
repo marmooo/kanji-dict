@@ -64,24 +64,11 @@ function notFoundSvg() {
 }
 
 function getAncientSvgs(kanji) {
-  const options = { width: 64, height: 64 };
-  const kinbun =
-    ttf2svg("fonts/syunju102/Shunju-tsu-kyoiku.ttf", kanji, options)[0].svg ||
-    notFoundSvg();
-  const reisho =
-    ttf2svg("fonts/aoyagireisyosimo_ttf_2_01.ttf", kanji, options)[0].svg ||
-    notFoundSvg();
-  const sousho =
-    ttf2svg("fonts/KouzanBrushFontSousyo.ttf", kanji, options)[0].svg ||
-    notFoundSvg();
-  const gyousho =
-    ttf2svg("fonts/衡山毛筆フォント行書.ttf", kanji, options)[0].svg ||
-    notFoundSvg();
   return {
-    "古代文字": kinbun,
-    "隷書": reisho,
-    "草書": sousho,
-    "行書": gyousho,
+    "古代文字": kinbun[kanji] || notFoundSvg(),
+    "隷書": reisho[kanji] || notFoundSvg(),
+    "草書": sousho[kanji] || notFoundSvg(),
+    "行書": gyousho[kanji] || notFoundSvg(),
   };
 }
 
@@ -203,6 +190,21 @@ function initGradedIdioms() {
   return db;
 }
 
+function loadSvgs(filePath) {
+  const db = {};
+  const options = { width: 64, height: 64 };
+  const jkat = new Kanji(JKAT);
+  const data = ttf2svg(filePath, undefined, options);
+  for (const datum of data) {
+    const code = datum.glyph.unicode;
+    if (!code) continue;
+    const kanji = String.fromCodePoint(datum.glyph.unicode);
+    if (jkat.getGrade(kanji) < 0) continue;
+    db[kanji] = datum.svg;
+  }
+  return db;
+}
+
 const eta = new Eta({ views: ".", cache: true });
 const jkat = new Kanji(JKAT);
 const joyoStrokes = new Kanji(JoyoStrokes);
@@ -213,6 +215,10 @@ const gradedVocabs = initGradedVocabs();
 const gradedIdioms = initGradedIdioms();
 await onkunDict.fetchJoyo("https://raw.githubusercontent.com/marmooo/onkun/v0.2.3/data/joyo-2017.csv");
 await onkunDict.fetchUnihan("https://raw.githubusercontent.com/marmooo/onkun/v0.2.3/data/Unihan-2023-07-15.csv");
+const kinbun = loadSvgs("fonts/syunju102/Shunju-tsu-kyoiku.ttf");
+const reisho = loadSvgs("fonts/aoyagireisyosimo_ttf_2_01.ttf");
+const sousho = loadSvgs("fonts/KouzanBrushFontSousyo.ttf");
+const gyousho = loadSvgs("fonts/衡山毛筆フォント行書.ttf");
 
 for (const file of expandGlobSync("kanjivg/*.svg")) {
   const name = basename(file.path).split(".")[0];
