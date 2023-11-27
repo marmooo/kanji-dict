@@ -20,10 +20,6 @@ deno run --allow-read --allow-write --allow-env build.js > build.log
 bash build.sh
 ```
 
-## References
-
-- [部首一覧](http://etc.dounokouno.com/bushu-search/bushu-list.html)
-
 ## License
 
 CC BY-SA 4.0
