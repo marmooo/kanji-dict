@@ -198,7 +198,6 @@ function initGradedIdioms() {
 function loadSvgs(filePath) {
   const db = {};
   const options = { width: 64, height: 64 };
-  const jkat = new Kanji(JKAT);
   const data = ttf2svg(filePath, undefined, options);
   for (const datum of data) {
     const code = datum.glyph.unicode;
@@ -215,9 +214,9 @@ const jkat = new Kanji(JKAT);
 const joyoStrokes = new Kanji(JoyoStrokes);
 const jis4UnihanStrokes = new Kanji(JIS4UnihanStrokes);
 const radicalDB = initRadicalDB();
-const onkunDict = new Onkun();
 const gradedVocabs = initGradedVocabs();
 const gradedIdioms = initGradedIdioms();
+const onkunDict = new Onkun();
 await onkunDict.fetchJoyo(
   "https://raw.githubusercontent.com/marmooo/onkun/v0.2.6/data/joyo-2017.csv",
 );
