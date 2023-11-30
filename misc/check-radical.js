@@ -1,4 +1,4 @@
-import { Kanji, JKAT, Unicode1Radical } from "npm:@marmooo/kanji@0.0.2";
+import { Kanji, JKAT, Unicode1Radical } from "../kanji/src/mod.js";
 
 // perfect quality
 function bmp3(codeDB) {
