@@ -108,19 +108,21 @@ function getStrokes(kanji, grade) {
 
 function getYomis(kanji, grade) {
   const onkun = onkunDict.get(kanji);
-  if (grade <= 5) {
-    return onkun["小学"];
-  } else if (grade <= 7) {
-    const yomis = [];
-    yomis.push(...onkun["小学"]);
-    yomis.push(...onkun["中学"]);
-    return yomis;
-  } else if (grade <= 9) {
-    const yomis = [];
-    yomis.push(...onkun["小学"]);
-    yomis.push(...onkun["中学"]);
-    yomis.push(...onkun["高校"]);
-    return yomis;
+  if (grade <= 9) {
+    return onkun["Joyo"];
+  // if (grade <= 5) {
+  //   return onkun["小学"];
+  // } else if (grade <= 7) {
+  //   const yomis = [];
+  //   yomis.push(...onkun["小学"]);
+  //   yomis.push(...onkun["中学"]);
+  //   return yomis;
+  // } else if (grade <= 9) {
+  //   const yomis = [];
+  //   yomis.push(...onkun["小学"]);
+  //   yomis.push(...onkun["中学"]);
+  //   yomis.push(...onkun["高校"]);
+  //   return yomis;
   } else if (onkun) {
     return onkun["Unihan"];
   } else {
@@ -219,6 +221,10 @@ const gradedIdioms = initGradedIdioms();
 const onkunDict = new Onkun();
 await onkunDict.fetchJoyo(
   "https://raw.githubusercontent.com/marmooo/onkun/v0.2.6/data/joyo-2017.csv",
+);
+await onkunDict.fetch(
+  "Joyo",
+  "https://raw.githubusercontent.com/marmooo/onkun/v0.2.6/data/joyo-2010.csv",
 );
 await onkunDict.fetch(
   "Unihan",
