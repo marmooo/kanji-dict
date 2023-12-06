@@ -91,7 +91,7 @@
               <tr><th>音読み</th><td class="notranslate"><%= it.info["音読み"].join(", ") %></td></tr>
               <tr><th>訓読み</th><td class="notranslate"><%= it.info["訓読み"].join(", ") %></td></tr>
               <tr><th>画数</th><td class="notranslate"><%= it.info["総画数"] %></td></tr>
-              <tr><th>214部首</th><td><%= it.info["部首"].component %></td></tr>
+              <tr><th>214 部首</th><td><a href="/kanji-dict/部首/<%= it.info["部首"].component %>/"><%= it.info["部首"].component %></a></td></tr>
               <tr><th>部首</th><td><%= it.info["部首"].name %> (<%= it.info["部首"].yomi %>)</td></tr>
               <tr><th><a href="https://ja.wiktionary.org/wiki/<%= it.kanji %>">用例</a></th><td class="notranslate"><%~ it.vocabs %></td></tr>
               <tr><th>熟語</th><td class="notranslate"><%~ it.idioms %></td></tr>
