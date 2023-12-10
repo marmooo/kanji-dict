@@ -45,7 +45,7 @@ function getKanjiList(count) {
     html += "</div>";
   } else {
     for (const [n, kanjis] of Object.entries(strokesDB[strokesThreshold])) {
-      html += `<h4>${n}画</4>`;
+      html += `<h4>${n}画</h4>`;
       html += `<div class="fs-3">`;
       Array.from(kanjis).forEach((kanji) => {
         const kanjiId = toKanjiId(kanji);
