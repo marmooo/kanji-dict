@@ -36,12 +36,21 @@ function toggleDarkMode() {
 function search() {
   const text = document.getElementById("searchText").value;
   if (!text) return;
-  const kanji = text[0];
-  const grade = jkat.getGrade(kanji);
-  if (grade >= 0) {
-    location.href = "/kanji-dict/" + dirNames[grade] + "/" + kanji + "/";
+  if (/[0-9]/.test(text[0])) {
+    const strokes = parseInt(text);
+    if (strokes < 25) {
+      location.href = `/kanji-dict/画数/${strokes}画/`;
+    } else {
+      location.href = `/kanji-dict/画数/25画〜/`;
+    }
   } else {
-    location.href = "/kanji-dict/常用外/" + kanji + "/";
+    const kanji = text[0];
+    const grade = jkat.getGrade(kanji);
+    if (grade >= 0) {
+      location.href = "/kanji-dict/" + dirNames[grade] + "/" + kanji + "/";
+    } else {
+      location.href = "/kanji-dict/常用外/" + kanji + "/";
+    }
   }
 }
 
