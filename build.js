@@ -9,7 +9,7 @@ import {
   JKAT,
   JoyoStrokes,
   Kanji,
-} from "npm:@marmooo/kanji@0.0.2";
+} from "npm:@marmooo/kanji@0.0.7";
 
 const dirNames = [
   "小1",
