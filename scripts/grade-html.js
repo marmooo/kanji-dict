@@ -229,7 +229,7 @@ await onkunDict.fetch(
   "Unihan",
   "https://raw.githubusercontent.com/marmooo/onkun/v0.2.6/data/Unihan-2023-07-15.csv",
 );
-const kinbun = loadSvgs("fonts/syunju102/Shunju-tsu-kyoiku.ttf");
+const kinbun = loadSvgs("fonts/syunju201/春秋tsu-教育漢字.otf");
 const reisho = loadSvgs("fonts/aoyagireisyosimo_ttf_2_01.ttf");
 const sousho = loadSvgs("fonts/KouzanBrushFontSousyo.ttf");
 const gyousho = loadSvgs("fonts/衡山毛筆フォント行書.ttf");
