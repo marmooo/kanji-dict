@@ -2,13 +2,7 @@ import { basename } from "https://deno.land/std/path/mod.ts";
 import { expandGlobSync } from "https://deno.land/std/fs/expand_glob.ts";
 import { Eta } from "eta";
 import { ttf2svg } from "@marmooo/ttf2svg";
-import { Onkun } from "onkun";
-import {
-  JIS4UnihanStrokes,
-  JKAT,
-  JoyoStrokes,
-  Kanji,
-} from "@marmooo/kanji";
+import { JKAT, Kanji } from "@marmooo/kanji";
 
 const dirNames = [
   "小1",
@@ -44,20 +38,6 @@ function toKanjiId(str) {
   return ("00000" + hex).slice(-5);
 }
 
-// function toKanji(kanjiId) {
-//   return String.fromCodePoint(parseInt("0x" + kanjiId));
-// }
-
-function getStudyVocabs(words, grade) {
-  const examples = [];
-  words.forEach((word) => {
-    const grades = Array.from(word).map((str) => jkat.getGrade(str));
-    const difficulty = grades.filter((g) => grade <= g).length;
-    if (difficulty == 1) examples.push(word);
-  });
-  return examples;
-}
-
 function notFoundSvg() {
   return `
 <svg role="img" aria-label="未発見" xmlns="http://www.w3.org/2000/svg" fill="red" width="64" height="64" viewBox="0 0 16 16">
@@ -87,115 +67,6 @@ function toLinks(idioms) {
   return html;
 }
 
-function initRadicalDB() {
-  const dict = {};
-  const csv = Deno.readTextFileSync("data/radicals1.csv");
-  csv.trimEnd().split("\n").forEach((line) => {
-    const [kanji, component, componentYomi, name, yomi] = line.split(",");
-    dict[kanji] = { component, componentYomi, name, yomi };
-  });
-  return dict;
-}
-
-function getStrokes(kanji, grade) {
-  if (grade <= 9) {
-    return joyoStrokes.getGrade(kanji);
-  } else {
-    return jis4UnihanStrokes.getGrade(kanji);
-  }
-}
-
-function getYomis(kanji, grade) {
-  const onkun = onkunDict.get(kanji);
-  if (grade <= 9) {
-    return onkun["Joyo"];
-  // if (grade <= 5) {
-  //   return onkun["小学"];
-  // } else if (grade <= 7) {
-  //   const yomis = [];
-  //   yomis.push(...onkun["小学"]);
-  //   yomis.push(...onkun["中学"]);
-  //   return yomis;
-  // } else if (grade <= 9) {
-  //   const yomis = [];
-  //   yomis.push(...onkun["小学"]);
-  //   yomis.push(...onkun["中学"]);
-  //   yomis.push(...onkun["高校"]);
-  //   return yomis;
-  } else if (onkun) {
-    return onkun["Unihan"];
-  } else {
-    console.log(`warning: ${kanji} onkun is undefined`);
-    return [];
-  }
-}
-
-function getOnkun(kanji, grade) {
-  const on = [];
-  const kun = [];
-  const yomis = getYomis(kanji, grade);
-  yomis.forEach((yomi) => {
-    if (/[ァ-ヶ]/.test(yomi)) {
-      on.push(yomi);
-    } else {
-      kun.push(yomi);
-    }
-  });
-  return [on, kun];
-}
-
-function initGradedVocabs() {
-  const db = {};
-  const kanjiRegexp = /[\u3400-\u9FFF\uF900-\uFAFF\u{20000}-\u{2FFFF}]/u;
-  const filepath = "graded-vocab-ja/dist/all.csv";
-  const text = Deno.readTextFileSync(filepath);
-  for (const line of text.trimEnd().split("\n")) {
-    const word = line.split(",")[0];
-    if (word.includes("々")) continue;
-    const kanjis = Array.from(word).filter((char) => kanjiRegexp.test(char));
-    const wordGrades = kanjis.map((kanji) => jkat.getGrade(kanji));
-    if (wordGrades.includes(-1)) continue;
-    const wordGrade = Math.max(...wordGrades);
-    for (const char of kanjis) {
-      const charGrade = jkat.getGrade(char);
-      if (charGrade < 0) continue;
-      if (charGrade != wordGrade) continue;
-      if (char in db) {
-        db[char].add(word);
-      } else {
-        db[char] = new Set([word]);
-      }
-    }
-  }
-  return db;
-}
-
-function initGradedIdioms() {
-  const db = {};
-  const kanjiRegexp = /[\u3400-\u9FFF\uF900-\uFAFF\u{20000}-\u{2FFFF}]/u;
-  const filepath = "graded-idioms-ja/dist/all.csv";
-  const text = Deno.readTextFileSync(filepath);
-  for (const line of text.trimEnd().split("\n")) {
-    const word = line.split(",")[0];
-    if (word.includes("々")) continue;
-    const kanjis = Array.from(word).filter((char) => kanjiRegexp.test(char));
-    const wordGrades = kanjis.map((kanji) => jkat.getGrade(kanji));
-    if (wordGrades.includes(-1)) continue;
-    const wordGrade = Math.max(...wordGrades);
-    for (const char of kanjis) {
-      const charGrade = jkat.getGrade(char);
-      if (charGrade < 0) continue;
-      if (charGrade != wordGrade) continue;
-      if (char in db) {
-        db[char].add(word);
-      } else {
-        db[char] = new Set([word]);
-      }
-    }
-  }
-  return db;
-}
-
 function loadSvgs(filePath) {
   const db = {};
   const options = { width: 64, height: 64 };
@@ -210,65 +81,63 @@ function loadSvgs(filePath) {
   return db;
 }
 
+function loadDB() {
+  const db = {};
+  const csv = Deno.readTextFileSync("kanji.csv");
+  csv.trimEnd().split("\n").forEach((line) => {
+    const arr = line.split(",");
+    const strokes = (arr[6] != "0") ? arr[6] : "";
+    const vocabs = (arr[9].length != 0) ? arr[9].split(" ") : [];
+    const idioms = (arr[10].length != 0) ? arr[10].split(" ") : [];
+    const studyVocabs = (arr[11].length != 0) ? arr[11].split(" ") : [];
+    db[arr[0]] = {
+      kanji: arr[0],
+      unicode: Number(arr[1]),
+      jis: Number(arr[2]),
+      grade: Number(arr[3]),
+      on: arr[4].split(" "),
+      kun: arr[5].split(" "),
+      strokes,
+      radicalComponent: arr[7],
+      radical: arr[8],
+      vocabs,
+      idioms,
+      studyVocabs,
+    };
+  });
+  return db;
+}
+
 const eta = new Eta({ views: ".", cache: true });
 const jkat = new Kanji(JKAT);
-const joyoStrokes = new Kanji(JoyoStrokes);
-const jis4UnihanStrokes = new Kanji(JIS4UnihanStrokes);
-const radicalDB = initRadicalDB();
-const gradedVocabs = initGradedVocabs();
-const gradedIdioms = initGradedIdioms();
-const onkunDict = new Onkun();
-await onkunDict.fetchJoyo(
-  "https://raw.githubusercontent.com/marmooo/onkun/v0.2.6/data/joyo-2017.csv",
-);
-await onkunDict.fetch(
-  "Joyo",
-  "https://raw.githubusercontent.com/marmooo/onkun/v0.2.6/data/joyo-2010.csv",
-);
-await onkunDict.fetch(
-  "Unihan",
-  "https://raw.githubusercontent.com/marmooo/onkun/v0.2.6/data/Unihan-2023-07-15.csv",
-);
 const kinbun = loadSvgs("fonts/syunju201/春秋tsu-教育漢字.otf");
 const reisho = loadSvgs("fonts/aoyagireisyosimo_ttf_2_01.ttf");
 const sousho = loadSvgs("fonts/KouzanBrushFontSousyo.ttf");
 const gyousho = loadSvgs("fonts/衡山毛筆フォント行書.ttf");
+const db = loadDB();
 
 for (const file of expandGlobSync("kanjivg/*.svg")) {
   const name = basename(file.path).split(".")[0];
   if (name.includes("-")) continue;
   const code = Number("0x" + name);
   const kanji = String.fromCharCode(code);
-  const grade = jkat.getGrade(kanji);
-  if (grade < 0) continue;
+  const info = db[kanji];
+  if (!info) continue;
+  if (info.grade < 1) continue;
 
-  const [on, kun] = getOnkun(kanji, grade);
-  const vocabs = gradedVocabs[kanji];
-  const idioms = gradedIdioms[kanji];
-  const info = {};
-  info["dir"] = dirNames[grade];
-  info["学年"] = grades[grade];
-  info["音読み"] = on;
-  info["訓読み"] = kun;
-  info["総画数"] = getStrokes(kanji, grade);
-  info["部首"] = radicalDB[kanji];
-  info["用例"] = vocabs ? [...vocabs] : [];
-  info["熟語"] = idioms ? [...idioms] : [];
-  const studyVocabs = getStudyVocabs(info["用例"].concat(info["熟語"]), grade);
-  info["学習例"] = studyVocabs;
-
-  const dir = "src/" + dirNames[grade];
+  const dir = "src/" + dirNames[info.grade - 1];
   Deno.mkdirSync(dir, { recursive: true });
   const ancientSvgs = getAncientSvgs(kanji);
   const kanjiId = toKanjiId(kanji);
   const html = eta.render("eta/grade.eta", {
     kanji: kanji,
     kanjiId: kanjiId,
+    grade: grades[info.grade - 1],
     info: info,
     ancientSvgs: ancientSvgs,
-    vocabs: toLinks(info["用例"].slice(0, 10)),
-    idioms: toLinks(info["熟語"].slice(0, 10)),
-    studyVocabs: toLinks(info["学習例"].slice(0, 10)),
+    vocabs: toLinks(info.vocabs.slice(0, 10)),
+    idioms: toLinks(info.idioms.slice(0, 10)),
+    studyVocabs: toLinks(info.studyVocabs.slice(0, 10)),
   });
   const kanjiDir = dir + "/" + kanji;
   Deno.mkdirSync(kanjiDir, { recursive: true });

@@ -87,13 +87,13 @@
         <div class="col-sm">
           <table class="table table-striped table-responsive">
             <tbody>
-              <tr><th>学年</th><td><%= it.info["学年"] %></td></tr>
-              <tr><th>音読み</th><td class="notranslate"><%= it.info["音読み"].join(", ") %></td></tr>
-              <tr><th>訓読み</th><td class="notranslate"><%= it.info["訓読み"].join(", ") %></td></tr>
-              <tr><th>画数</th><td class="notranslate"><%= it.info["総画数"] %></td></tr>
-              <tr><th>214 部首</th><td><a href="/kanji-dict/部首/<%= it.info["部首"].component %>/"><%= it.info["部首"].component %></a></td></tr>
-              <tr><th>部首</th><td><%= it.info["部首"].name %> (<%= it.info["部首"].yomi %>)</td></tr>
-              <tr><th><a href="https://ja.wiktionary.org/wiki/<%= it.kanji %>">用例</a></th><td class="notranslate"><%~ it.vocabs %></td></tr>
+              <tr><th>学年</th><td><%= it.grade %></td></tr>
+              <tr><th>音読み</th><td class="notranslate"><%= it.info.on.join(", ") %></td></tr>
+              <tr><th>訓読み</th><td class="notranslate"><%= it.info.kun.join(", ") %></td></tr>
+              <tr><th>画数</th><td class="notranslate"><%= it.info.strokes %></td></tr>
+              <tr><th>214 部首</th><td><a href="/kanji-dict/部首/<%= it.info.radicalComponent %>/"><%= it.info.radicalComponent %></a></td></tr>
+              <tr><th>部首</th><td><%= it.info.radical %></td></tr>
+              <tr><th><a href="https://ja.wiktionary.org/wiki/<%= it.info.kanji %>">用例</a></th><td class="notranslate"><%~ it.vocabs %></td></tr>
               <tr><th>熟語</th><td class="notranslate"><%~ it.idioms %></td></tr>
               <tr><th>学習例</th><td class="notranslate"><%~ it.studyVocabs %></td></tr>
             </tbody>
