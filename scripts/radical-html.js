@@ -1,5 +1,5 @@
-import { Eta } from "https://deno.land/x/eta@v3.1.1/src/index.ts";
-import { JKAT, Kanji, Unicode1Radical } from "npm:@marmooo/kanji@0.0.4";
+import { Eta } from "eta";
+import { JKAT, Kanji, Unicode1Radical } from "@marmooo/kanji";
 
 const dirNames = [
   "小1",
@@ -97,7 +97,7 @@ for (let i = 0; i < Unicode1Radical.length; i++) {
   const count = radicalDB[i].length;
   const dir = `src/部首/${radical.component}`;
   Deno.mkdirSync(dir, { recursive: true });
-  const html = eta.render("radical.eta", {
+  const html = eta.render("eta/radical.eta", {
     count,
     radical,
     radicalList,

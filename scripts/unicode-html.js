@@ -1,4 +1,4 @@
-import { Eta } from "https://deno.land/x/eta@v3.1.1/src/index.ts";
+import { Eta } from "eta";
 
 const charts = [
   {
@@ -251,7 +251,7 @@ charts.forEach((chart) => {
   const positionWidth = from.toString(16).length == 4 ? 50 : 60;
   const width = from.toString(16).length == 4 ? 451 : 461;
   const height = Math.ceil((to - from) / 16 + 1) * 25 + 1;
-  const html = eta.render("unicode.eta", {
+  const html = eta.render("eta/unicode.eta", {
     fontFaces,
     positionWidth,
     width,

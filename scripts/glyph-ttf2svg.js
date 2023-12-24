@@ -1,5 +1,5 @@
-import { ttf2svgFont } from "npm:@marmooo/ttf2svg@0.1.4";
-import { $ } from "https://deno.land/x/deno_dx@0.3.1/mod.ts";
+import { ttf2svgFont } from "@marmooo/ttf2svg";
+import { $ } from "deno_dx";
 
 function range(start, end) {
   const list = Array(end - start);

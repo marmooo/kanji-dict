@@ -1,6 +1,6 @@
-import { parse } from "npm:node-html-parser@6.1.11";
-import svg2ttf from "npm:svg2ttf@6.0.3";
-import ttf2woff2 from "npm:ttf2woff2@5.0.0";
+import { parse } from "node-html-parser";
+import svg2ttf from "svg2ttf";
+import ttf2woff2 from "ttf2woff2";
 
 function getSmallSvg(name, from, to) {
   const svg = Deno.readTextFileSync(`src/glyph/${name}.svg`);

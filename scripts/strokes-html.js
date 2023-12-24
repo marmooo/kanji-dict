@@ -1,11 +1,11 @@
-import { Eta } from "https://deno.land/x/eta@v3.1.1/src/index.ts";
+import { Eta } from "eta";
 import {
   JIS4UnihanStrokes,
   JKAT,
   JoyoStrokes,
   Kanji,
   Unicode1UnihanStrokes,
-} from "npm:@marmooo/kanji@0.0.5";
+} from "@marmooo/kanji";
 
 const dirNames = [
   "小1",
@@ -123,7 +123,7 @@ for (let i = 1; i < strokesThreshold; i++) {
   const kanjiList = getKanjiList(i);
   const dir = `src/画数/${strokes}`;
   Deno.mkdirSync(dir, { recursive: true });
-  const html = eta.render("strokes.eta", {
+  const html = eta.render("eta/strokes.eta", {
     count,
     strokes,
     strokesList,
@@ -139,7 +139,7 @@ const strokesList = getStrokesList();
 const kanjiList = getKanjiList(strokesThreshold);
 const dir = `src/画数/${strokesThreshold}画〜`;
 Deno.mkdirSync(dir, { recursive: true });
-const html = eta.render("strokes.eta", {
+const html = eta.render("eta/strokes.eta", {
   count,
   strokes,
   strokesList,

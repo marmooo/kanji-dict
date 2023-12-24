@@ -1,0 +1,25 @@
+{
+  "imports": {
+    "eta": "https://deno.land/x/eta@v3.1.1/src/index.ts",
+    "deno_dx": "https://deno.land/x/deno_dx@0.3.1/mod.ts",
+    "node-html-parser": "npm:node-html-parser@6.1.11",
+    "svg2ttf": "npm:svg2ttf@6.0.3",
+    "ttf2woff2": "npm:ttf2woff2@5.0.0",
+    "@marmooo/ttf2svg": "npm:@marmooo/ttf2svg@0.1.4",
+    "@marmooo/kanji": "npm:@marmooo/kanji@0.0.7",
+    "onkun": "https://raw.githubusercontent.com/marmooo/onkun/v0.2.6/mod.js"
+  },
+  "tasks": {
+    "build-csv": "deno run -A scripts/build-csv.js",
+    "grade-html": "deno run --allow-read --allow-write scripts/grade-html.js",
+    "radical-html": "deno run --allow-read --allow-write scripts/radical-html.js",
+    "strokes-html": "deno run --allow-read --allow-write scripts/strokes-html.js",
+    "unicode": "deno task unicode-svg2woff2 && deno task unicode-html",
+    "unicode-html": "deno run --allow-read --allow-write scripts/unicode-html.js",
+    "unicode-svg2woff2": "deno run --allow-read --allow-write scripts/unicode-svg2woff2.js",
+    "glyph": "deno task glyph-ttf2svg && deno task glyph-svg2index && deno task glyph-csv2index",
+    "glyph-ttf2svg": "deno run -A scripts/glyph-ttf2svg.js",
+    "glyph-svg2index": "deno run --allow-read --allow-write scripts/glyph-svg2index.js",
+    "glyph-csv2index": "deno run --allow-read --allow-write scripts/glyph-csv2index.js"
+  }
+}

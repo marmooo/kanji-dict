@@ -16,7 +16,8 @@
 ## Build
 
 ```
-deno run --allow-read --allow-write --allow-env build.js > build.log
+deno task grade-html
+deno task [task-name]
 bash build.sh
 ```
 

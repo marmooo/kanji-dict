@@ -1,15 +1,14 @@
-import { readLines } from "https://deno.land/std/io/mod.ts";
 import { basename } from "https://deno.land/std/path/mod.ts";
 import { expandGlobSync } from "https://deno.land/std/fs/expand_glob.ts";
-import { Eta } from "https://deno.land/x/eta@v3.1.1/src/index.ts";
-import { ttf2svg } from "npm:@marmooo/ttf2svg@0.1.2";
-import { Onkun } from "https://raw.githubusercontent.com/marmooo/onkun/v0.2.6/mod.js";
+import { Eta } from "eta";
+import { ttf2svg } from "@marmooo/ttf2svg";
+import { Onkun } from "onkun";
 import {
   JIS4UnihanStrokes,
   JKAT,
   JoyoStrokes,
   Kanji,
-} from "npm:@marmooo/kanji@0.0.7";
+} from "@marmooo/kanji";
 
 const dirNames = [
   "小1",
@@ -262,7 +261,7 @@ for (const file of expandGlobSync("kanjivg/*.svg")) {
   Deno.mkdirSync(dir, { recursive: true });
   const ancientSvgs = getAncientSvgs(kanji);
   const kanjiId = toKanjiId(kanji);
-  const html = eta.render("page.eta", {
+  const html = eta.render("eta/grade.eta", {
     kanji: kanji,
     kanjiId: kanjiId,
     info: info,

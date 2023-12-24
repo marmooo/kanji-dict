@@ -1,4 +1,4 @@
-import { Onkun } from "https://raw.githubusercontent.com/marmooo/onkun/v0.2.6/mod.js";
+import { Onkun } from "onkun";
 import {
   UnihanStrokes,
   JISCode,
@@ -7,7 +7,7 @@ import {
   Kanji,
   Unicode,
   UnicodeChart,
-} from "npm:@marmooo/kanji@0.0.7";
+} from "@marmooo/kanji";
 
 function getStudyVocabs(words, grade) {
   const examples = [];
