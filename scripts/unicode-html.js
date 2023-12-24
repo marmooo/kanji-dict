@@ -8,7 +8,7 @@ const charts = [
     description:
       "Unicode のブロックの1つである CJK統合漢字拡A に収録されている文字の一覧です。",
     lead:
-      `CJK統合漢字拡張A は基本多言語面 (第0面) の <span id="range">U+3400-4DBF</span> の範囲に定義されています。`,
+      `CJK統合漢字拡張A は基本多言語面 (第0面) の U+3400-4DBF の範囲に定義されています。`,
   },
   {
     dir: "URO1",
