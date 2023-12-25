@@ -170,7 +170,7 @@ function addKanjiInfo(code, csv) {
   const arr = csv.split(",");
   const table = document.querySelector("table");
   const trs = table.querySelectorAll("tr");
-  trs[0].children[1].textContent = `U+${code.toString(16).toUpperCase()}`;
+  trs[0].children[1].textContent = `U+${code.toString(16).toUpperCase()} (${arr[0]})`;
   trs[1].children[1].textContent = unicodeNames[Number(arr[1])];
   trs[2].children[1].textContent = jisCodeNames[Number(arr[2])];
   trs[3].children[1].textContent = jkatNames[Number(arr[3])];
