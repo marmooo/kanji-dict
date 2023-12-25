@@ -38,26 +38,31 @@ function characterIsSupported(char) {
 
 function colorTable(td, code) {
   return new Promise((resolve) => {
-    setTimeout(() => {
-      if (!td.classList.contains("table-warning")) {
-        const kanji = String.fromCodePoint(code);
+    if (td.classList.contains("table-warning")) {
+      resolve();
+    } else {
+      const kanji = String.fromCodePoint(code);
+      setTimeout(() => {
         if (!characterIsSupported(kanji)) {
           td.classList.add("table-warning");
         }
-      }
-      resolve();
-    }, 0);
+        resolve();
+      }, 0);
+    }
   });
 }
 
 function isElementInViewport(node) {
-  const { top } = node.getBoundingClientRect();
-  return top <= window.innerHeight;
+  const { top, bottom } = node.getBoundingClientRect();
+  return 0 <= bottom && top <= window.innerHeight;
 }
 
 async function checkSupportInViewport() {
   const trs = codeTrs.filter((tr) => isElementInViewport(tr));
+  const id = Date.now();
+  scrollId = id;
   for (const tr of trs) {
+    if (id != scrollId) continue;
     const tds = tr.children;
     const hex = tds[0].textContent;
     const from = Number(`0x${hex}`);
@@ -69,6 +74,7 @@ async function checkSupportInViewport() {
 }
 
 loadConfig();
+let scrollId;
 const codeTrs = [...document.querySelectorAll("#table tr")].slice(1);
 checkSupportInViewport();
 document.getElementById("toggleDarkMode").onclick = toggleDarkMode;
