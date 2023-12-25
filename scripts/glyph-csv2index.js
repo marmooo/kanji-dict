@@ -8,7 +8,7 @@ function getIndex(filePath) {
       const to = match.index;
       return encoder.encode(csv.slice(from, to)).length;
     } else {
-      return encoder.encode(csv.slice(0, match.index)).length;
+      return encoder.encode(csv.slice(0, match.index + 1)).length;
     }
   });
   const arr = [0].concat(tmp);
