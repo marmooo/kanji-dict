@@ -179,8 +179,12 @@ function getReferenceLinks(kanji) {
   const fragment = new DocumentFragment();
   const code = kanji.codePointAt(0);
   fragment.appendChild(getReferenceLink(
-    "康熙字典",
+    "康熙字典網上版",
     `https://www.kangxizidian.com/kxhans/${kanji}`,
+  ));
+  fragment.appendChild(getReferenceLink(
+    "漢語多功能字庫",
+    `https://humanum.arts.cuhk.edu.hk//Lexis/lexi-mf/search.php?word=${kanji}`,
   ));
   fragment.appendChild(getReferenceLink(
     "漢字字体規範史データセット",
@@ -193,6 +197,18 @@ function getReferenceLinks(kanji) {
   fragment.appendChild(getReferenceLink(
     "くずし字データベース",
     `http://codh.rois.ac.jp/char-shape/unicode/U+${code}`,
+  ));
+  fragment.appendChild(getReferenceLink(
+    "史的文字データベース",
+    `https://mojiportal.nabunken.go.jp/?c=search&moji=${kanji}`,
+  ));
+  fragment.appendChild(getReferenceLink(
+    "歷史文字資料庫",
+    `https://mojiportal.nabunken.go.jp/?c=search&moji=${kanji}`,
+  ));
+  fragment.appendChild(getReferenceLink(
+    "拓本文字データベース",
+    `http://coe21.zinbun.kyoto-u.ac.jp/djvuchar?query=${kanji}`,
   ));
   fragment.appendChild(getReferenceLink(
     "Wiktionary",
