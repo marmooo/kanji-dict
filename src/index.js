@@ -43,24 +43,30 @@ function search() {
     } else {
       location.href = `/kanji-dict/画数/25画〜/`;
     }
+  }
+  // TODO: IVS/IVD
+  const matchCode = text.match(/^[uU]\+?/);
+  if (matchCode) {
+    const code = text.slice(matchCode[0].length);
+    location.href = `/kanji-dict/glyph/?q=U+${code}`;
   } else {
     const kanji = text[0];
     const grade = jkat.getGrade(kanji);
     if (grade >= 0) {
-      location.href = "/kanji-dict/" + dirNames[grade] + "/" + kanji + "/";
+      location.href = `/kanji-dict/${dirNames[grade]}/${kanji}/`;
     } else {
-      location.href = "/kanji-dict/常用外/" + kanji + "/";
+      location.href = `/kanji-dict/glyph/?q=${kanji}`;
     }
   }
 }
 
 function setGrades() {
-  for (let i = 0; i < 10; i++) {
-    const e = document.getElementById(dirNames[i]);
-    for (let j = 0; j < JKAT[i].length; j++) {
-      const kanji = JKAT[i][j];
+  for (let g = 0; g < 10; g++) {
+    const e = document.getElementById(dirNames[g]);
+    for (let i = 0; i < JKAT[g].length; i++) {
+      const kanji = JKAT[g][i];
       const a = document.createElement("a");
-      a.href = "/kanji-dict/" + dirNames[i] + "/" + kanji + "/";
+      a.href = `/kanji-dict/${dirNames[g]}/${kanji}/`;
       a.className = "px-1";
       a.textContent = kanji;
       e.appendChild(a);
