@@ -177,7 +177,7 @@ function getLink(url, text) {
 
 function getReferenceLinks(kanji) {
   const fragment = new DocumentFragment();
-  const code = kanji.codePointAt(0);
+  const hex = kanji.codePointAt(0).toString(16).toUpperCase();
   fragment.appendChild(getReferenceLink(
     "康熙字典網上版",
     `https://www.kangxizidian.com/kxhans/${kanji}`,
@@ -192,11 +192,11 @@ function getReferenceLinks(kanji) {
   ));
   fragment.appendChild(getReferenceLink(
     "篆書字体データセット",
-    `http://codh.rois.ac.jp/tensho/unicode/U+${code}`,
+    `http://codh.rois.ac.jp/tensho/unicode/U+${hex}`,
   ));
   fragment.appendChild(getReferenceLink(
     "くずし字データベース",
-    `http://codh.rois.ac.jp/char-shape/unicode/U+${code}`,
+    `http://codh.rois.ac.jp/char-shape/unicode/U+${hex}`,
   ));
   fragment.appendChild(getReferenceLink(
     "史的文字データベース",
@@ -216,11 +216,11 @@ function getReferenceLinks(kanji) {
   ));
   fragment.appendChild(getReferenceLink(
     "文字情報基盤",
-    `https://moji.or.jp/mojikibansearch/result?UCS=${code}`,
+    `https://moji.or.jp/mojikibansearch/result?UCS=${hex}`,
   ));
   fragment.appendChild(getReferenceLink(
     "Unihan Database",
-    `http://www.unicode.org/cgi-bin/GetUnihanData.pl?codepoint=${code}`,
+    `http://www.unicode.org/cgi-bin/GetUnihanData.pl?codepoint=${hex}`,
   ));
   fragment.appendChild(getReferenceLink(
     "CHISE",
@@ -228,7 +228,7 @@ function getReferenceLinks(kanji) {
   ));
   fragment.appendChild(getReferenceLink(
     "GlyphWiki",
-    `https://glyphwiki.org/wiki/${code}`,
+    `https://glyphwiki.org/wiki/u${hex.toLowerCase()}`,
   ));
   return fragment;
 }
