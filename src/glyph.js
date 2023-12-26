@@ -159,11 +159,59 @@ function getExampleLinks(text) {
   return fragment;
 }
 
+function getReferenceLink(name, url) {
+  const a = document.createElement("a");
+  a.href = url;
+  a.textContent = name;
+  a.className = "px-1 text-nowrap";
+  a.target = "_blank";
+  a.rel = "noopener noreferer";
+  return a;
+}
+
 function getLink(url, text) {
   const a = document.createElement("a");
   a.href = url;
   a.textContent = text;
   return a;
+}
+
+function getReferenceLinks(kanji) {
+  const fragment = new DocumentFragment();
+  const code = kanji.codePointAt(0);
+  fragment.appendChild(getReferenceLink(
+    "康熙字典",
+    `https://www.kangxizidian.com/kxhans/${kanji}`
+  ));
+  fragment.appendChild(getReferenceLink(
+    "漢字字体規範史データセット",
+    `https://search.hng-data.org/search/${kanji}`
+  ));
+  fragment.appendChild(getReferenceLink(
+    "篆書字体データセット",
+    `http://codh.rois.ac.jp/tensho/unicode/U+${code}`
+  ));
+  fragment.appendChild(getReferenceLink(
+    "くずし字データベース",
+    `http://codh.rois.ac.jp/char-shape/unicode/U+${code}`
+  ));
+  fragment.appendChild(getReferenceLink(
+    "文字情報基盤",
+    `https://moji.or.jp/mojikibansearch/result?UCS=${code}`
+  ));
+  fragment.appendChild(getReferenceLink(
+    "Unihan Database",
+    `http://www.unicode.org/cgi-bin/GetUnihanData.pl?codepoint=${code}`
+  ));
+  fragment.appendChild(getReferenceLink(
+    "CHISE",
+    `https://www.chise.org/est/view/character/${kanji}`
+  ));
+  fragment.appendChild(getReferenceLink(
+    "GlyphWiki",
+    `https://glyphwiki.org/wiki/${code}`
+  ));
+  return fragment;
 }
 
 function addKanjiInfo(code, csv) {
@@ -189,6 +237,7 @@ function addKanjiInfo(code, csv) {
   divs[0].appendChild(getExampleLinks(arr[9])); // 用例
   divs[1].appendChild(getExampleLinks(arr[10])); // 熟語
   divs[2].appendChild(getExampleLinks(arr[11])); // 学習例
+  divs[3].appendChild(getReferenceLinks(arr[0]));
 }
 
 async function loadGlyph() {
