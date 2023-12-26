@@ -187,6 +187,10 @@ function getReferenceLinks(kanji) {
     `https://humanum.arts.cuhk.edu.hk//Lexis/lexi-mf/search.php?word=${kanji}`,
   ));
   fragment.appendChild(getReferenceLink(
+    "Etymology",
+    `https://hanziyuan.net/#${kanji}`,
+  ));
+  fragment.appendChild(getReferenceLink(
     "漢字字体規範史データセット",
     `https://search.hng-data.org/search/${kanji}`,
   ));
