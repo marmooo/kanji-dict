@@ -196,6 +196,10 @@ function getReferenceLinks(kanji) {
     `http://codh.rois.ac.jp/char-shape/unicode/U+${code}`
   ));
   fragment.appendChild(getReferenceLink(
+    "Wiktionary",
+    `https://ja.wiktionary.org/wiki/${kanji}`
+  ));
+  fragment.appendChild(getReferenceLink(
     "文字情報基盤",
     `https://moji.or.jp/mojikibansearch/result?UCS=${code}`
   ));
