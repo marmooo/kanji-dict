@@ -104,7 +104,22 @@ function getSvg(xml) {
 `;
 }
 
-unicodeNames = [
+
+const dirNames = [
+  "小1",
+  "小2",
+  "小3",
+  "小4",
+  "小5",
+  "小6",
+  "中2",
+  "中3",
+  "高校",
+  "常用",
+  "準1級",
+  "1級",
+];
+const unicodeNames = [
   "表外",
   "CJK統合漢字 (URO)",
   "CJK互換漢字",
@@ -119,16 +134,14 @@ unicodeNames = [
   "CJK統合漢字拡張H",
   "CJK統合漢字拡張I",
 ];
-
-jisCodeNames = [
+const jisCodeNames = [
   "表外",
   "JIS第1水準",
   "JIS第2水準",
   "JIS第3水準",
   "JIS第4水準",
 ];
-
-jkatNames = [
+const jkatNames = [
   "表外",
   "10級 (小学1年生)",
   "9級 (小学2年生)",
@@ -249,8 +262,9 @@ function getReferenceLinks(kanji) {
   return fragment;
 }
 
-function addKanjiInfo(code, csv) {
+function addKanjiInfo(kanji, code, csv) {
   const arr = csv.split(",");
+  const grade = Number(arr[3]);
   const table = document.querySelector("table");
   const trs = table.querySelectorAll("tr");
   trs[0].children[1].textContent = `U+${code.toString(16).toUpperCase()} (${
@@ -258,7 +272,7 @@ function addKanjiInfo(code, csv) {
   })`;
   trs[1].children[1].textContent = unicodeNames[Number(arr[1])];
   trs[2].children[1].textContent = jisCodeNames[Number(arr[2])];
-  trs[3].children[1].textContent = jkatNames[Number(arr[3])];
+  trs[3].children[1].textContent = jkatNames[grade];
   trs[4].children[1].textContent = arr[4].replace(/ /g, ","); // 音読み
   trs[5].children[1].textContent = arr[5].replace(/ /g, ","); // 訓読み
   if (arr[6] != "0") {
@@ -275,6 +289,12 @@ function addKanjiInfo(code, csv) {
   divs[1].appendChild(getExampleLinks(arr[10])); // 熟語
   divs[2].appendChild(getExampleLinks(arr[11])); // 学習例
   divs[3].appendChild(getReferenceLinks(arr[0])); // 文字情報
+  if (grade != 0) {
+    const kidsURL = `/kanji-dict/${dirNames[grade - 1]}/${kanji}/`;
+    const a = document.getElementById("kids");
+    a.classList.remove("d-none");
+    a.href = kidsURL;
+  }
 }
 
 async function loadGlyph() {
@@ -295,7 +315,7 @@ async function loadGlyph() {
     const svg = getSvg(xml);
     document.getElementById("kanji").innerHTML = svg;
     const csv = await fetchCSV(name, index);
-    addKanjiInfo(code, csv);
+    addKanjiInfo(kanji, code, csv);
   } else {
     const span = document.createElement("span");
     span.textContent = "\ufffd";
