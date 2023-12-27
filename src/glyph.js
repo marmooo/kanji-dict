@@ -187,6 +187,14 @@ function getReferenceLinks(kanji) {
     `https://humanum.arts.cuhk.edu.hk//Lexis/lexi-mf/search.php?word=${kanji}`,
   ));
   fragment.appendChild(getReferenceLink(
+    "簡牘字典",
+    `https://wcd-ihp.ascdc.sinica.edu.tw/woodslip/result.php?search=${kanji}`,
+  ));
+  fragment.appendChild(getReferenceLink(
+    "中華語文知識庫",
+    `https://www.chinese-linguipedia.org/search_results.html?query=${kanji}`,
+  ));
+  fragment.appendChild(getReferenceLink(
     "Etymology",
     `https://hanziyuan.net/#${kanji}`,
   ));
@@ -213,6 +221,10 @@ function getReferenceLinks(kanji) {
   fragment.appendChild(getReferenceLink(
     "拓本文字データベース",
     `http://coe21.zinbun.kyoto-u.ac.jp/djvuchar?query=${kanji}`,
+  ));
+  fragment.appendChild(getReferenceLink(
+    "漢典",
+    `https://www.zdic.net/hans/${kanji}`,
   ));
   fragment.appendChild(getReferenceLink(
     "Wiktionary",
