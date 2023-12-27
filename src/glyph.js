@@ -275,10 +275,12 @@ function addKanjiInfo(kanji, code, csv) {
   trs[3].children[1].textContent = jkatNames[grade];
   trs[4].children[1].textContent = arr[4].replace(/ /g, ","); // 音読み
   trs[5].children[1].textContent = arr[5].replace(/ /g, ","); // 訓読み
-  if (arr[6] != "0") {
-    const strokes = `${arr[6]}画`;
-    const strokesURL = `/kanji-dict/画数/${strokes}/`;
-    trs[6].children[1].appendChild(getLink(strokesURL, strokes));
+  const strokes = Number(arr[6]);
+  if (strokes != 0) {
+    const strokesText = `${strokes}画`;
+    const strokesDir = (strokes < 25) ? strokesText : "25画〜";
+    const strokesURL = `/kanji-dict/画数/${strokesDir}/`;
+    trs[6].children[1].appendChild(getLink(strokesURL, strokesText));
   }
   const componentURL = `/kanji-dict/部首/${arr[7]}/`;
   trs[7].children[1].appendChild(getLink(componentURL, arr[7]));
