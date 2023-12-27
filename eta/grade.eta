@@ -47,6 +47,7 @@
             こども漢字辞書
           </a>
           <div class="navbar-nav">
+            <a id="glyph" class="fs-4 btn p-0" href="/kanji-dict/glyph/">🧑</a>
             <button title="ダークモード切替" id="toggleDarkMode" class="fs-4 btn p-0" type="button">🌓</button>
           </div>
         </div>
@@ -90,9 +91,9 @@
               <tr><th>学年</th><td><%= it.grade %></td></tr>
               <tr><th>音読み</th><td class="notranslate"><%= it.info.on.join(", ") %></td></tr>
               <tr><th>訓読み</th><td class="notranslate"><%= it.info.kun.join(", ") %></td></tr>
-              <tr><th>画数</th><td class="notranslate"><%= it.info.strokes %></td></tr>
-              <tr><th>214 部首</th><td><a href="/kanji-dict/部首/<%= it.info.radicalComponent %>/"><%= it.info.radicalComponent %></a></td></tr>
-              <tr><th>部首</th><td><%= it.info.radical %></td></tr>
+              <tr><th>画数</th><td class="notranslate"><a href="/kanji-dict/画数/<%= it.info.strokes %>画/"><%= it.info.strokes %>画</a></td></tr>
+              <tr><th>214部首</th><td class="notranslate"><a href="/kanji-dict/部首/<%= it.info.radicalComponent %>/"><%= it.info.radicalComponent %></a></td></tr>
+              <tr><th>部首</th><td class="notranslate"><%= it.info.radical %></td></tr>
               <tr><th><a href="https://ja.wiktionary.org/wiki/<%= it.info.kanji %>">用例</a></th><td class="notranslate"><%~ it.vocabs %></td></tr>
               <tr><th>熟語</th><td class="notranslate"><%~ it.idioms %></td></tr>
               <tr><th>学習例</th><td class="notranslate"><%~ it.studyVocabs %></td></tr>
@@ -178,6 +179,6 @@
       </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/vivus@0.4.6/dist/vivus.min.js" integrity="sha256-DSPDv+rS5PAURHc6mTaH9/kBinkq/DA+KRuXganawp4=" crossorigin="anonymous"></script>
-    <script src="/kanji-dict/page.js"></script>
+    <script src="/kanji-dict/grade.js"></script>
   </body>
 </html>
