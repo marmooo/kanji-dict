@@ -198,7 +198,7 @@ UnicodeChart.forEach((list, i) => {
     info["用例"] = vocabs ? [...vocabs] : [];
     info["熟語"] = idioms ? [...idioms] : [];
     const studyVocabs = getStudyVocabs(
-      info["用例"].concat(info["熟語"]),
+      [...new Set(info["用例"].concat(info["熟語"]))],
       grade,
     );
     info["学習例"] = studyVocabs;
