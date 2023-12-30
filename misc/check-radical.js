@@ -1,4 +1,4 @@
-import { Kanji, JKAT, Unicode1Radical } from "../kanji/src/mod.js";
+import { JKAT, Kanji, Unicode1Radical } from "@marmooo/kanji";
 
 // perfect quality
 function bmp3(codeDB) {
@@ -104,7 +104,7 @@ function mojikiban(codeDB) {
   return dict;
 }
 
-function checkDiff(name, dict1, dict2, showDetails=false) {
+function checkDiff(name, dict1, dict2, showDetails = false) {
   let count = 0;
   for (const [k1, v1] of Object.entries(dict1)) {
     if (k1 in dict2) {

@@ -1,6 +1,6 @@
 import { basename } from "https://deno.land/std/path/mod.ts";
 import { expandGlobSync } from "https://deno.land/std/fs/expand_glob.ts";
-import { parse } from "npm:node-html-parser@6.1.11";
+import { parse } from "node-html-parser";
 
 function checkElementError() {
   const db = {};
@@ -27,7 +27,9 @@ function checkElementError() {
     const component = original ?? element;
     if (element in db) {
       if (db[element] != component) {
-        console.log(`error: ${name}, ${kanji}, ${element}, ${db[element]}, ${component}`);
+        console.log(
+          `error: ${name}, ${kanji}, ${element}, ${db[element]}, ${component}`,
+        );
         db[element];
       }
     } else {

@@ -1,12 +1,12 @@
 import { Onkun } from "onkun";
 import {
-  UnihanStrokes,
   JISCode,
   JKAT,
   JoyoStrokes,
   Kanji,
   Unicode,
   UnicodeChart,
+  UnihanStrokes,
 } from "@marmooo/kanji";
 
 function getStudyVocabs(words, grade) {
