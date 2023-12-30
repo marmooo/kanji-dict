@@ -42,7 +42,7 @@ function getUnicodeNameIndex(code) {
   if (code < Number(0x2EBF0)) return undefined;
   if (code <= Number(0x2EE5D)) return ["ExtI", code - Number(0x2EBF0)];
   if (code < Number(0x2F800)) return undefined;
-  if (code <= Number(0xFA1D)) return ["CIS", code - Number(0x2F800)];
+  if (code <= Number(0x2FA1D)) return ["CIS", code - Number(0x2F800)];
   if (code < Number(0x30000)) return undefined;
   if (code <= Number(0x3134A)) return ["ExtG", code - Number(0x30000)];
   if (code < Number(0x31350)) return undefined;
