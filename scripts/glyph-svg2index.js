@@ -9,7 +9,7 @@ function getIndex(filePath) {
     if (i > 0) {
       // fill missing glyphs
       const code = Number(match[1]);
-      for (let i = 0; i < code - prevCode - 1; i++) {
+      for (let i = 1; i < code - prevCode; i++) {
         arr.push(0);
       }
       prevCode = code;
