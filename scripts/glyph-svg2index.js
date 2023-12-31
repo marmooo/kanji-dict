@@ -1,14 +1,26 @@
 function getIndex(filePath) {
   const svg = Deno.readTextFileSync(filePath);
-  const matches = [...svg.matchAll(/<glyph[^\/>]*\/>/g)];
+  const matches = [...svg.matchAll(/<glyph glyph-name="\&#(\d+);" [^\/>]*\/>/g)];
   const encoder = new TextEncoder("utf-8");
-  const arr = matches.map((match, i) => {
+  const arr = [];
+  let prevCode;
+  matches.forEach((match, i) => {
     if (i > 0) {
+      // fill missing glyphs
+      const code = Number(match[1]);
+      for (let i = 0; i < code - prevCode - 1; i++) {
+        arr.push(0);
+      }
+      prevCode = code;
+
       const from = matches[i - 1].index;
       const to = match.index;
-      return encoder.encode(svg.slice(from, to)).length;
+      const glyphLength = encoder.encode(svg.slice(from, to)).length;
+      arr.push(glyphLength);
     } else {
-      return encoder.encode(svg.slice(0, match.index)).length;
+      prevCode = Number(match[1]);
+      const glyphLength = encoder.encode(svg.slice(0, match.index)).length;
+      arr.push(glyphLength);
     }
   });
   const from = matches.at(-1).index;
