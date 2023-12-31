@@ -1,6 +1,7 @@
 function getIndex(filePath) {
   const svg = Deno.readTextFileSync(filePath);
-  const matches = [...svg.matchAll(/<glyph glyph-name="\&#(\d+);" [^\/>]*\/>/g)];
+  const glyphRegExp = /<glyph glyph-name="\&#(\d+);" [^\/>]*\/>/g;
+  const matches = [...svg.matchAll(glyphRegExp)];
   const encoder = new TextEncoder("utf-8");
   const arr = [];
   let prevCode;
