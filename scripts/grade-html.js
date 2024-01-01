@@ -86,23 +86,23 @@ function loadDB() {
   const csv = Deno.readTextFileSync("kanji.csv");
   csv.trimEnd().split("\n").forEach((line) => {
     const arr = line.split(",");
-    const strokes = Number(arr[6]);
-    const strokesText = (strokes != 0) ? `${arr[6]}画` : "";
+    const strokes = Number(arr[7]);
+    const strokesText = (strokes != 0) ? `${arr[7]}画` : "";
     const strokesDir = (strokes >= 25) ? `25画〜` : `${strokes}画`;
-    const vocabs = (arr[9].length != 0) ? arr[9].split(" ") : [];
-    const idioms = (arr[10].length != 0) ? arr[10].split(" ") : [];
-    const studyVocabs = (arr[11].length != 0) ? arr[11].split(" ") : [];
+    const vocabs = (arr[10].length != 0) ? arr[10].split(" ") : [];
+    const idioms = (arr[11].length != 0) ? arr[11].split(" ") : [];
+    const studyVocabs = (arr[12].length != 0) ? arr[12].split(" ") : [];
     db[arr[0]] = {
-      kanji: arr[0],
-      unicode: Number(arr[1]),
-      jis: Number(arr[2]),
-      grade: Number(arr[3]),
-      on: arr[4].split(" "),
-      kun: arr[5].split(" "),
+      kanji: arr[1],
+      unicode: Number(arr[2]),
+      jis: Number(arr[3]),
+      grade: Number(arr[4]),
+      on: arr[5].split(" "),
+      kun: arr[6].split(" "),
       strokesText,
       strokesDir,
-      radicalComponent: arr[7],
-      radical: arr[8],
+      radicalComponent: arr[8],
+      radical: arr[9],
       vocabs,
       idioms,
       studyVocabs,

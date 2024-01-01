@@ -262,35 +262,33 @@ function getReferenceLinks(kanji) {
   return fragment;
 }
 
-function addKanjiInfo(kanji, code, csv) {
+function addKanjiInfo(kanji, csv) {
   const arr = csv.split(",");
-  const grade = Number(arr[3]);
+  const grade = Number(arr[4]);
   const table = document.querySelector("table");
   const trs = table.querySelectorAll("tr");
-  trs[0].children[1].textContent = `U+${code.toString(16).toUpperCase()} (${
-    arr[0]
-  })`;
-  trs[1].children[1].textContent = unicodeNames[Number(arr[1])];
-  trs[2].children[1].textContent = jisCodeNames[Number(arr[2])];
+  trs[0].children[1].textContent = `${arr[0]} (${arr[1]})`;
+  trs[1].children[1].textContent = unicodeNames[Number(arr[2])];
+  trs[2].children[1].textContent = jisCodeNames[Number(arr[3])];
   trs[3].children[1].textContent = jkatNames[grade];
-  trs[4].children[1].textContent = arr[4].replace(/ /g, ","); // 音読み
-  trs[5].children[1].textContent = arr[5].replace(/ /g, ","); // 訓読み
-  const strokes = Number(arr[6]);
+  trs[4].children[1].textContent = arr[5].replace(/ /g, ","); // 音読み
+  trs[5].children[1].textContent = arr[6].replace(/ /g, ","); // 訓読み
+  const strokes = Number(arr[7]);
   if (strokes != 0) {
     const strokesText = `${strokes}画`;
     const strokesDir = (strokes < 25) ? strokesText : "25画〜";
     const strokesURL = `/kanji-dict/画数/${strokesDir}/`;
     trs[6].children[1].appendChild(getLink(strokesURL, strokesText));
   }
-  const componentURL = `/kanji-dict/部首/${arr[7]}/`;
-  trs[7].children[1].appendChild(getLink(componentURL, arr[7]));
-  trs[8].children[1].textContent = arr[8]; // 部首
+  const componentURL = `/kanji-dict/部首/${arr[8]}/`;
+  trs[7].children[1].appendChild(getLink(componentURL, arr[8]));
+  trs[8].children[1].textContent = arr[9]; // 部首
   const examples = document.getElementById("examples");
   const divs = examples.querySelectorAll("div");
-  divs[0].appendChild(getExampleLinks(arr[9])); // 用例
-  divs[1].appendChild(getExampleLinks(arr[10])); // 熟語
-  divs[2].appendChild(getExampleLinks(arr[11])); // 学習例
-  divs[3].appendChild(getReferenceLinks(arr[0])); // 文字情報
+  divs[0].appendChild(getExampleLinks(arr[10])); // 用例
+  divs[1].appendChild(getExampleLinks(arr[11])); // 熟語
+  divs[2].appendChild(getExampleLinks(arr[12])); // 学習例
+  divs[3].appendChild(getReferenceLinks(arr[1])); // 文字情報
   if (grade != 0) {
     const kidsURL = `/kanji-dict/${dirNames[grade - 1]}/${kanji}/`;
     const a = document.getElementById("kids");
@@ -317,7 +315,7 @@ async function loadGlyph() {
     const svg = getSvg(xml);
     document.getElementById("kanji").innerHTML = svg;
     const csv = await fetchCSV(name, index);
-    addKanjiInfo(kanji, code, csv);
+    addKanjiInfo(kanji, csv);
   } else {
     const span = document.createElement("span");
     span.textContent = "\ufffd";
