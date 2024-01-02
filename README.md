@@ -1,6 +1,7 @@
 # こども漢字辞書
 
-[漢字の書き順(筆順)・読み方・画数・部首・用例・成り立ちを調べるためのシンプルな漢字辞書](https://marmooo.github.io/kanji-dict/)です。
+[漢字の書き順(筆順)・読み方・画数・部首・用例・成り立ちを調べるための漢字辞書](https://marmooo.github.io/kanji-dict/)です。
+Unicode 15.1 のすべての漢字 98,682字を収録しています。
 
 ## Installation
 
@@ -16,7 +17,7 @@
 ## Build
 
 ```
-deno task grade-html
+deno task build-csv
 deno task [task-name]
 bash build.sh
 ```
