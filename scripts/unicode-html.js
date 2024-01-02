@@ -226,22 +226,13 @@ function getFontFaces(dir, from, to, splitRange) {
   let style = "";
   for (let i = 1; i <= splitRange.length; i++) {
     const rangeFrom = from + splitRange[i - 1];
-    const rangeTo = from + splitRange[i];
-    if (rangeTo < to) {
-      if (i == splitRange.length) {
-        style += getFontFace(dir, rangeFrom, to, i);
-      } else {
-        style += getFontFace(dir, rangeFrom, rangeTo, i);
-      }
-    } else {
-      style += getFontFace(dir, rangeFrom, to, i);
-      break;
-    }
+    const rangeTo = Math.min(to, from + splitRange[i]);
+    style += getFontFace(dir, rangeFrom, rangeTo, i);
   }
   return style;
 }
 
-const splitRange = [0, 64, 128, 256, 512, 1024, 2048];
+const splitRange = [0, 64, 128, 256, 512, 1024, 2048, Infinity];
 const eta = new Eta({ views: ".", cache: true });
 charts.forEach((chart) => {
   const dir = `src/unicode/${chart.dir}`;
