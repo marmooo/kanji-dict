@@ -114,6 +114,7 @@ function getKanjiComponent(graded, count) {
             html += getKanjiLink(kanji);
           });
           html += "</div>\n";
+          html += "</details>\n";
         }
       } else {
         if (list.length > 0) {
