@@ -38,10 +38,10 @@ function search() {
   if (!text) return;
   if (/[0-9]/.test(text[0])) {
     const strokes = parseInt(text);
-    if (strokes < 25) {
+    if (strokes < 35) {
       location.href = `/kanji-dict/画数/${strokes}画/`;
     } else {
-      location.href = `/kanji-dict/画数/25画〜/`;
+      location.href = `/kanji-dict/画数/35画〜/`;
     }
   }
   // TODO: IVS/IVD
