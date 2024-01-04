@@ -226,8 +226,9 @@ function getFontFaces(dir, from, to, splitRange) {
   let style = "";
   for (let i = 1; i <= splitRange.length; i++) {
     const rangeFrom = from + splitRange[i - 1];
-    const rangeTo = Math.min(to, from + splitRange[i]);
+    const rangeTo = Math.min(to, from + splitRange[i] - 1);
     style += getFontFace(dir, rangeFrom, rangeTo, i);
+    if (to == rangeTo) break;
   }
   return style;
 }
