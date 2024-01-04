@@ -104,7 +104,6 @@ function getSvg(xml) {
 `;
 }
 
-
 const dirNames = [
   "小1",
   "小2",
@@ -210,6 +209,10 @@ function getReferenceLinks(kanji) {
   fragment.appendChild(getReferenceLink(
     "Etymology",
     `https://hanziyuan.net/#${kanji}`,
+  ));
+  fragment.appendChild(getReferenceLink(
+    "zi.tools",
+    `https://zi.tools/zi/${kanji}`,
   ));
   fragment.appendChild(getReferenceLink(
     "漢字字体規範史データセット",
