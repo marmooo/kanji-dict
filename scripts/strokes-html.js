@@ -80,7 +80,7 @@ function getGradedKanjiList(count) {
 }
 
 function getKanjiPanel(graded, count) {
-  const open = (count >= 30) ? "open" : "";
+  const open = (graded[14].length < 500) ? "open" : "";
   const fontSize = (count >= 25) ? "fs-1" : "fs-3";
   let html = "";
   if (count < strokesThreshold) {
@@ -219,7 +219,7 @@ const Strokes = initStrokes();
 
 for (let i = 1; i < strokesThreshold; i++) {
   const graded = getGradedKanjiList(i);
-  const fontFaces = (i >= 25)
+  const fontFaces = (graded[14].length < 500)
     ? getFontFaces(`${i}画`, graded[14], splitRange)
     : "";
   const joyoCount = JoyoStrokes[i] ? JoyoStrokes[i].length : 0;
