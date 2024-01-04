@@ -3,11 +3,11 @@
   <head prefix="og: http://ogp.me/ns#">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="康熙字典 214 部首「<%= it.radical.component %>」に属する漢字をまとめたページです。">
+    <meta name="description" content="康熙字典 214 部首「<%= it.radical.component %>」に属する漢字の一覧です。">
     <title><%= it.radical.component %> | こども漢字辞書</title>
     <meta property="og:title" content="<%= it.radical.component %> | こども漢字辞書">
     <meta property="og:site_name" content="こども漢字辞書">
-    <meta property="og:description" content="康熙字典 214 部首「<%= it.radical.component %>」に属する漢字をまとめたページです。">
+    <meta property="og:description" content="康熙字典 214 部首「<%= it.radical.component %>」に属する漢字の一覧です。">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://marmooo.github.io/kanji-dict/">
     <meta property="og:image" content="https://marmooo.github.io/kanji-dict/favicon/apple-touch-icon.png">
@@ -26,6 +26,7 @@
     <link rel="manifest" href="/kanji-dict/favicon/site.webmanifest">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <style>
+      <%~ it.fontFaces %>
       html[data-bs-theme="dark"] .favicon { filter: invert(1) hue-rotate(180deg); }
     </style>
   </head>
@@ -49,27 +50,31 @@
       </noscript>
       <div class="row">
         <div class="col-md pb-3">
-          <h3><%= it.radical.component %> (<%= it.radical.componentYomi %>)</h3>
-          中国の漢字字典である <a href="https://ja.wikipedia.org/wiki/康熙字典">康熙字典</a> では、漢字を 214 の部首に分けています。
+          <h1><%= it.radical.component %> (<%= it.radical.componentYomi %>)</h1>
+          <p>康熙字典 214 部首「<%= it.radical.component %>」に属する漢字の一覧です。
+          常用漢字には <%= it.joyoCount %>字、JIS第4基準には <%= it.jis4Count %>字、Unicode全漢字には <%= it.allCount %>字あります。
+          </p>
+          <p>中国の漢字字典である <a href="https://ja.wikipedia.org/wiki/康熙字典">康熙字典</a> では、漢字を 214 の部首に分けています。
           そのうち <%= it.radical.component %> (<%= it.radical.componentYomi %>) に属する漢字をまとめました。
           日本では <a href="https://ja.wikipedia.org/wiki/偏旁">偏旁</a> に応じて部首名を以下のように表記・呼称します。
+          </p>
           <ul>
-            <%~ it.radicalList %> 
+            <%~ it.radicalPanel %> 
           </ul>
-          Unicode 1.1 に準拠する基本多言語面において、<%= it.radical.component %> (<%= it.radical.componentYomi %>) に属する漢字は <%= it.count %> 字あります。
-          一覧は例字の欄を参照ください。
+          <p>一覧は例字の欄を参照ください。
+          学年別漢字配当表、漢字検定配当表、JIS基準、Unicode全漢字を整理して表示します。
+          このページは Unicode 15.1 に準拠しています。
+          </p>
         </div>
         <div class="col-md pb-3">
           <div class="alert alert-light">
-            <h4>康熙字典 214 部首</h4>
-            <%~ it.radicalComponentList %>
+            <h3>部首一覧</h3>
+            <%~ it.radicalComponentPanel %>
           </div>
         </div>
       </div>
       <h3>例字</h3>
-      <div class="fs-3">
-        <%~ it.kanjiList %>
-      </div>
+      <%~ it.kanjiPanel %>
     </main>
     <footer class="pt-4 alert text-center">
       <div>
@@ -81,25 +86,6 @@
         / <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
       </div>
     </footer>
-    <script>
-      function loadConfig() {
-        if (localStorage.getItem("darkMode") == 1) {
-          document.documentElement.setAttribute("data-bs-theme", "dark");
-        }
-      }
-
-      function toggleDarkMode() {
-        if (localStorage.getItem("darkMode") == 1) {
-          localStorage.setItem("darkMode", 0);
-          document.documentElement.setAttribute("data-bs-theme", "light");
-        } else {
-          localStorage.setItem("darkMode", 1);
-          document.documentElement.setAttribute("data-bs-theme", "dark");
-        }
-      }
-
-      loadConfig();
-      document.getElementById("toggleDarkMode").onclick = toggleDarkMode;
-    </script>
+    <script src="/kanji-dict/radical.js"></script>
   </body>
 </html>
