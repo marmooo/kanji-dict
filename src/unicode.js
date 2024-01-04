@@ -38,13 +38,13 @@ function characterIsSupported(char) {
 
 function colorTable(td, code) {
   return new Promise((resolve) => {
-    if (td.classList.contains("table-warning")) {
+    if (td.classList.contains("bg-warning-subtle")) {
       resolve();
     } else {
       const kanji = String.fromCodePoint(code);
       setTimeout(() => {
         if (!characterIsSupported(kanji)) {
-          td.classList.add("table-warning");
+          td.classList.add("bg-warning-subtle");
         }
         resolve();
       }, 0);
