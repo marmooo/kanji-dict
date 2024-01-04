@@ -79,7 +79,7 @@ function getGradedKanjiList(count) {
   return arr;
 }
 
-function getKanjiComponent(graded, count) {
+function getKanjiPanel(graded, count) {
   const open = (count >= 30) ? "open" : "";
   const fontSize = (count >= 25) ? "fs-1" : "fs-3";
   let html = "";
@@ -148,7 +148,7 @@ function getKanjiComponent(graded, count) {
   return html;
 }
 
-function getStrokesComponent() {
+function getStrokesPanel() {
   let html = "";
   for (let i = 1; i < strokesThreshold; i++) {
     html += `<a href="/kanji-dict/画数/${i}画/" class="px-1">${i}画</a>`;
@@ -227,8 +227,8 @@ for (let i = 1; i < strokesThreshold; i++) {
     .filter((kanji) => jisCode.getGrade(kanji) >= 0).length;
   const allCount = Strokes[i].length;
   const strokes = `${i}画`;
-  const strokesComponent = getStrokesComponent();
-  const kanjiComponent = getKanjiComponent(graded, i);
+  const strokesPanel = getStrokesPanel();
+  const kanjiPanel = getKanjiPanel(graded, i);
   const dir = `src/画数/${strokes}`;
   Deno.mkdirSync(dir, { recursive: true });
   const html = eta.render("eta/strokes.eta", {
@@ -237,8 +237,8 @@ for (let i = 1; i < strokesThreshold; i++) {
     jis4Count,
     allCount,
     strokes,
-    strokesComponent,
-    kanjiComponent,
+    strokesPanel,
+    kanjiPanel,
   });
   Deno.writeTextFileSync(dir + "/index.html", html);
 }
@@ -251,8 +251,8 @@ const jis4Count = Strokes.slice(strokesThreshold)
   .flat().length;
 const allCount = Strokes.slice(strokesThreshold).flat().length;
 const strokes = `${strokesThreshold}画以上`;
-const strokesComponent = getStrokesComponent();
-const kanjiComponent = getKanjiComponent(graded, strokesThreshold);
+const strokesPanel = getStrokesPanel();
+const kanjiPanel = getKanjiPanel(graded, strokesThreshold);
 const dir = `src/画数/${strokesThreshold}画〜`;
 Deno.mkdirSync(dir, { recursive: true });
 const html = eta.render("eta/strokes.eta", {
@@ -261,7 +261,7 @@ const html = eta.render("eta/strokes.eta", {
   jis4Count,
   allCount,
   strokes,
-  strokesComponent,
-  kanjiComponent,
+  strokesPanel,
+  kanjiPanel,
 });
 Deno.writeTextFileSync(dir + "/index.html", html);
