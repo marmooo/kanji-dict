@@ -243,6 +243,10 @@ function getReferenceLinks(kanji) {
     `https://www.zdic.net/hans/${kanji}`,
   ));
   fragment.appendChild(getReferenceLink(
+    "異體字詞典",
+    `https://jf.xmu.edu.cn/variants/cc.html?q=${kanji}`,
+  ));
+  fragment.appendChild(getReferenceLink(
     "古今文字集成",
     `http://www.ccamc.co/cjkv.php?cjkv=${kanji}`,
   ));
