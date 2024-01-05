@@ -280,6 +280,14 @@ function getJapanGlyphReferences(kanji) {
     "拓本文字データベース",
     `http://coe21.zinbun.kyoto-u.ac.jp/djvuchar?query=${kanji}`,
   ));
+  fragment.appendChild(getReferenceLink(
+    "浄瑠璃丸本 字形データベース",
+    `https://www.waseda.jp/prj-kyodo-enpaku/kuzushiji/DB/glyph/U+${hex}.html`,
+  ));
+  fragment.appendChild(getReferenceLink(
+    "国語研変体仮名字形データベース",
+    `https://cid.ninjal.ac.jp/hentaiganaDB/DB/glyph/U+${hex}.html`,
+  ));
   return fragment;
 }
 
