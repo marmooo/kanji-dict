@@ -171,13 +171,15 @@ function getExampleLinks(text) {
 }
 
 function getReferenceLink(name, url) {
+  const li = document.createElement("li");
   const a = document.createElement("a");
   a.href = url;
   a.textContent = name;
   a.className = "px-1 text-nowrap";
   a.target = "_blank";
   a.rel = "noopener noreferer";
-  return a;
+  li.appendChild(a);
+  return li;
 }
 
 function getLink(url, text) {
@@ -187,60 +189,41 @@ function getLink(url, text) {
   return a;
 }
 
-function getReferenceLinks(kanji) {
+function getDictReferences(kanji) {
   const fragment = new DocumentFragment();
   const hex = kanji.codePointAt(0).toString(16).toUpperCase();
   fragment.appendChild(getReferenceLink(
-    "康熙字典網上版",
-    `https://www.kangxizidian.com/kxhans/${kanji}`,
-  ));
-  fragment.appendChild(getReferenceLink(
-    "漢語多功能字庫",
-    `https://humanum.arts.cuhk.edu.hk//Lexis/lexi-mf/search.php?word=${kanji}`,
-  ));
-  fragment.appendChild(getReferenceLink(
-    "簡牘字典",
-    `https://wcd-ihp.ascdc.sinica.edu.tw/woodslip/result.php?search=${kanji}`,
-  ));
-  fragment.appendChild(getReferenceLink(
-    "中華語文知識庫",
-    `https://www.chinese-linguipedia.org/search_results.html?query=${kanji}`,
-  ));
-  fragment.appendChild(getReferenceLink(
-    "Etymology",
-    `https://hanziyuan.net/#${kanji}`,
+    "Wiktionary",
+    `https://ja.wiktionary.org/wiki/${kanji}`,
   ));
   fragment.appendChild(getReferenceLink(
     "zi.tools",
     `https://zi.tools/zi/${kanji}`,
   ));
   fragment.appendChild(getReferenceLink(
-    "漢字字体規範史データセット",
-    `https://search.hng-data.org/search/${kanji}`,
+    "漢語多功能字庫",
+    `https://humanum.arts.cuhk.edu.hk//Lexis/lexi-mf/search.php?word=${kanji}`,
   ));
   fragment.appendChild(getReferenceLink(
-    "篆書字体データセット",
-    `http://codh.rois.ac.jp/tensho/unicode/U+${hex}`,
+    "國學大師",
+    `https://www.guoxuedashi.net/zidian/${hex}.html`,
   ));
   fragment.appendChild(getReferenceLink(
-    "くずし字データベース",
-    `http://codh.rois.ac.jp/char-shape/unicode/U+${hex}`,
+    "說文解字第一網",
+    `http://www.shuowen.net/jiezi/${hex}/`,
+  ));
+  return fragment;
+}
+
+function getMeaningReferences(kanji) {
+  const fragment = new DocumentFragment();
+  fragment.appendChild(getReferenceLink(
+    "康熙字典網上版",
+    `https://www.kangxizidian.com/kxhans/${kanji}`,
   ));
   fragment.appendChild(getReferenceLink(
-    "史的文字データベース",
-    `https://mojiportal.nabunken.go.jp/?c=search&moji=${kanji}`,
-  ));
-  fragment.appendChild(getReferenceLink(
-    "歷史文字資料庫",
-    `https://mojiportal.nabunken.go.jp/?c=search&moji=${kanji}`,
-  ));
-  fragment.appendChild(getReferenceLink(
-    "拓本文字データベース",
-    `http://coe21.zinbun.kyoto-u.ac.jp/djvuchar?query=${kanji}`,
-  ));
-  fragment.appendChild(getReferenceLink(
-    "漢典",
-    `https://www.zdic.net/hans/${kanji}`,
+    "中華語文知識庫",
+    `https://www.chinese-linguipedia.org/search_results.html?query=${kanji}`,
   ));
   fragment.appendChild(getReferenceLink(
     "異體字詞典",
@@ -251,13 +234,58 @@ function getReferenceLinks(kanji) {
     `http://www.ccamc.co/cjkv.php?cjkv=${kanji}`,
   ));
   fragment.appendChild(getReferenceLink(
-    "Wiktionary",
-    `https://ja.wiktionary.org/wiki/${kanji}`,
+    "漢典",
+    `https://www.zdic.net/hans/${kanji}`,
+  ));
+  return fragment;
+}
+
+function getChineseGlyphReferences(kanji) {
+  const fragment = new DocumentFragment();
+  fragment.appendChild(getReferenceLink(
+    "Etymology",
+    `https://hanziyuan.net/#${kanji}`,
   ));
   fragment.appendChild(getReferenceLink(
-    "文字情報基盤",
-    `https://moji.or.jp/mojikibansearch/result?UCS=${hex}`,
+    "簡牘字典",
+    `https://wcd-ihp.ascdc.sinica.edu.tw/woodslip/result.php?search=${kanji}`,
   ));
+  fragment.appendChild(getReferenceLink(
+    "歷史文字資料庫",
+    `https://wcd-ihp.ascdc.sinica.edu.tw/union/?c=search&moji=${kanji}`,
+  ));
+  return fragment;
+}
+
+function getJapanGlyphReferences(kanji) {
+  const fragment = new DocumentFragment();
+  const hex = kanji.codePointAt(0).toString(16).toUpperCase();
+  fragment.appendChild(getReferenceLink(
+    "漢字字体規範史データセット",
+    `https://search.hng-data.org/search/${kanji}`,
+  ));
+  fragment.appendChild(getReferenceLink(
+    "篆書字体データセット",
+    `http://codh.rois.ac.jp/tensho/unicode/U+${hex}`,
+  ));
+  fragment.appendChild(getReferenceLink(
+    "日本古典籍くずし字データセット",
+    `http://codh.rois.ac.jp/char-shape/unicode/U+${hex}`,
+  ));
+  fragment.appendChild(getReferenceLink(
+    "史的文字データベース",
+    `https://mojiportal.nabunken.go.jp/?c=search&moji=${kanji}`,
+  ));
+  fragment.appendChild(getReferenceLink(
+    "拓本文字データベース",
+    `http://coe21.zinbun.kyoto-u.ac.jp/djvuchar?query=${kanji}`,
+  ));
+  return fragment;
+}
+
+function getUnicodeReferences(kanji) {
+  const fragment = new DocumentFragment();
+  const hex = kanji.codePointAt(0).toString(16).toUpperCase();
   fragment.appendChild(getReferenceLink(
     "Unihan Database",
     `http://www.unicode.org/cgi-bin/GetUnihanData.pl?codepoint=${hex}`,
@@ -270,7 +298,21 @@ function getReferenceLinks(kanji) {
     "GlyphWiki",
     `https://glyphwiki.org/wiki/u${hex.toLowerCase()}`,
   ));
+  fragment.appendChild(getReferenceLink(
+    "文字情報基盤",
+    `https://moji.or.jp/mojikibansearch/result?UCS=${hex}`,
+  ));
   return fragment;
+}
+
+function addReferences(kanji) {
+  const references = document.getElementById("references");
+  const ul = references.querySelectorAll("ul");
+  ul[0].appendChild(getDictReferences(kanji)); // 総合 (中国)
+  ul[1].appendChild(getMeaningReferences(kanji)); // 字義
+  ul[2].appendChild(getChineseGlyphReferences(kanji)); // 字体 (中国)
+  ul[3].appendChild(getJapanGlyphReferences(kanji)); // 字体 (日本)
+  ul[4].appendChild(getUnicodeReferences(kanji)); // Unicode
 }
 
 function addKanjiInfo(kanji, csv) {
@@ -299,7 +341,6 @@ function addKanjiInfo(kanji, csv) {
   divs[0].appendChild(getExampleLinks(arr[10])); // 用例
   divs[1].appendChild(getExampleLinks(arr[11])); // 熟語
   divs[2].appendChild(getExampleLinks(arr[12])); // 学習例
-  divs[3].appendChild(getReferenceLinks(arr[1])); // 文字情報
   if (grade != 0) {
     const kidsURL = `/kanji-dict/${dirNames[grade - 1]}/${kanji}/`;
     const a = document.getElementById("kids");
@@ -327,6 +368,7 @@ async function loadGlyph() {
     document.getElementById("kanji").innerHTML = svg;
     const csv = await fetchCSV(name, index);
     addKanjiInfo(kanji, csv);
+    addReferences(kanji);
   } else {
     const span = document.createElement("span");
     span.textContent = "\ufffd";
