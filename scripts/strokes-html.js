@@ -87,7 +87,7 @@ function getKanjiPanel(graded, count) {
     const joyo = graded.slice(0, 10);
     if (joyo.flat().length > 0) {
       html += `<h4>常用漢字</h4>\n`;
-      html += `<div class="${fontSize} pb-3">\n`;
+      html += `<div class="${fontSize} pb-3 notranslate">\n`;
       joyo.forEach((list, i) => {
         if (list.length > 0) {
           html += `<span class="badge rounded-pill bg-secondary">${
@@ -108,7 +108,7 @@ function getKanjiPanel(graded, count) {
 <div class="alert alert-info">
   以下の内容は通常文字化けする漢字が多数含まれますが、Webフォントで代替表示しているため文字化けは発生しません。
 </div>
-<div id="unicodeList" class="${fontSize}">
+<div id="unicodeList" class="${fontSize} notranslate">
 `;
           list.forEach((kanji) => {
             html += getKanjiLink(kanji);
@@ -119,7 +119,7 @@ function getKanjiPanel(graded, count) {
       } else {
         if (list.length > 0) {
           html += `<h4>${grades[i + 10]}</h4>\n`;
-          html += `<div class="${fontSize} pb-3">`;
+          html += `<div class="${fontSize} pb-3 notranslate">`;
           list.forEach((kanji) => {
             html += getKanjiLink(kanji);
           });
@@ -132,7 +132,7 @@ function getKanjiPanel(graded, count) {
 <div class="alert alert-info">
   以下の内容は通常文字化けする漢字が多数含まれますが、Webフォントで代替表示しているため文字化けは発生しません。
 </div>`;
-    html += `<div id="unicodeList" class="${fontSize}">\n`;
+    html += `<div id="unicodeList" class="${fontSize} notranslate">\n`;
     Strokes.slice(count).forEach((list, i) => {
       if (list.length > 0) {
         html += `<span class="badge rounded-pill bg-secondary">${

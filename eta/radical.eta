@@ -58,7 +58,7 @@
           そのうち <%= it.radical.component %> (<%= it.radical.componentYomi %>) に属する漢字をまとめました。
           日本では <a href="https://ja.wikipedia.org/wiki/偏旁">偏旁</a> に応じて部首名を以下のように表記・呼称します。
           </p>
-          <ul>
+          <ul class="notranslate">
             <%~ it.radicalPanel %> 
           </ul>
           <p>一覧は例字の欄を参照ください。
@@ -69,7 +69,9 @@
         <div class="col-md pb-3">
           <div class="alert alert-light">
             <h3>部首一覧</h3>
-            <%~ it.radicalComponentPanel %>
+            <div class="notranslate">
+              <%~ it.radicalComponentPanel %>
+            </div>
           </div>
         </div>
       </div>
