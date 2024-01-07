@@ -92,7 +92,7 @@ function loadDB() {
     const vocabs = (arr[10].length != 0) ? arr[10].split(" ") : [];
     const idioms = (arr[11].length != 0) ? arr[11].split(" ") : [];
     const studyVocabs = (arr[12].length != 0) ? arr[12].split(" ") : [];
-    db[arr[0]] = {
+    db[arr[1]] = {
       kanji: arr[1],
       unicode: Number(arr[2]),
       jis: Number(arr[3]),
