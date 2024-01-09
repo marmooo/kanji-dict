@@ -4,7 +4,6 @@ import {
   JKAT,
   Kanji,
   JoyoRadical,
-  Unicode,
   UnicodeRadical
 } from "@marmooo/kanji";
 

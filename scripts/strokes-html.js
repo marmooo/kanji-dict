@@ -4,7 +4,6 @@ import {
   JKAT,
   JoyoStrokes,
   Kanji,
-  Unicode,
   UnicodeStrokes,
 } from "@marmooo/kanji";
 
@@ -165,7 +164,7 @@ function initStrokes() {
   }
   const joyoStrokes = new Kanji(JoyoStrokes);
   const unicodeStrokes = new Kanji(UnicodeStrokes);
-  Unicode.forEach((list) => {
+  UnicodeStrokes.forEach((list) => {
     list.forEach((kanji) => {
       const joyoGrade = joyoStrokes.getGrade(kanji);
       if (joyoGrade >= 0) {
