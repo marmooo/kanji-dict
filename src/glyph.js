@@ -323,7 +323,7 @@ function addReferences(kanji) {
   ul[4].appendChild(getUnicodeReferences(kanji)); // Unicode
 }
 
-function addKanjiInfo(kanji, csv) {
+function addKanjiInfo(kanji, hex, csv) {
   const arr = csv.split(",");
   const grade = Number(arr[4]);
   const table = document.querySelector("table");
@@ -355,6 +355,12 @@ function addKanjiInfo(kanji, csv) {
     a.classList.remove("d-none");
     a.href = kidsURL;
   }
+  const description =
+    `漢字「${kanji}」(U+${hex}) の読み方・画数・部首・用例・成り立ちをまとめたページです。`;
+  ['meta[name="description"]', 'meta[property="og:description"]']
+    .forEach((selector) => {
+      document.querySelector(selector).setAttribute("content", description);
+    });
 }
 
 async function loadGlyph() {
@@ -375,7 +381,7 @@ async function loadGlyph() {
     const svg = getSvg(xml);
     document.getElementById("kanji").innerHTML = svg;
     const csv = await fetchCSV(name, index);
-    addKanjiInfo(kanji, csv);
+    addKanjiInfo(kanji, hex, csv);
     addReferences(kanji);
   } else {
     const span = document.createElement("span");
