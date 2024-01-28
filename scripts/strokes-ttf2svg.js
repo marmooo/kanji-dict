@@ -1,7 +1,7 @@
 import { ttf2svgFont } from "@marmooo/ttf2svg";
-import { $ } from "deno_dx";
+import { string } from "@tdewolff/minify";
 
-async function build(inFile, outFile, options) {
+function build(inFile, outFile, options) {
   const text = Deno.readTextFileSync(inFile);
   const list = text.replaceAll(/\n/g, "");
   const svg1 = ttf2svgFont(
@@ -22,8 +22,7 @@ async function build(inFile, outFile, options) {
   const svg = svg1.slice(0, svg1.match(toRegExp).index) +
     svg2.slice(svg2.match(fromRegExp).index, svg2.match(toRegExp).index) +
     svg3.slice(svg2.match(fromRegExp).index);
-  Deno.writeTextFile(outFile, svg);
-  return await $`minify ${outFile} -o ${outFile}`;
+  Deno.writeTextFile(outFile, string("image/svg+xml", svg));
 }
 
 // TODO: opentype.js 1.3.4 does not support IVS/IVD (HEAD is supported)
@@ -34,13 +33,13 @@ const fromRegExp = /<glyph [^\/>]*\/>/;
 const toRegExp = /<\/font>/;
 
 for (let i = 1; i < strokesThreshold; i++) {
-  await build(
+  build(
     `src/画数/${i}画/font.lst`,
     `src/画数/${i}画/font.svg`,
     options,
   );
 }
-await build(
+build(
   `src/画数/${strokesThreshold}画〜/font.lst`,
   `src/画数/${strokesThreshold}画〜/font.svg`,
   options,

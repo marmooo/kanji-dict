@@ -1,7 +1,7 @@
 {
   "imports": {
     "eta": "https://deno.land/x/eta@v3.2.0/src/index.ts",
-    "deno_dx": "https://deno.land/x/deno_dx@0.3.1/mod.ts",
+    "@tdewolff/minify": "npm:@tdewolff/minify@2.20.15",
     "node-html-parser": "npm:node-html-parser@6.1.12",
     "svg2ttf": "npm:svg2ttf@6.0.3",
     "ttf2woff2": "npm:ttf2woff2@5.0.0",
@@ -17,19 +17,19 @@
     "radical-html": "deno run --allow-read --allow-write scripts/radical-html.js",
     "radical-woff2": "deno task radical-list && deno task radical-ttf2svg && deno task radical-svg2woff2",
     "radical-list": "deno run --allow-write scripts/radical-list.js",
-    "radical-ttf2svg": "deno run -A scripts/radical-ttf2svg.js",
+    "radical-ttf2svg": "deno run --allow-read --allow-write --allow-ffi scripts/radical-ttf2svg.js",
     "radical-svg2woff2": "deno run --allow-read --allow-write --allow-sys scripts/radical-svg2woff2.js",
     "strokes": "deno task strokes-html && deno task strokes-woff2",
     "strokes-html": "deno run --allow-read --allow-write scripts/strokes-html.js",
     "strokes-woff2": "deno task strokes-list && deno task strokes-ttf2svg && deno task strokes-svg2woff2",
     "strokes-list": "deno run --allow-write scripts/strokes-list.js",
-    "strokes-ttf2svg": "deno run -A scripts/strokes-ttf2svg.js",
+    "strokes-ttf2svg": "deno run --allow-read --allow-write --allow-ffi scripts/strokes-ttf2svg.js",
     "strokes-svg2woff2": "deno run --allow-read --allow-write --allow-sys scripts/strokes-svg2woff2.js",
     "unicode": "deno task unicode-svg2woff2 && deno task unicode-html",
     "unicode-html": "deno run --allow-read --allow-write scripts/unicode-html.js",
     "unicode-svg2woff2": "deno run --allow-read --allow-write --allow-sys scripts/unicode-svg2woff2.js",
     "glyph": "deno task glyph-ttf2svg && deno task glyph-svg2index && deno task glyph-csv2index",
-    "glyph-ttf2svg": "deno run -A scripts/glyph-ttf2svg.js",
+    "glyph-ttf2svg": "deno run --allow-read --allow-write --allow-ffi scripts/glyph-ttf2svg.js",
     "glyph-svg2index": "deno run --allow-read --allow-write scripts/glyph-svg2index.js",
     "glyph-csv2index": "deno run --allow-read --allow-write scripts/glyph-csv2index.js"
   }
