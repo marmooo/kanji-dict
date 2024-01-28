@@ -2,9 +2,9 @@ import { Eta } from "eta";
 import {
   JISCode,
   JKAT,
-  Kanji,
   JoyoRadical,
-  UnicodeRadical
+  Kanji,
+  UnicodeRadical,
 } from "@marmooo/kanji";
 
 const dirNames = [
