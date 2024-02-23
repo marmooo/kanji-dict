@@ -1,6 +1,9 @@
 function normalizeFile(fileName) {
   const text = Deno.readTextFileSync(fileName);
-  Deno.writeTextFileSync(fileName, text.normalize("NFKC"));
+  const normalized = text.replace(/[\u2F00-\u2FDF]/g, (match) => {
+    return match.normalize("NFKC");
+  });
+  Deno.writeTextFileSync(fileName, normalized);
 }
 
 // Normalize radical chars, which tends to create unintended bugs.
