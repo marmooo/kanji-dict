@@ -3,22 +3,13 @@ import { string } from "@tdewolff/minify";
 
 function build(inFile, outFile, options) {
   const text = Deno.readTextFileSync(inFile);
-  const list = text.replaceAll(/\n/g, "");
-  const svg1 = ttf2svgFont(
-    "fonts/Jigmo-20230816/Jigmo.ttf",
-    list,
-    options,
-  );
-  const svg2 = ttf2svgFont(
-    "fonts/Jigmo-20230816/Jigmo2.ttf",
-    list,
-    options,
-  );
-  const svg3 = ttf2svgFont(
-    "fonts/Jigmo-20230816/Jigmo3.ttf",
-    list,
-    options,
-  );
+  const jigmo1 = Deno.readFileSync("fonts/Jigmo-20230816/Jigmo.ttf");
+  const jigmo2 = Deno.readFileSync("fonts/Jigmo-20230816/Jigmo2.ttf");
+  const jigmo3 = Deno.readFileSync("fonts/Jigmo-20230816/Jigmo3.ttf");
+  options.text = text.replaceAll(/\n/g, "");
+  const svg1 = ttf2svgFont(jigmo1, options);
+  const svg2 = ttf2svgFont(jigmo2, options);
+  const svg3 = ttf2svgFont(jigmo3, options);
   const svg = svg1.slice(0, svg1.match(toRegExp).index) +
     svg2.slice(svg2.match(fromRegExp).index, svg2.match(toRegExp).index) +
     svg3.slice(svg2.match(fromRegExp).index);

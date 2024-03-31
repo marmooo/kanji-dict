@@ -1,7 +1,7 @@
 import { basename } from "https://deno.land/std/path/mod.ts";
 import { expandGlobSync } from "https://deno.land/std/fs/expand_glob.ts";
 import { Eta } from "eta";
-import { ttf2svg } from "@marmooo/ttf2svg";
+import { parse, toSVG } from "@marmooo/ttf2svg";
 import { JKAT, Kanji } from "@marmooo/kanji";
 
 const dirNames = [
@@ -70,13 +70,14 @@ function toLinks(idioms) {
 function loadSvgs(filePath) {
   const db = {};
   const options = { width: 64, height: 64 };
-  const data = ttf2svg(filePath, undefined, options);
-  for (const datum of data) {
-    const code = datum.glyph.unicode;
+  const ttf = Deno.readFileSync(filePath);
+  const font = parse(ttf.buffer, options);
+  for (const glyph of Object.values(font.glyphs.glyphs)) {
+    const code = glyph.unicode;
     if (!code) continue;
-    const kanji = String.fromCodePoint(datum.glyph.unicode);
+    const kanji = String.fromCodePoint(glyph.unicode);
     if (jkat.getGrade(kanji) < 0) continue;
-    db[kanji] = datum.svg;
+    db[kanji] = toSVG(font, glyph, options);
   }
   return db;
 }
