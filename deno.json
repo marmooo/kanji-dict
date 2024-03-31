@@ -12,7 +12,7 @@
   "tasks": {
     "normalize": "deno run --allow-read --allow-write scripts/normalize.js",
     "build-csv": "deno run -A scripts/build-csv.js",
-    "grade-html": "deno run --allow-read --allow-write scripts/grade-html.js",
+    "grade-html": "deno run --allow-read --allow-write --allow-env scripts/grade-html.js",
     "radical": "deno task radical-html && deno task radical-woff2",
     "radical-html": "deno run --allow-read --allow-write scripts/radical-html.js",
     "radical-woff2": "deno task radical-list && deno task radical-ttf2svg && deno task radical-svg2woff2",
