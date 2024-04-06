@@ -73,8 +73,7 @@ function loadSvgs(filePath) {
   const ttf = Deno.readFileSync(filePath);
   const font = parse(ttf.buffer, options);
   for (const glyph of Object.values(font.glyphs.glyphs)) {
-    const code = glyph.unicode;
-    if (!code) continue;
+    if (!glyph.unicode) continue;
     const kanji = String.fromCodePoint(glyph.unicode);
     if (jkat.getGrade(kanji) < 0) continue;
     db[kanji] = toSVG(font, glyph, options);
