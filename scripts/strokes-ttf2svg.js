@@ -18,7 +18,7 @@ function build(inFile, outFile, options) {
 
 // TODO: opentype.js 1.3.4 does not support IVS/IVD (HEAD is supported)
 // ex: font.charToGlyph("\u82a6\ue0100");
-const options = { removeNotdef: true };
+const options = { removeNotdef: true, removeLigatures: true };
 const strokesThreshold = 35;
 const fromRegExp = /<glyph [^\/>]*\/>/;
 const toRegExp = /<\/font>/;

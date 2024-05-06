@@ -11,7 +11,7 @@ function range(start, end) {
 
 // TODO: opentype.js 1.3.4 does not support IVS/IVD (HEAD is supported)
 // ex: font.charToGlyph("\u82a6\ue0100");
-const options = { removeNotdef: true };
+const options = { removeNotdef: true, removeLigatures: true };
 const jigmo1 = Deno.readFileSync("fonts/Jigmo-20230816/Jigmo.ttf");
 const jigmo2 = Deno.readFileSync("fonts/Jigmo-20230816/Jigmo2.ttf");
 const jigmo3 = Deno.readFileSync("fonts/Jigmo-20230816/Jigmo3.ttf");
