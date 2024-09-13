@@ -154,15 +154,15 @@ const gradedVocabs = initGradedVocabs();
 const gradedIdioms = initGradedIdioms();
 const onkunDict = new Onkun();
 await onkunDict.fetchJoyo(
-  "https://raw.githubusercontent.com/marmooo/onkun/v0.2.6/data/joyo-2017.csv",
+  "https://raw.githubusercontent.com/marmooo/onkun/v0.2.8/data/joyo-2017.csv",
 );
 await onkunDict.fetch(
   "Joyo",
-  "https://raw.githubusercontent.com/marmooo/onkun/v0.2.6/data/joyo-2010.csv",
+  "https://raw.githubusercontent.com/marmooo/onkun/v0.2.8/data/joyo-2010.csv",
 );
 await onkunDict.fetch(
   "Unihan",
-  "https://raw.githubusercontent.com/marmooo/onkun/v0.2.6/data/Unihan-2023-07-15.csv",
+  "https://raw.githubusercontent.com/marmooo/onkun/v0.2.8/data/Unihan-2023-07-15.csv",
 );
 
 const chartNames = [
