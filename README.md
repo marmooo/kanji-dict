@@ -13,6 +13,7 @@ Unicode 15.1 のすべての漢字 98,682字を収録しています。
   [marmooo/graded-idioms-ja](https://github.com/marmooo/graded-idioms-ja)
   licensed under the CC-BY 4.0
 - `bash install-fonts.sh`
+- `deno task install`
 
 ## Build
 
