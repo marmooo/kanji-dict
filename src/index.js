@@ -43,6 +43,7 @@ function search() {
     } else {
       location.href = `/kanji-dict/画数/35画〜/`;
     }
+    return;
   }
   // TODO: IVS/IVD
   const matchCode = text.match(/^[uU]\+?/);
