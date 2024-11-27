@@ -1,4 +1,4 @@
-import { bundle } from "https://deno.land/x/emit/mod.ts";
+import { bundle } from "jsr:@deno/emit";
 
 const url = new URL(import.meta.resolve(Deno.args[0]));
 const { code } = await bundle(url);
