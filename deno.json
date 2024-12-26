@@ -31,6 +31,7 @@
     "glyph": "deno task glyph-ttf2svg && deno task glyph-svg2index && deno task glyph-csv2index",
     "glyph-ttf2svg": "deno run -RWE --allow-ffi scripts/glyph-ttf2svg.js",
     "glyph-svg2index": "deno run -RW scripts/glyph-svg2index.js",
-    "glyph-csv2index": "deno run -RW scripts/glyph-csv2index.js"
+    "glyph-csv2index": "deno run -RW scripts/glyph-csv2index.js",
+    "update-sudachi-dict": "deno task build-csv && deno task grade-html && deno task glyph-csv2index"
   }
 }
