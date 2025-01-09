@@ -153,17 +153,9 @@ const radicalDB = initRadicalDB();
 const gradedVocabs = initGradedVocabs();
 const gradedIdioms = initGradedIdioms();
 const onkunDict = new Onkun();
-await onkunDict.fetchJoyo(
-  "https://raw.githubusercontent.com/marmooo/onkun/v0.2.8/data/joyo-2017.csv",
-);
-await onkunDict.fetch(
-  "Joyo",
-  "https://raw.githubusercontent.com/marmooo/onkun/v0.2.8/data/joyo-2010.csv",
-);
-await onkunDict.fetch(
-  "Unihan",
-  "https://raw.githubusercontent.com/marmooo/onkun/v0.2.8/data/Unihan-2023-07-15.csv",
-);
+await onkunDict.loadJoyo("onkun/data/joyo-2017.csv");
+await onkunDict.load("Joyo", "onkun/data/joyo-2010.csv");
+await onkunDict.load("Unihan", "onkun/data/Unihan-2024-07-31.csv");
 
 const chartNames = [
   "URO1",
