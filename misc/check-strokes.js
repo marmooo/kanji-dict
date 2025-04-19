@@ -1,6 +1,6 @@
-import { TextLineStream } from "https://deno.land/std/streams/mod.ts";
-import { basename } from "https://deno.land/std/path/mod.ts";
-import { expandGlobSync } from "https://deno.land/std/fs/expand_glob.ts";
+import { TextLineStream } from "@std/streams";
+import { basename } from "@std/path";
+import { expandGlobSync } from "@std/fs";
 import { parse } from "node-html-parser";
 import { JKAT, Kanji } from "@marmooo/kanji";
 
