@@ -1,5 +1,5 @@
-import { basename } from "https://deno.land/std/path/mod.ts";
-import { expandGlobSync } from "https://deno.land/std/fs/expand_glob.ts";
+import { basename } from "@std/path";
+import { expandGlobSync } from "@std/fs";
 import { Eta } from "eta";
 import { parse, toSVG } from "@marmooo/ttf2svg";
 import { JKAT, Kanji } from "@marmooo/kanji";
