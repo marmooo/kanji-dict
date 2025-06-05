@@ -1,5 +1,6 @@
 mkdir -p docs
 deno task grade-html
+deno task onkun-html
 deno task radical-html
 deno task strokes-html
 deno task unicode-html
