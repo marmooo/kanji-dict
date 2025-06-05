@@ -11,6 +11,8 @@ deno run -A ~/workspace/drop-inline-css/cli.js -d src/部首/一部/index.html >
 deno run -A ~/workspace/drop-inline-css/cli.js -r src/部首 -o docs/部首 -c inline.css
 deno run -A ~/workspace/drop-inline-css/cli.js -d src/画数/1画/index.html > inline.css
 deno run -A ~/workspace/drop-inline-css/cli.js -r src/画数 -o docs/画数 -c inline.css
+deno run -A ~/workspace/drop-inline-css/cli.js -d src/音訓/あ/index.html > inline.css
+deno run -A ~/workspace/drop-inline-css/cli.js -r src/音訓 -o docs/音訓 -c inline.css
 deno run -A ~/workspace/drop-inline-css/cli.js -d src/unicode/URO1/index.html > inline.css
 deno run -A ~/workspace/drop-inline-css/cli.js -r src/unicode -o docs/unicode -c inline.css
 deno run -A ~/workspace/drop-inline-css/cli.js src/index.html -o docs/index.html
