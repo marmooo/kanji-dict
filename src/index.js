@@ -33,6 +33,13 @@ function toggleDarkMode() {
   }
 }
 
+function kanaToHira(str) {
+  return str.replace(/[ァ-ヶ]/g, (match) => {
+    const chr = match.charCodeAt(0) - 0x60;
+    return String.fromCharCode(chr);
+  });
+}
+
 function search() {
   const text = document.getElementById("searchText").value;
   if (!text) return;
@@ -43,6 +50,9 @@ function search() {
     } else {
       location.href = `/kanji-dict/画数/35画〜/`;
     }
+    return;
+  } else if (/[あ-ゖァ-ヶ]/.test(text[0])) {
+    location.href = `/kanji-dict/音訓/${kanaToHira(text[0])}/`;
     return;
   }
   // TODO: IVS/IVD
