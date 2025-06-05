@@ -68,7 +68,8 @@ function getKanjiPanel(dict, dir) {
     }
     if (i === 0) {
       const style = `style="font-family:jigmo_${index},sans-serif;"`;
-      html += `<details font="${font}" open><summary>${index}</summary><div ${style}>\n`;
+      html +=
+        `<details font="${font}" open><summary>${index}</summary><div ${style}>\n`;
     } else {
       html += `<details font="${font}"><summary>${index}</summary><div>\n`;
     }
@@ -283,18 +284,22 @@ const unicode = new Kanji(Unicode);
 const Onkuns = await initOnkuns();
 
 const aiueos = Array.from(
-  "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわ",
+  "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん",
 );
 const onkunPanel = getOnkunPanel();
 for (let i = 0; i < aiueos.length; i++) {
   const aiueo = aiueos[i];
-  const dir = `src/音訓/${aiueo}`;
-  Deno.mkdirSync(`${dir}/fonts`, { recursive: true });
   const onkuns = Onkuns.get(aiueo);
+  if (!onkuns) continue;
+  const dir = `src/音訓/${aiueo}`;
+  Deno.mkdirSync(dir, { recursive: true });
   const kanjis = toKanjis(onkuns);
   const joyoCount = getJoyoCount(kanjis, jinmei);
   const jis4Count = getJis4Count(kanjis, jisCode);
   const allCount = kanjis.length;
+  if (0 < allCount - jis4Count) {
+    Deno.mkdirSync(`${dir}/fonts`, { recursive: true });
+  }
   const fontFace = getFontFace(onkuns.keys().next().value);
   const kanjiPanel = getKanjiPanel(onkuns, dir);
   const html = eta.render("eta/onkun.eta", {
