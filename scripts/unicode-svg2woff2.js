@@ -1,6 +1,5 @@
 import { parse } from "node-html-parser";
-import svg2ttf from "svg2ttf";
-import ttf2woff2 from "ttf2woff2";
+import { convert } from "fontconv";
 
 function getSmallSvg(svgFile, from, to) {
   const svg = Deno.readTextFileSync(svgFile);
@@ -14,18 +13,14 @@ function getSmallSvg(svgFile, from, to) {
   return doc.toString();
 }
 
-function build(name, splitRange) {
+async function build(name, splitRange) {
   for (let i = 1; i <= splitRange.length; i++) {
     const from = splitRange[i - 1];
     const to = (i == splitRange.length) ? undefined : splitRange[i];
     const svg = getSmallSvg(`src/glyph/${name}.svg`, from, to);
     if (svg) {
-      const ttf = svg2ttf(svg);
-      Deno.writeFileSync(`src/unicode/${name}.${i}.ttf`, ttf.buffer);
-      Deno.writeFileSync(
-        `src/unicode/${name}.${i}.woff2`,
-        ttf2woff2(ttf.buffer),
-      );
+      const woff2 = await convert(svg, ".woff2", { removeLigatures: true });
+      Deno.writeFileSync(`src/unicode/${name}.${i}.woff2`, woff2);
     } else {
       break;
     }
@@ -58,5 +53,5 @@ const names = [
 
 const splitRange = [0, 64, 128, 256, 512, 1024, 2048];
 for (const name of names) {
-  build(name, splitRange);
+  await build(name, splitRange);
 }

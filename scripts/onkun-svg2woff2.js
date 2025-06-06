@@ -1,6 +1,6 @@
-import { dirname, basename } from "@std/path";
+import { basename, dirname } from "@std/path";
 import { expandGlob } from "@std/fs";
-import { convert } from "npm:fontconv";
+import { convert } from "fontconv";
 
 const inPath = "./src/音訓/**/*.svg";
 const files = expandGlob(inPath, { globstar: true });

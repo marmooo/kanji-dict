@@ -1,6 +1,5 @@
 import { parse } from "node-html-parser";
-import svg2ttf from "svg2ttf";
-import ttf2woff2 from "ttf2woff2";
+import { convert } from "fontconv";
 
 function getSmallSvg(svgFile, from, to) {
   const svg = Deno.readTextFileSync(svgFile);
@@ -14,18 +13,14 @@ function getSmallSvg(svgFile, from, to) {
   return doc.toString();
 }
 
-function build(dir, splitRange) {
+async function build(dir, splitRange) {
   for (let i = 1; i <= splitRange.length; i++) {
     const from = splitRange[i - 1];
     const to = (i == splitRange.length) ? undefined : splitRange[i];
     const svg = getSmallSvg(`${dir}/font.svg`, from, to);
     if (svg) {
-      const ttf = svg2ttf(svg);
-      Deno.writeFileSync(`${dir}/font.${i}.ttf`, ttf.buffer);
-      Deno.writeFileSync(
-        `${dir}/font.${i}.woff2`,
-        ttf2woff2(ttf.buffer),
-      );
+      const woff2 = await convert(svg, ".woff2", { removeLigatures: true });
+      Deno.writeFileSync(`${dir}/font.${i}.woff2`, woff2);
     } else {
       break;
     }
@@ -37,5 +32,5 @@ const radicalComponents = Array.from(
 );
 const splitRange = [0, 64, 128, 256, 512, 1024, 2048];
 for (let i = 0; i < radicalComponents.length; i++) {
-  build(`src/部首/${radicalComponents[i]}部`, splitRange);
+  await build(`src/部首/${radicalComponents[i]}部`, splitRange);
 }
