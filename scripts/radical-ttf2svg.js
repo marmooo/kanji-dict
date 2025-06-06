@@ -10,10 +10,31 @@ function build(inFile, outFile, options) {
   const svg1 = ttf2svgFont(ttf1, options);
   const svg2 = ttf2svgFont(ttf2, options);
   const svg3 = ttf2svgFont(ttf3, options);
-  const svg = svg1.slice(0, svg1.match(toRegExp).index) +
-    svg2.slice(svg2.match(fromRegExp).index, svg2.match(toRegExp).index) +
-    svg3.slice(svg2.match(fromRegExp).index);
+  const [header, footer] = getHeaderFooter([svg1, svg2, svg3]);
+  const svg = header +
+    getGlyphs(svg1, fromRegExp, toRegExp) +
+    getGlyphs(svg2, fromRegExp, toRegExp) +
+    getGlyphs(svg3, fromRegExp, toRegExp) +
+    footer;
   Deno.writeTextFile(outFile, string("image/svg+xml", svg));
+}
+
+function getHeaderFooter(svgs) {
+  for (let i = 0; i < svgs.length; i++) {
+    const svg = svgs[i];
+    const fromResult = svg.match(fromRegExp);
+    if (!fromResult) continue;
+    const header = svg.slice(0, fromResult.index);
+    const footer = svg.slice(svg.match(toRegExp).index);
+    return [header, footer];
+  }
+  throw new Error("font list is empty");
+}
+
+function getGlyphs(svg, fromRegExp, toRegExp) {
+  const fromResult = svg.match(fromRegExp);
+  if (!fromResult) return "";
+  return svg.slice(fromResult.index, svg.match(toRegExp).index);
 }
 
 // TODO: opentype.js 1.3.4 does not support IVS/IVD (HEAD is supported)

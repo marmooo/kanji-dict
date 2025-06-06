@@ -17,7 +17,7 @@ function build(inFile, outFile, options) {
   const svg2 = ttf2svgFont(ttf2, options);
   const svg3 = ttf2svgFont(ttf3, options);
   const [header, footer] = getHeaderFooter([svg1, svg2, svg3]);
-  const svg = header + 
+  const svg = header +
     getGlyphs(svg1, fromRegExp, toRegExp) +
     getGlyphs(svg2, fromRegExp, toRegExp) +
     getGlyphs(svg3, fromRegExp, toRegExp) +
@@ -45,7 +45,7 @@ function getGlyphs(svg, fromRegExp, toRegExp) {
 
 // TODO: opentype.js 1.3.4 does not support IVS/IVD (HEAD is supported)
 // ex: font.charToGlyph("\u82a6\ue0100");
-const filePath = "src/音訓/**/*.lst"
+const filePath = "src/音訓/**/*.lst";
 const options = { removeNotdef: true, removeLigatures: true };
 const fromRegExp = /<glyph [^\/>]*\/>/;
 const toRegExp = /<\/font>/;
