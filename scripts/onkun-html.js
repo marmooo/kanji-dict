@@ -152,19 +152,6 @@ function getKanjiPanel(dict, dir) {
 //   return html;
 // }
 
-function getOnkunPanel() {
-  const aiueos = Array.from(
-    "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわ",
-  );
-  let html = "";
-  for (let i = 0; i < aiueos.length; i++) {
-    html += `<a href="/kanji-dict/音訓/${aiueos[i]}/" class="px-1">${
-      aiueos[i]
-    }</a>`;
-  }
-  return html;
-}
-
 async function initOnkuns() {
   const dict = new Map();
   const file = await Deno.open("kanji.csv");
@@ -286,7 +273,6 @@ const Onkuns = await initOnkuns();
 const aiueos = Array.from(
   "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん",
 );
-const onkunPanel = getOnkunPanel();
 for (let i = 0; i < aiueos.length; i++) {
   const aiueo = aiueos[i];
   const onkuns = Onkuns.get(aiueo);
@@ -308,7 +294,6 @@ for (let i = 0; i < aiueos.length; i++) {
     jis4Count,
     allCount,
     aiueo,
-    onkunPanel,
     kanjiPanel,
   });
   Deno.writeTextFileSync(dir + "/index.html", html);
