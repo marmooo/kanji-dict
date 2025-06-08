@@ -4,9 +4,8 @@ function initStrokes() {
   const arr = structuredClone(UnicodeStrokes);
   arr.forEach((list, i) => {
     arr[i] = list.filter((kanji) => {
-      if (jkat.getGrade(kanji) < 0 && jisCode.getGrade(kanji) < 0) {
-        return true;
-      }
+      if (kanji in jkat.dict && kanji in jisCode.dict) return false;
+      return true;
     });
   });
   return arr;

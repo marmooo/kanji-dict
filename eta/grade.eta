@@ -85,8 +85,8 @@
               <tr><th>学年</th><td><%= it.grade %></td></tr>
               <tr><th>音読み</th><td class="notranslate"><%= it.info.on.join(", ") %></td></tr>
               <tr><th>訓読み</th><td class="notranslate"><%= it.info.kun.join(", ") %></td></tr>
-              <tr><th>画数</th><td class="notranslate"><a href="/kanji-dict/画数/<%= it.info.strokesDir %>/"><%= it.info.strokesText %></a></td></tr>
-              <tr><th>214部首</th><td class="notranslate"><a href="/kanji-dict/部首/<%= it.info.radicalComponent %>/"><%= it.info.radicalComponent %></a></td></tr>
+              <tr><th>画数</th><td class="notranslate"><%~ it.info.strokesComponent %></td></tr>
+              <tr><th>214部首</th><td class="notranslate"><%~ it.info.radicalComponent %></td></tr>
               <tr><th>部首</th><td class="notranslate"><%= it.info.radical %></td></tr>
               <tr><th><a href="https://ja.wiktionary.org/wiki/<%= it.info.kanji %>">用例</a></th><td class="notranslate"><%~ it.vocabs %></td></tr>
               <tr><th>熟語</th><td class="notranslate"><%~ it.idioms %></td></tr>

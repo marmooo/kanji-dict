@@ -21,7 +21,7 @@ function getStudyVocabs(words, grade) {
 }
 
 function initRadicalDB() {
-  const radicalComponents = Array.from(
+  const radicals = Array.from(
     "一丨丶丿乙亅二亠人儿入八冂冖冫几凵刀力勹匕匚匸十卜卩厂厶又口囗土士夂夊夕大女子宀寸小尢尸屮山巛工己巾干幺广廴廾弋弓彐彡彳心戈戶手支攴文斗斤方无日曰月木欠止歹殳毋比毛氏气水火爪父爻爿片牙牛犬玄玉瓜瓦甘生用田疋疒癶白皮皿目矛矢石示禸禾穴立竹米糸缶网羊羽老而耒耳聿肉臣自至臼舌舛舟艮色艸虍虫血行衣襾見角言谷豆豕豸貝赤走足身車辛辰辵邑酉釆里金長門阜隶隹雨靑非面革韋韭音頁風飛食首香馬骨高髟鬥鬯鬲鬼魚鳥鹵鹿麥麻黃黍黑黹黽鼎鼓鼠鼻齊齒龍龜龠",
   );
   const dict = {};
@@ -36,7 +36,7 @@ function initRadicalDB() {
   UnicodeRadical.forEach((list, radicalId) => {
     list.forEach((kanji) => {
       if (kanji in dict === false) {
-        const component = radicalComponents[radicalId] + "部";
+        const component = radicals[radicalId] + "部";
         dict[kanji] = { component, componentYomi, name, yomi };
       }
     });
@@ -46,9 +46,13 @@ function initRadicalDB() {
 
 function getStrokes(kanji, grade) {
   if (0 <= grade && grade <= 9) {
-    return joyoStrokes.getGrade(kanji);
+    const strokes = joyoStrokes.dict[kanji];
+    if (!strokes) return "";
+    return strokes.join(" ");
   } else {
-    return unicodeStrokes.getGrade(kanji);
+    const strokes = unicodeStrokes.dict[kanji];
+    if (!strokes) return "";
+    return strokes.join(" ");
   }
 }
 
@@ -148,6 +152,7 @@ const jkat = new Kanji(JKAT);
 const jisCode = new Kanji(JISCode);
 const unicodeDB = new Kanji(Unicode);
 const joyoStrokes = new Kanji(JoyoStrokes);
+const unicodeRadical = new Kanji(UnicodeRadical);
 const unicodeStrokes = new Kanji(UnicodeStrokes);
 const radicalDB = initRadicalDB();
 const gradedVocabs = initGradedVocabs();
@@ -181,6 +186,26 @@ const chartNames = [
   "ExtI",
 ];
 
+function getRadicals(kanji) {
+  const radicals = unicodeRadical.dict[kanji];
+  if (kanji === "𱶿") console.log("zzz", radicals);
+  if (!radicals) return "";
+  return radicals.join(" ");
+}
+
+function getRadicalName(kanji) {
+  if (kanji in radicalDB) {
+    const r = radicalDB[kanji];
+    if (r.name && r.yomi) {
+      return `${r.name} (${r.yomi})`;
+    } else {
+      return "";
+    }
+  } else {
+    return "";
+  }
+}
+
 const result = [];
 UnicodeChart.forEach((list, i) => {
   const chart = [];
@@ -189,20 +214,8 @@ UnicodeChart.forEach((list, i) => {
     const jis = jisCode.getGrade(kanji);
     const grade = jkat.getGrade(kanji);
     const [on, kun] = getOnkun(kanji, grade);
-    let strokes = getStrokes(kanji, grade);
-    if (strokes < 0) strokes = 0;
     const vocabs = gradedVocabs[kanji];
     const idioms = gradedIdioms[kanji];
-    const r = radicalDB[kanji];
-    let radicalComponent = "";
-    let radical = "";
-    if (r) {
-      // radicalComponent = `${r.component} (${r.componentYomi})`;
-      radicalComponent = r.component;
-      if (r.name.length != 0) {
-        radical = `${r.name} (${r.yomi})`;
-      }
-    }
     const info = {};
     info["用例"] = vocabs ? [...vocabs] : [];
     info["熟語"] = idioms ? [...idioms] : [];
@@ -219,9 +232,9 @@ UnicodeChart.forEach((list, i) => {
       grade + 1,
       on.join(" "),
       kun.join(" "),
-      strokes,
-      radicalComponent,
-      radical,
+      getStrokes(kanji, grade),
+      getRadicals(kanji),
+      getRadicalName(kanji),
       info["用例"].join(" "),
       info["熟語"].join(" "),
       info["学習例"].join(" "),
