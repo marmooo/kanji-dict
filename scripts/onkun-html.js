@@ -24,21 +24,6 @@ function kanaToHira(str) {
   });
 }
 
-// function getKanjiLink(kanji) {
-//   const grade = jkat.getGrade(kanji);
-//   if (0 <= grade && grade <= 9) {
-//     const url = `/kanji-dict/${dirNames[grade]}/${kanji}/`;
-//     return `<a href="${url}" class="px-1">${kanji}</a>\n`;
-//   } else if (jisCode.getGrade(kanji) >= 0) {
-//     const url = `/kanji-dict/glyph/?q=${kanji}`;
-//     return `<a href="${url}" class="px-1">${kanji}</a>\n`;
-//   } else {
-//     const hex = kanji.codePointAt(0).toString(16).toUpperCase();
-//     const url = `/kanji-dict/glyph/?q=U+${hex}`;
-//     return `<a href="${url}" class="px-1">${kanji}</a>\n`;
-//   }
-// }
-
 function getKanjiLink(onkun, kanji) {
   const grade = jkat.getGrade(kanji);
   if (0 <= grade && grade <= 9) {
@@ -82,75 +67,6 @@ function getKanjiPanel(dict, dir) {
   }
   return html;
 }
-
-// function getKanjiPanel(graded, count) {
-//   const open = (graded[14].length < 500) ? "open" : "";
-//   const fontSize = (count >= 25) ? "fs-1" : "fs-3";
-//   let html = "";
-//   if (count < strokesThreshold) {
-//     const joyo = graded.slice(0, 10);
-//     if (joyo.flat().length > 0) {
-//       html += `<h4>常用漢字</h4>\n`;
-//       html += `<div class="${fontSize} pb-3 notranslate">\n`;
-//       joyo.forEach((list, i) => {
-//         if (list.length > 0) {
-//           html += `<span class="badge rounded-pill bg-secondary">${
-//             grades[i]
-//           }</span>\n`;
-//           list.forEach((kanji) => {
-//             html += getKanjiLink(kanji);
-//           });
-//         }
-//       });
-//       html += "</div>\n";
-//     }
-//     graded.slice(10).forEach((list, i) => {
-//       if (i == 4) {
-//         if (list.length > 0) {
-//           html += `<details id="unicodeDetails" ${open}>
-// <summary class="h4">${grades[i + 10]}</summary>
-// <div class="alert alert-info">
-//   以下の内容は通常文字化けする漢字が多数含まれますが、Webフォントで代替表示しているため文字化けは発生しません。
-// </div>
-// <div id="unicodeList" class="${fontSize} notranslate">
-// `;
-//           list.forEach((kanji) => {
-//             html += getKanjiLink(kanji);
-//           });
-//           html += "</div>\n";
-//           html += "</details>\n";
-//         }
-//       } else {
-//         if (list.length > 0) {
-//           html += `<h4>${grades[i + 10]}</h4>\n`;
-//           html += `<div class="${fontSize} pb-3 notranslate">`;
-//           list.forEach((kanji) => {
-//             html += getKanjiLink(kanji);
-//           });
-//           html += "</div>\n";
-//         }
-//       }
-//     });
-//   } else {
-//     html += `
-// <div class="alert alert-info">
-//   以下の内容は通常文字化けする漢字が多数含まれますが、Webフォントで代替表示しているため文字化けは発生しません。
-// </div>`;
-//     html += `<div id="unicodeList" class="${fontSize} notranslate">\n`;
-//     Strokes.slice(count).forEach((list, i) => {
-//       if (list.length > 0) {
-//         html += `<span class="badge rounded-pill bg-secondary">${
-//           count + i
-//         }画</span>\n`;
-//         list.forEach((kanji) => {
-//           html += getKanjiLink(kanji);
-//         });
-//       }
-//     });
-//     html += "</div>\n";
-//   }
-//   return html;
-// }
 
 async function initOnkuns() {
   const dict = new Map();
