@@ -1,5 +1,5 @@
-import { Kanji } from "https://cdn.jsdelivr.net/npm/@marmooo/kanji@0.0.2/esm/kanji.js";
-import { JKAT } from "https://cdn.jsdelivr.net/npm/@marmooo/kanji@0.0.2/esm/jkat.js";
+import { Kanji } from "https://cdn.jsdelivr.net/npm/@marmooo/kanji@0.1.1/esm/kanji.js";
+import { JKAT } from "https://cdn.jsdelivr.net/npm/@marmooo/kanji@0.1.1/esm/jkat.js";
 
 const dirNames = [
   "小1",
