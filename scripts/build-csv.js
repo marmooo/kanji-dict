@@ -44,6 +44,17 @@ function initRadicalDB() {
   return dict;
 }
 
+function initIDSDB() {
+  const dict = {};
+  const csv = Deno.readTextFileSync("data/ids.csv");
+  csv.trimEnd().split("\n").forEach((line) => {
+    const [kanji, idsList] = line.split(",");
+    dict[kanji] = idsList;
+  });
+  return dict;
+}
+
+
 function getStrokes(kanji, grade) {
   if (0 <= grade && grade <= 9) {
     const strokes = joyoStrokes.dict[kanji];
@@ -155,6 +166,7 @@ const joyoStrokes = new Kanji(JoyoStrokes);
 const unicodeRadical = new Kanji(UnicodeRadical);
 const unicodeStrokes = new Kanji(UnicodeStrokes);
 const radicalDB = initRadicalDB();
+const idsDB = initIDSDB();
 const gradedVocabs = initGradedVocabs();
 const gradedIdioms = initGradedIdioms();
 const onkunDict = new Onkun();
@@ -206,6 +218,14 @@ function getRadicalName(kanji) {
   }
 }
 
+function getIDS(kanji) {
+  if (kanji in idsDB) {
+    return idsDB[kanji];
+  } else {
+    return "";
+  }
+}
+
 const result = [];
 UnicodeChart.forEach((list, i) => {
   const chart = [];
@@ -235,6 +255,7 @@ UnicodeChart.forEach((list, i) => {
       getStrokes(kanji, grade),
       getRadicals(kanji),
       getRadicalName(kanji),
+      getIDS(kanji),
       info["用例"].join(" "),
       info["熟語"].join(" "),
       info["学習例"].join(" "),

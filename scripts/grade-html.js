@@ -88,9 +88,10 @@ function loadDB() {
     const arr = line.split(",");
     const strokesComponent = getStrokesComponent(arr[7]);
     const radicalComponent = getRadicalComponent(arr[8]);
-    const vocabs = (arr[10].length != 0) ? arr[10].split(" ") : [];
-    const idioms = (arr[11].length != 0) ? arr[11].split(" ") : [];
-    const studyVocabs = (arr[12].length != 0) ? arr[12].split(" ") : [];
+    // const ids = arr[10];
+    const vocabs = (arr[11].length != 0) ? arr[11].split(" ") : [];
+    const idioms = (arr[12].length != 0) ? arr[12].split(" ") : [];
+    const studyVocabs = (arr[13].length != 0) ? arr[13].split(" ") : [];
     db[arr[1]] = {
       kanji: arr[1],
       unicode: Number(arr[2]),
