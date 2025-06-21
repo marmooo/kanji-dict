@@ -345,6 +345,18 @@ function getRadicalComponent(radicalText) {
   return components.join(" または ");
 }
 
+function getIDSComponent(idsString) {
+  let html = "";
+  idsString.split(" ").forEach((kanjis) => {
+    html += "<li>";
+    html += Array.from(kanjis).map((kanji) => {
+      return `<span>${kanji}</span>`;
+    }).join(" ＋ ");
+    html += "</li>";
+  });
+  return html;
+}
+
 function addKanjiInfo(kanji, hex, csv) {
   const arr = csv.split(",");
   const grade = Number(arr[4]);
@@ -359,11 +371,12 @@ function addKanjiInfo(kanji, hex, csv) {
   trs[6].children[1].innerHTML = getStrokesComponent(arr[7]);
   trs[7].children[1].innerHTML = getRadicalComponent(arr[8]);
   trs[8].children[1].textContent = arr[9]; // 部首
+  document.getElementById("ids").innerHTML = getIDSComponent(arr[10]); // IDS
   const examples = document.getElementById("examples");
   const divs = examples.querySelectorAll("div");
-  divs[0].appendChild(getExampleLinks(arr[10])); // 用例
-  divs[1].appendChild(getExampleLinks(arr[11])); // 熟語
-  divs[2].appendChild(getExampleLinks(arr[12])); // 学習例
+  divs[0].appendChild(getExampleLinks(arr[11])); // 用例
+  divs[1].appendChild(getExampleLinks(arr[12])); // 熟語
+  divs[2].appendChild(getExampleLinks(arr[13])); // 学習例
   if (grade != 0) {
     const kidsURL = `/kanji-dict/${dirNames[grade - 1]}/${kanji}/`;
     const a = document.getElementById("kids");
