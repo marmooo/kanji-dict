@@ -33,4 +33,4 @@ CC-BY-SA-4.0
   [MIT](https://github.com/kamichikoichi/jigmo/blob/main/README.md)
 - [古代文字フォント「春秋-tsu」](http://www.tarojiro.co.jp/kanji/shunju-tsu/)
 - [yi-bai/ids](https://github.com/yi-bai/ids) licensed under the
-  MIT(https://github.com/yi-bai/ids/blob/main/LICENSE)
+  [MIT](https://github.com/yi-bai/ids/blob/main/LICENSE)
