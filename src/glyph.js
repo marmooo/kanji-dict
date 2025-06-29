@@ -347,6 +347,7 @@ function getRadicalComponent(radicalText) {
 
 function getIDSComponent(idsString) {
   let html = "";
+  if (idsString.length === 0) return "";
   idsString.split(" ").forEach((kanjis) => {
     html += "<li>";
     html += Array.from(kanjis).map((kanji) => {
