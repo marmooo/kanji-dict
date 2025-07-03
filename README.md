@@ -17,6 +17,7 @@ Unicode 16.0 のすべての漢字 98,682字を収録しています。
 ## Build
 
 ```
+bash install-unihan.sh
 bash install-fonts.sh
 deno task build-csv
 deno task [task-name]
@@ -34,3 +35,4 @@ CC-BY-SA-4.0
 - [古代文字フォント「春秋-tsu」](http://www.tarojiro.co.jp/kanji/shunju-tsu/)
 - [yi-bai/ids](https://github.com/yi-bai/ids) licensed under the
   [MIT](https://github.com/yi-bai/ids/blob/main/LICENSE)
+- [Unihan Database](https://www.unicode.org/Public/UCD/latest/ucd/Unihan.zip)

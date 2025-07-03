@@ -14,8 +14,9 @@
   },
   "tasks": {
     "normalize": "deno run -RW scripts/normalize.js",
-    "build-csv": "deno run -RWE scripts/build-csv.js",
+    "build-tsv": "deno run -RWE scripts/build-tsv.js",
     "build-ids": "deno run -RW scripts/build-ids.js",
+    "build-unihan": "deno run -RW scripts/build-unihan.js",
     "grade-html": "deno run -RWE scripts/grade-html.js",
     "onkun": "deno task onkun-html && deno task onkun-woff2",
     "onkun-html": "deno run -RW scripts/onkun-html.js",
@@ -38,10 +39,10 @@
     "unicode": "deno task unicode-svg2woff2 && deno task unicode-html",
     "unicode-html": "deno run -RW scripts/unicode-html.js",
     "unicode-svg2woff2": "deno run -RWE --allow-sys scripts/unicode-svg2woff2.js",
-    "glyph": "deno task glyph-ttf2svg && deno task glyph-svg2index && deno task glyph-csv2index",
+    "glyph": "deno task glyph-ttf2svg && deno task glyph-svg2index && deno task glyph-tsv2index",
     "glyph-ttf2svg": "deno run -RWE --allow-ffi scripts/glyph-ttf2svg.js",
     "glyph-svg2index": "deno run -RW scripts/glyph-svg2index.js",
-    "glyph-csv2index": "deno run -RW scripts/glyph-csv2index.js",
-    "update-sudachi-dict": "deno task build-csv && deno task grade-html && deno task glyph-csv2index"
+    "glyph-tsv2index": "deno run -RW scripts/glyph-tsv2index.js",
+    "update-sudachi-dict": "deno task build-tsv && deno task grade-html && deno task glyph-tsv2index"
   }
 }

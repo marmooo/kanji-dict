@@ -70,19 +70,19 @@ async function fetchGlyph(name, index) {
   return await response.text();
 }
 
-async function fetchCSVIndex(name) {
-  const response = await fetch(`/kanji-dict/glyph/${name}.csv.idx`);
+async function fetchTSVIndex(name) {
+  const response = await fetch(`/kanji-dict/glyph/${name}.tsv.idx`);
   const buffer = await response.arrayBuffer();
   const arr = new Uint16Array(buffer);
   let sum = 0;
   return Array.from(arr, (x) => sum += x);
 }
 
-async function fetchCSV(name, index) {
-  const arr = await fetchCSVIndex(name);
+async function fetchTSV(name, index) {
+  const arr = await fetchTSVIndex(name);
   const from = arr[index];
   const to = arr[index + 1] - 1;
-  const response = await fetch(`/kanji-dict/glyph/${name}.csv`, {
+  const response = await fetch(`/kanji-dict/glyph/${name}.tsv`, {
     headers: {
       "content-type": "multipart/byteranges",
       "range": `bytes=${from}-${to}`,
@@ -358,8 +358,19 @@ function getIDSComponent(idsString) {
   return html;
 }
 
-function addKanjiInfo(kanji, hex, csv) {
-  const arr = csv.split(",");
+function getKanjiComponent(kanjiString) {
+  if (kanji === "") return "";
+  let html = "";
+  const arr = Array.from(kanjiString);
+  for (let i = 0; i < arr.length; i++) {
+    const kanji = arr[i];
+    html += `<a class="px-1" href="/kanji-dict/glyph/?q=${kanji}">${kanji}</a>`;
+  }
+  return html;
+}
+
+function addKanjiInfo(kanji, hex, tsv) {
+  const arr = tsv.split("\t");
   const grade = Number(arr[4]);
   const table = document.querySelector("table");
   const trs = table.querySelectorAll("tr");
@@ -373,11 +384,19 @@ function addKanjiInfo(kanji, hex, csv) {
   trs[7].children[1].innerHTML = getRadicalComponent(arr[8]);
   trs[8].children[1].textContent = arr[9]; // 部首
   document.getElementById("ids").innerHTML = getIDSComponent(arr[10]); // IDS
+  const unihan = document.getElementById("unihan");
+  const tds = unihan.querySelectorAll("td:nth-of-type(2)");
+  for (let i = 0; i <= 6; i++) { // Variants
+    tds[i].innerHTML = getKanjiComponent(arr[i + 11]);
+  }
+  for (let i = 7; i <= 15; i++) { // Readings
+    tds[i].textContent = arr[i + 11];
+  }
   const examples = document.getElementById("examples");
   const divs = examples.querySelectorAll("div");
-  divs[0].appendChild(getExampleLinks(arr[11])); // 用例
-  divs[1].appendChild(getExampleLinks(arr[12])); // 熟語
-  divs[2].appendChild(getExampleLinks(arr[13])); // 学習例
+  divs[0].appendChild(getExampleLinks(arr[27])); // 用例
+  divs[1].appendChild(getExampleLinks(arr[28])); // 熟語
+  divs[2].appendChild(getExampleLinks(arr[29])); // 学習例
   if (grade != 0) {
     const kidsURL = `/kanji-dict/${dirNames[grade - 1]}/${kanji}/`;
     const a = document.getElementById("kids");
@@ -409,8 +428,8 @@ async function loadGlyph() {
     const xml = await fetchGlyph(name, index);
     const svg = getSvg(xml);
     document.getElementById("kanji").innerHTML = svg;
-    const csv = await fetchCSV(name, index);
-    addKanjiInfo(kanji, hex, csv);
+    const tsv = await fetchTSV(name, index);
+    addKanjiInfo(kanji, hex, tsv);
     addReferences(kanji);
   } else {
     const span = document.createElement("span");

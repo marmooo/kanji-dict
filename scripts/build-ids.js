@@ -21,8 +21,8 @@ for await (const line of lineStream) {
     }
   }
 }
-let result = "";
+const lines = [];
 for (const [kanji, idsSet] of Object.entries(dict)) {
-  result += `${kanji},${Array.from(idsSet).join(" ")}\n`;
+  lines.push(`${kanji},${Array.from(idsSet).join(" ")}`);
 }
-Deno.writeTextFileSync("data/ids.csv", result.trimEnd());
+Deno.writeTextFileSync("data/ids.csv", lines.join("\n"));

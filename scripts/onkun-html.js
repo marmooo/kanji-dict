@@ -70,12 +70,12 @@ function getKanjiPanel(dict, dir) {
 
 async function initOnkuns() {
   const dict = new Map();
-  const file = await Deno.open("kanji.csv");
+  const file = await Deno.open("kanji.tsv");
   const lineStream = file.readable
     .pipeThrough(new TextDecoderStream())
     .pipeThrough(new TextLineStream());
   for await (const line of lineStream) {
-    const arr = line.split(",");
+    const arr = line.split("\t");
     const kanji = arr[1];
     const ons = arr[5].split(" ");
     const kuns = arr[6].split(" ");

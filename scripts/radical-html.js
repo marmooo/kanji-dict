@@ -162,7 +162,7 @@ function initRadicalDB() {
     dict[radicalComponents[i]] = i;
   }
   const csv = Deno.readTextFileSync("data/radicals1.csv");
-  csv.trimEnd().split("\n").forEach((line) => {
+  csv.split("\n").forEach((line) => {
     const [kanji, component, componentYomi, name, yomi] = line.split(",");
     if (component[0] in dict) {
       const i = dict[component[0]];

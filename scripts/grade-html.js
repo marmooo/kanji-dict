@@ -83,15 +83,16 @@ function loadSvgs(filePath) {
 
 function loadDB() {
   const db = {};
-  const csv = Deno.readTextFileSync("kanji.csv");
-  csv.trimEnd().split("\n").forEach((line) => {
-    const arr = line.split(",");
+  const tsv = Deno.readTextFileSync("kanji.tsv");
+  tsv.split("\n").forEach((line) => {
+    const arr = line.split("\t");
     const strokesComponent = getStrokesComponent(arr[7]);
     const radicalComponent = getRadicalComponent(arr[8]);
     // const ids = arr[10];
-    const vocabs = (arr[11].length != 0) ? arr[11].split(" ") : [];
-    const idioms = (arr[12].length != 0) ? arr[12].split(" ") : [];
-    const studyVocabs = (arr[13].length != 0) ? arr[13].split(" ") : [];
+    // const unihans = arr.slice(11, 27);
+    const vocabs = (arr[27].length != 0) ? arr[27].split(" ") : [];
+    const idioms = (arr[28].length != 0) ? arr[28].split(" ") : [];
+    const studyVocabs = (arr[29].length != 0) ? arr[29].split(" ") : [];
     db[arr[1]] = {
       kanji: arr[1],
       unicode: Number(arr[2]),

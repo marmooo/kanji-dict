@@ -70,18 +70,183 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md text-start">
+        <div class="col-xxl-3 text-start">
           <h5 class="pt-3">漢字構成</h5>
-          <ul id="ids"></ul>
+          <ul id="ids" class="notranslate"></ul>
         </div>
-        <div class="col-md" id="examples">
-          <h5 class="pt-3">用例</h5>
-          <div class="notranslate"></div>
-          <h5 class="pt-3">熟語</h5>
-          <div class="notranslate"></div>
-          <h5 class="pt-3">学習例</h5>
-          <div class="notranslate"></div>
+        <div class="col-xxl-9">
+          <div id="unihan" class="card">
+            <h4 class="card-header">Unihan</h4>
+            <div class="card-body row">
+              <div class="col-md text-start">
+                <h5>Variants</h5>
+                <table class="table table-sm table-striped">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <dl class="mb-0">
+                          <dt class="notranslate"><small><a href="https://www.unicode.org/reports/tr38/#kSemanticVariant">kSemanticVariant</a></small></dt>
+                          <dd class="mb-0">同義異形字</dd>
+                        </dl>
+                      </td>
+                      <td class="h1 notranslate"></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <dl class="mb-0">
+                          <dt class="notranslate"><small><a href="https://www.unicode.org/reports/tr38/#kSimplifiedVariant">kSimplifiedVariant</a></small></dt>
+                          <dd class="mb-0">簡体字</dd>
+                        </dl>
+                      </td>
+                      <td class="h1 notranslate"></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <dl class="mb-0">
+                          <dt class="notranslate"><small><a href="https://www.unicode.org/reports/tr38/#kSpecializedSemanticVariant">kSpecializedSemanticVariant</a></small></dt>
+                          <dd class="mb-0">特殊な同義異形字</dd>
+                        </dl>
+                      </td>
+                      <td class="h1 notranslate"></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <dl class="mb-0">
+                          <dt class="notranslate"><small><a href="https://www.unicode.org/reports/tr38/#kSpoofingVariant">kSpoofingVariant</a></small></dt>
+                          <dd class="mb-0">特殊な異形字</dd>
+                        </dl>
+                      </td>
+                      <td class="h1 notranslate"></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <dl class="mb-0">
+                          <dt class="notranslate"><small><a href="https://www.unicode.org/reports/tr38/#kTraditionalVariant">kTraditionalVariant</a></small></dt>
+                          <dd class="mb-0">繁体字</dd>
+                        </dl>
+                      </td>
+                      <td class="h1 notranslate"></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <dl class="mb-0">
+                          <dt class="notranslate"><small><a href="https://www.unicode.org/reports/tr38/#kZVariant">kZVariant</a></small></dt>
+                          <dd class="mb-0">重複収録字形</dd>
+                        </dl>
+                      </td>
+                      <td class="h1 notranslate"></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <dl class="mb-0">
+                          <dt class="notranslate"><small><a href="https://www.unicode.org/reports/tr38/#kCompatibilityVariant">kCompatibilityVariant</a></small></dt>
+                          <dd class="mb-0">互換漢字</dd>
+                        </dl>
+                      </td>
+                      <td class="h1 notranslate"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-md text-start">
+                <h5>Readings</h5>
+                <table class="table table-sm table-striped">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <dl class="mb-0">
+                          <dt class="d-inline-block notranslate"><small><a href="https://www.unicode.org/reports/tr38/#kDefinition">kDefinition</a></small></dt>
+                          <dd class="d-inline-block mb-0">字義</dd>
+                        </dl>
+                      </td>
+                      <td class="notranslate"></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <dl class="mb-0">
+                          <dt class="d-inline-block notranslate"><small><a href="https://www.unicode.org/reports/tr38/#kJapanese">kJapanese</a></small></dt>
+                          <dd class="d-inline-block mb-0">日本語</dd>
+                        </dl>
+                      </td>
+                      <td class="notranslate"></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <dl class="mb-0">
+                          <dt class="d-inline-block notranslate"><small><a href="https://www.unicode.org/reports/tr38/#kJapaneseOn">kJapaneseOn</a></small></dt>
+                          <dd class="d-inline-block mb-0">日本語 (音読み)</dd>
+                        </dl>
+                      </td>
+                      <td class="notranslate"></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <dl class="mb-0">
+                          <dt class="d-inline-block notranslate"><small><a href="https://www.unicode.org/reports/tr38/#kJapaneseKun">kJapaneseKun</a></small></dt>
+                          <dd class="d-inline-block mb-0">日本語 (訓読み)</dd>
+                        </dl>
+                      </td>
+                      <td class="notranslate"></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <dl class="mb-0">
+                          <dt class="d-inline-block notranslate"><small><a href="https://www.unicode.org/reports/tr38/#kMandarin">kMandarin</a></small></dt>
+                          <dd class="d-inline-block mb-0">中国語</dd>
+                        </dl>
+                      </td>
+                      <td class="notranslate"></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <dl class="mb-0">
+                          <dt class="d-inline-block notranslate"><small><a href="https://www.unicode.org/reports/tr38/#kCantonese">kCantonese</a></small></dt>
+                          <dd class="d-inline-block mb-0">広東語</dd>
+                        </dl>
+                      </td>
+                      <td class="notranslate"></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <dl class="mb-0">
+                          <dt class="d-inline-block notranslate"><small><a href="https://www.unicode.org/reports/tr38/#kHangul">kHangul</a></small></dt>
+                          <dd class="d-inline-block mb-0">韓国語 (ハングル)</dd>
+                        </dl>
+                      </td>
+                      <td class="notranslate"></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <dl class="mb-0">
+                          <dt class="d-inline-block notranslate"><small><a href="https://www.unicode.org/reports/tr38/#kKorean">kKorean</a></small></dt>
+                          <dd class="d-inline-block mb-0">韓国語 (読み)</dd>
+                        </dl>
+                      </td>
+                      <td class="notranslate"></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <dl class="mb-0">
+                          <dt class="d-inline-block notranslate"><small><a href="https://www.unicode.org/reports/tr38/#kVietnamese">kVietnamese</a></small></dt>
+                          <dd class="d-inline-block mb-0">ベトナム語</dd>
+                        </dl>
+                      </td>
+                      <td class="notranslate"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+      <div id="examples">
+        <h5 class="pt-3">用例</h5>
+        <div class="notranslate"></div>
+        <h5 class="pt-3">熟語</h5>
+        <div class="notranslate"></div>
+        <h5 class="pt-3">学習例</h5>
+        <div class="notranslate"></div>
       </div>
       <div>
         <h5 class="pt-3">文字情報</h5>
