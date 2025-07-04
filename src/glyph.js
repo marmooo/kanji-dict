@@ -91,14 +91,14 @@ async function fetchTSV(name, index) {
   return await response.text();
 }
 
-function getSvg(xml) {
+function getSVG(xml) {
   const doc = new DOMParser().parseFromString(xml, "text/xml");
   const glyph = doc.querySelector("glyph");
   const d = glyph.getAttribute("d");
   const horizAdvX = glyph.getAttribute("horiz-adv-x");
   const vertAdvY = glyph.getAttribute("vert-adv-y");
   return `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-  width="300" height="300" viewBox="0 0 ${horizAdvX} ${vertAdvY}">
+  width="1em" height="1em" viewBox="0 0 ${horizAdvX} ${vertAdvY}">
   <g transform="scale(1, -1) translate(0, -${vertAdvY})"><path d="${d}"></g>
 </svg>
 `;
@@ -358,18 +358,20 @@ function getIDSComponent(idsString) {
   return html;
 }
 
-function getKanjiComponent(kanjiString) {
+async function getKanjiComponent(kanjiString) {
   if (kanji === "") return "";
   let html = "";
   const arr = Array.from(kanjiString);
   for (let i = 0; i < arr.length; i++) {
     const kanji = arr[i];
-    html += `<a class="px-1" href="/kanji-dict/glyph/?q=${kanji}">${kanji}</a>`;
+    const glyph = await loadGlyph(kanji.codePointAt(0));
+    html +=
+      `<a class="p-1 text-decoration-none" href="/kanji-dict/glyph/?q=${kanji}">${glyph}</a>`;
   }
   return html;
 }
 
-function addKanjiInfo(kanji, hex, tsv) {
+async function addKanjiInfo(kanji, hex, tsv) {
   const arr = tsv.split("\t");
   const grade = Number(arr[4]);
   const table = document.querySelector("table");
@@ -387,7 +389,7 @@ function addKanjiInfo(kanji, hex, tsv) {
   const unihan = document.getElementById("unihan");
   const tds = unihan.querySelectorAll("td:nth-of-type(2)");
   for (let i = 0; i <= 6; i++) { // Variants
-    tds[i].innerHTML = getKanjiComponent(arr[i + 11]);
+    tds[i].innerHTML = await getKanjiComponent(arr[i + 11]);
   }
   for (let i = 7; i <= 15; i++) { // Readings
     tds[i].textContent = arr[i + 11];
@@ -411,35 +413,44 @@ function addKanjiInfo(kanji, hex, tsv) {
     });
 }
 
-async function loadGlyph() {
-  const params = new URLSearchParams(location.search);
-  const q = params.get("q");
-  // TODO: IVS/IVD
-  const matchCode = q.match(/^[uU] ?/);
-  const code = matchCode
-    ? parseInt("0x" + q.slice(matchCode[0].length))
-    : q.codePointAt(0);
+async function loadSVG(code) {
   const nameIndex = getUnicodeNameIndex(code);
   if (nameIndex) {
-    const kanji = String.fromCodePoint(code);
-    const hex = code.toString(16).toUpperCase();
-    document.title = `${kanji} (U+${hex}) | ${document.title}`;
     const [name, index] = nameIndex;
     const xml = await fetchGlyph(name, index);
-    const svg = getSvg(xml);
-    document.getElementById("kanji").innerHTML = svg;
-    const tsv = await fetchTSV(name, index);
-    addKanjiInfo(kanji, hex, tsv);
-    addReferences(kanji);
+    return getSVG(xml);
+  }
+}
+
+async function loadGlyph(code) {
+  const svg = await loadSVG(code);
+  if (svg) {
+    return svg;
   } else {
-    const span = document.createElement("span");
-    span.textContent = "\ufffd";
-    span.style.fontSize = "300px";
-    span.style.lineHeight = 1;
-    document.getElementById("kanji").appendChild(span);
+    return `<span>\ufffd</span>`;
   }
 }
 
 loadConfig();
-loadGlyph();
+const params = new URLSearchParams(location.search);
+const q = params.get("q");
+const matchCode = q.match(/^[uU] ?/);
+const code = matchCode
+  ? parseInt("0x" + q.slice(matchCode[0].length))
+  : q.codePointAt(0);
+const glyph = await loadGlyph(code);
+document.getElementById("kanji").innerHTML = glyph;
+const nameIndex = getUnicodeNameIndex(code);
+if (nameIndex) {
+  const kanji = String.fromCodePoint(code);
+  const hex = code.toString(16).toUpperCase();
+  document.title = `${kanji} (U+${hex}) | ${document.title}`;
+  const [name, index] = nameIndex;
+  const tsv = await fetchTSV(name, index);
+  await addKanjiInfo(kanji, hex, tsv);
+  addReferences(kanji);
+} else {
+  document.title = `\ufffd (U+FFFD) | ${document.title}`;
+}
+
 document.getElementById("toggleDarkMode").onclick = toggleDarkMode;
