@@ -359,14 +359,20 @@ function getIDSComponent(idsString) {
 }
 
 async function getKanjiComponent(kanjiString) {
-  if (kanji === "") return "";
+  if (kanjiString === "") return "";
   let html = "";
   const arr = Array.from(kanjiString);
+  const promises = new Array(arr.length);
   for (let i = 0; i < arr.length; i++) {
     const kanji = arr[i];
-    const glyph = await loadGlyph(kanji.codePointAt(0));
+    promises[i] = loadGlyph(kanji.codePointAt(0));
+  }
+  const glyphs = await Promise.all(promises);
+  for (let i = 0; i < glyphs.length; i++) {
     html +=
-      `<a class="p-1 text-decoration-none" href="/kanji-dict/glyph/?q=${kanji}">${glyph}</a>`;
+      `<a class="p-1 text-decoration-none" href="/kanji-dict/glyph/?q=${kanji}">${
+        glyphs[i]
+      }</a>`;
   }
   return html;
 }
@@ -431,6 +437,11 @@ async function loadGlyph(code) {
   }
 }
 
+async function loadMainGlyph(code) {
+  const glyph = await loadGlyph(code);
+  document.getElementById("kanji").innerHTML = glyph;
+}
+
 loadConfig();
 const params = new URLSearchParams(location.search);
 const q = params.get("q");
@@ -438,8 +449,8 @@ const matchCode = q.match(/^[uU] ?/);
 const code = matchCode
   ? parseInt("0x" + q.slice(matchCode[0].length))
   : q.codePointAt(0);
-const glyph = await loadGlyph(code);
-document.getElementById("kanji").innerHTML = glyph;
+loadMainGlyph(code);
+
 const nameIndex = getUnicodeNameIndex(code);
 if (nameIndex) {
   const kanji = String.fromCodePoint(code);
