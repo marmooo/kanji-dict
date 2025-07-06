@@ -369,10 +369,9 @@ async function getKanjiComponent(kanjiString) {
   }
   const glyphs = await Promise.all(promises);
   for (let i = 0; i < glyphs.length; i++) {
-    html +=
-      `<a class="p-1 text-decoration-none" href="/kanji-dict/glyph/?q=${kanji}">${
-        glyphs[i]
-      }</a>`;
+    html += `<a class="p-1" href="/kanji-dict/glyph/?q=${
+      arr[i]
+    }">${glyphs[i]}</a>`;
   }
   return html;
 }
