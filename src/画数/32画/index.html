@@ -33,6 +33,7 @@
   font-display:swap;
   unicode-range: U+4A0A-31195;
 }
+      #list a { text-decoration:none; }
       html[data-bs-theme="dark"] .favicon { filter: invert(1) hue-rotate(180deg); }
     </style>
   </head>
@@ -74,7 +75,8 @@
         </div>
       </div>
       <h3>例字</h3>
-      <details id="unicodeDetails" open>
+      <div id="list">
+        <details id="unicodeDetails" open>
 <summary class="h4">Unicode全漢字</summary>
 <div class="alert alert-info">
   以下の内容は通常文字化けする漢字が多数含まれますが、Webフォントで代替表示しているため文字化けは発生しません。
@@ -132,6 +134,7 @@
 <a href="/kanji-dict/glyph/?q=U+31195" class="px-1">𱆕</a>
 </div>
 </details>
+      </div>
     </main>
     <footer class="pt-4 alert text-center">
       <div>
