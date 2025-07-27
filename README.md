@@ -13,6 +13,11 @@ Unicode 16.0 のすべての漢字 98,682字を収録しています。
   [marmooo/graded-idioms-ja](https://github.com/marmooo/graded-idioms-ja)
   licensed under the CC-BY-4.0
 - install [onkun](https://github.com/marmooo/onkun) licensed under the MIT
+- install [yi-bai/ids](https://github.com/yi-bai/ids) licensed under the
+  [MIT](https://github.com/yi-bai/ids/blob/main/LICENSE)
+- install [marmooo/cjkvi-variants](https://github.com/marmooo/cjkvi-variants)
+  licensed under the
+  [MIT](https://github.com/marmooo/cjkvi-variants/blob/master/LICENSE)
 
 ## Build
 
@@ -34,7 +39,3 @@ CC-BY-SA-4.0
   [MIT](https://github.com/kamichikoichi/jigmo/blob/main/README.md)
 - [古代文字フォント「春秋-tsu」](http://www.tarojiro.co.jp/kanji/shunju-tsu/)
 - [Unihan Database](https://www.unicode.org/Public/UCD/latest/ucd/Unihan.zip)
-- [yi-bai/ids](https://github.com/yi-bai/ids) licensed under the
-  [MIT](https://github.com/yi-bai/ids/blob/main/LICENSE)
-- [marmooo/cjkvi-variants](https://github.com/marmooo/cjkvi-variants) licensed
-  under the [MIT](https://github.com/marmooo/cjkvi-variants/blob/master/LICENSE)
