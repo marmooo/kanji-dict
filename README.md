@@ -6,13 +6,16 @@ Unicode 16.0 のすべての漢字 98,682字を収録しています。
 ## Installation
 
 - install [KanjiVG/kanjivg](https://github.com/KanjiVG/kanjivg) licensed under
-  the CC-BY-SA-3.0
+  the [CC-BY-SA-3.0](https://github.com/KanjiVG/kanjivg)
 - install [marmooo/graded-vocab-ja](https://github.com/marmooo/graded-vocab-ja)
-  licensed under the CC-BY-4.0
+  licensed under the
+  [CC-BY-4.0](https://github.com/marmooo/graded-vocab-ja/blob/main/LICENSE)
 - install
   [marmooo/graded-idioms-ja](https://github.com/marmooo/graded-idioms-ja)
-  licensed under the CC-BY-4.0
-- install [onkun](https://github.com/marmooo/onkun) licensed under the MIT
+  licensed under the
+  [CC-BY-4.0](https://github.com/marmooo/graded-idioms-ja/blob/main/LICENSE)
+- install [onkun](https://github.com/marmooo/onkun) licensed under the
+  [MIT](https://github.com/marmooo/onkun/blob/main/LICENSE)
 - install [yi-bai/ids](https://github.com/yi-bai/ids) licensed under the
   [MIT](https://github.com/yi-bai/ids/blob/main/LICENSE)
 - install [marmooo/cjkvi-variants](https://github.com/marmooo/cjkvi-variants)
