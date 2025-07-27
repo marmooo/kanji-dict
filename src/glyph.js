@@ -391,19 +391,20 @@ async function addKanjiInfo(kanji, hex, tsv) {
   trs[7].children[1].innerHTML = getRadicalComponent(arr[8]);
   trs[8].children[1].textContent = arr[9]; // 部首
   document.getElementById("ids").innerHTML = getIDSComponent(arr[10]); // IDS
+  document.getElementById("variants").innerHTML = await getKanjiComponent(arr[11]); // Variants
   const unihan = document.getElementById("unihan");
   const tds = unihan.querySelectorAll("td:nth-of-type(2)");
   for (let i = 0; i <= 6; i++) { // Variants
-    tds[i].innerHTML = await getKanjiComponent(arr[i + 11]);
+    tds[i].innerHTML = await getKanjiComponent(arr[i + 12]);
   }
   for (let i = 7; i <= 15; i++) { // Readings
-    tds[i].textContent = arr[i + 11];
+    tds[i].textContent = arr[i + 12];
   }
   const examples = document.getElementById("examples");
   const divs = examples.querySelectorAll("div");
-  divs[0].appendChild(getExampleLinks(arr[27])); // 用例
-  divs[1].appendChild(getExampleLinks(arr[28])); // 熟語
-  divs[2].appendChild(getExampleLinks(arr[29])); // 学習例
+  divs[0].appendChild(getExampleLinks(arr[28])); // 用例
+  divs[1].appendChild(getExampleLinks(arr[29])); // 熟語
+  divs[2].appendChild(getExampleLinks(arr[30])); // 学習例
   if (grade != 0) {
     const kidsURL = `/kanji-dict/${dirNames[grade - 1]}/${kanji}/`;
     const a = document.getElementById("kids");
