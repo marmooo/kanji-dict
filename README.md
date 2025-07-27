@@ -36,5 +36,5 @@ CC-BY-SA-4.0
 - [Unihan Database](https://www.unicode.org/Public/UCD/latest/ucd/Unihan.zip)
 - [yi-bai/ids](https://github.com/yi-bai/ids) licensed under the
   [MIT](https://github.com/yi-bai/ids/blob/main/LICENSE)
-- [@marmooo/cjkvi-variants](https://github.com/marmooo/cjkvi-variants) licensed
+- [marmooo/cjkvi-variants](https://github.com/marmooo/cjkvi-variants) licensed
   under the [MIT](https://github.com/marmooo/cjkvi-variants/blob/master/LICENSE)
