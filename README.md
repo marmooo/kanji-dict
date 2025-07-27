@@ -33,6 +33,11 @@ CC-BY-SA-4.0
 - [Jigmoフォント](https://github.com/kamichikoichi/jigmo) licensed under the
   [MIT](https://github.com/kamichikoichi/jigmo/blob/main/README.md)
 - [古代文字フォント「春秋-tsu」](http://www.tarojiro.co.jp/kanji/shunju-tsu/)
+- [Unihan Database](https://www.unicode.org/Public/UCD/latest/ucd/Unihan.zip)
+- `data/MJ/*` is modified from [文字情報基盤](https://moji.or.jp/mojikiban/)
+  licensed under the
+  [CC-BY-SA-2.1-JP](http://creativecommons.org/licenses/by-sa/2.1/jp/)
 - [yi-bai/ids](https://github.com/yi-bai/ids) licensed under the
   [MIT](https://github.com/yi-bai/ids/blob/main/LICENSE)
-- [Unihan Database](https://www.unicode.org/Public/UCD/latest/ucd/Unihan.zip)
+- [@marmooo/cjkvi-variants](https://github.com/marmooo/cjkvi-variants) licensed
+  under the [MIT](https://github.com/marmooo/cjkvi-variants/blob/master/LICENSE)

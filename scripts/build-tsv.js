@@ -54,6 +54,16 @@ function initIDSDB() {
   return dict;
 }
 
+function initVariantsDB() {
+  const dict = {};
+  const csv = Deno.readTextFileSync("data/variants.csv");
+  csv.split("\n").forEach((line) => {
+    const [kanji, idsList] = line.split(",");
+    dict[kanji] = idsList;
+  });
+  return dict;
+}
+
 function initUnihanDB() {
   const dict = {};
   const tsv = Deno.readTextFileSync("data/unihan.tsv");
@@ -178,6 +188,7 @@ const unicodeRadical = new Kanji(UnicodeRadical);
 const unicodeStrokes = new Kanji(UnicodeStrokes);
 const radicalDB = initRadicalDB();
 const idsDB = initIDSDB();
+const variantsDB = initVariantsDB();
 const unihanDB = initUnihanDB();
 const gradedVocabs = initGradedVocabs();
 const gradedIdioms = initGradedIdioms();
@@ -238,6 +249,14 @@ function getIDS(kanji) {
   }
 }
 
+function getVariants(kanji) {
+  if (kanji in variantsDB) {
+    return variantsDB[kanji];
+  } else {
+    return "";
+  }
+}
+
 function getUnihan(kanji) {
   if (kanji in unihanDB) {
     return unihanDB[kanji];
@@ -280,6 +299,7 @@ UnicodeChart.forEach((list, i) => {
       getRadicals(kanji),
       getRadicalName(kanji),
       getIDS(kanji),
+      getVariants(kanji),
       ...getUnihan(kanji),
       info["用例"].join(" "),
       info["熟語"].join(" "),
