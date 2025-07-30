@@ -9,7 +9,7 @@ for await (const line of lineStream) {
   const arr = line.split("\t");
   const kanji = arr[0];
   for (let i = 1; i <= arr.length - 1; i++) {
-    const str = arr[i].replace(/[0-9a-zA-Z(){}\-|\[\].:?#\u2FF0-\u2FFB]/gu, "");
+    const str = arr[i].replace(/[0-9a-zA-Z(){}\-|\[\].,:?#\u2FF0-\u2FFB]/gu, "");
     const list = str.split(";");
     for (let j = 0; j < list.length; j++) {
       const ids = (list[j] === "") ? kanji : list[j];
