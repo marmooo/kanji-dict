@@ -14,47 +14,33 @@ function toggleDarkMode() {
   }
 }
 
-function getCharacterURL(char) {
-  const canvas = document.createElement("canvas");
-  const size = 4;
-  canvas.width = size;
-  canvas.height = size;
-  const context = canvas.getContext("2d", {
-    alpha: false,
-    desynchronized: true,
+function checkCharacters(chars) {
+  return new Promise((resolve) => {
+    const handle = (e) => {
+      worker.removeEventListener("message", handle);
+      resolve(e.data);
+    };
+    worker.addEventListener("message", handle);
+    worker.postMessage({ chars });
   });
-  context.font = `${size}px sans-serif`;
-  context.fillStyle = "white";
-  context.fillText(char, 0, size);
-  return canvas.toDataURL();
 }
 
-const uFFFFURL = getCharacterURL("\uffff");
-
-function characterIsSupported(char) {
-  const charURL = getCharacterURL(char);
-  return uFFFFURL != charURL;
-}
-
-function colorTable(td, code) {
+function colorTable(td, result) {
   return new Promise((resolve) => {
     if (td.classList.contains("bg-warning-subtle")) {
       resolve();
     } else {
-      const kanji = String.fromCodePoint(code);
-      setTimeout(() => {
-        if (!characterIsSupported(kanji)) {
-          td.classList.add("bg-warning-subtle");
-        }
-        resolve();
-      }, 0);
+      if (!result.supported) {
+        td.classList.add("bg-warning-subtle");
+      }
+      resolve();
     }
   });
 }
 
 function isElementInViewport(node) {
   const { top, bottom } = node.getBoundingClientRect();
-  return 0 <= bottom && top <= window.innerHeight;
+  return 0 <= bottom && top <= globalThis.innerHeight;
 }
 
 async function checkSupportInViewport() {
@@ -67,15 +53,19 @@ async function checkSupportInViewport() {
     const hex = tds[0].textContent;
     const from = Number(`0x${hex}`);
     const codes = Array(16).fill().map((_, i) => from + i);
+    const chars = codes.map((code) => String.fromCodePoint(code));
+    const results = await checkCharacters(chars);
     await Promise.all(
-      codes.map((code) => colorTable(tds[code - from + 1], code)),
+      results.map((result, i) => colorTable(tds[i + 1], result)),
     );
   }
 }
 
 loadConfig();
+const worker = new Worker("/kanji-dict/unicode-worker.js", { type: "module" });
 let scrollId;
 const codeTrs = [...document.querySelectorAll("#table tr")].slice(1);
 checkSupportInViewport();
+
 document.getElementById("toggleDarkMode").onclick = toggleDarkMode;
 globalThis.addEventListener("scroll", checkSupportInViewport);
