@@ -14,39 +14,37 @@ function toggleDarkMode() {
   }
 }
 
+const ranges = {
+  "ExtA": [0x3400, 0x4DBF],
+  "URO1": [0x4E00, 0x62FF],
+  "URO2": [0x6300, 0x77FF],
+  "URO3": [0x7800, 0x8CFF],
+  "URO4": [0x8E00, 0x9FFF],
+  "CI": [0xF900, 0xFAD9],
+  "ExtB1": [0x20000, 0x215FF],
+  "ExtB2": [0x21600, 0x230FF],
+  "ExtB3": [0x23100, 0x245FF],
+  "ExtB4": [0x24600, 0x260FF],
+  "ExtB5": [0x26100, 0x275FF],
+  "ExtB6": [0x27600, 0x290FF],
+  "ExtB7": [0x29100, 0x2A6DF],
+  "ExtC": [0x2A700, 0x2B739],
+  "ExtD": [0x2B740, 0x2B81D],
+  "ExtE": [0x2B820, 0x2CEA1],
+  "ExtF": [0x2CEB0, 0x2EBE0],
+  "ExtI": [0x2EBF0, 0x2EE5D],
+  "CIS": [0x2F800, 0x2FA1D],
+  "ExtG": [0x30000, 0x3134A],
+  "ExtH": [0x31350, 0x323AF],
+};
+
 function getUnicodeNameIndex(code) {
-  if (code < Number(0x3400)) return undefined;
-  if (code <= Number(0x4DBF)) return ["ExtA", code - Number(0x3400)];
-  if (code < Number(0x4E00)) return undefined;
-  if (code <= Number(0x62FF)) return ["URO1", code - Number(0x4E00)];
-  if (code <= Number(0x77FF)) return ["URO2", code - Number(0x6300)];
-  if (code <= Number(0x8CFF)) return ["URO3", code - Number(0x7800)];
-  if (code <= Number(0x9FFF)) return ["URO4", code - Number(0x8D00)];
-  if (code < Number(0xF900)) return undefined;
-  if (code <= Number(0xFAD9)) return ["CI", code - Number(0xF900)];
-  if (code <= Number(0x215FF)) return ["ExtB1", code - Number(0x20000)];
-  if (code <= Number(0x230FF)) return ["ExtB2", code - Number(0x21600)];
-  if (code <= Number(0x245FF)) return ["ExtB3", code - Number(0x23100)];
-  if (code <= Number(0x260FF)) return ["ExtB4", code - Number(0x24600)];
-  if (code <= Number(0x275FF)) return ["ExtB5", code - Number(0x26100)];
-  if (code <= Number(0x290FF)) return ["ExtB6", code - Number(0x27600)];
-  if (code <= Number(0x2A6DF)) return ["ExtB7", code - Number(0x29100)];
-  if (code < Number(0x2A700)) return undefined;
-  if (code <= Number(0x2B739)) return ["ExtC", code - Number(0x2A700)];
-  if (code < Number(0x2B740)) return undefined;
-  if (code <= Number(0x2B81D)) return ["ExtD", code - Number(0x2B740)];
-  if (code < Number(0x2B820)) return undefined;
-  if (code <= Number(0x2CEA1)) return ["ExtE", code - Number(0x2B820)];
-  if (code < Number(0x2CEB0)) return undefined;
-  if (code <= Number(0x2EBE0)) return ["ExtF", code - Number(0x2CEB0)];
-  if (code < Number(0x2EBF0)) return undefined;
-  if (code <= Number(0x2EE5D)) return ["ExtI", code - Number(0x2EBF0)];
-  if (code < Number(0x2F800)) return undefined;
-  if (code <= Number(0x2FA1D)) return ["CIS", code - Number(0x2F800)];
-  if (code < Number(0x30000)) return undefined;
-  if (code <= Number(0x3134A)) return ["ExtG", code - Number(0x30000)];
-  if (code < Number(0x31350)) return undefined;
-  if (code <= Number(0x323AF)) return ["ExtH", code - Number(0x31350)];
+  for (const [name, [start, end]] of Object.entries(ranges)) {
+    if (code >= start && code <= end) {
+      return [name, code - start];
+    }
+  }
+  return undefined;
 }
 
 async function fetchGlyphIndex(name) {
