@@ -19,7 +19,7 @@ const ranges = {
   "URO1": [0x4E00, 0x62FF],
   "URO2": [0x6300, 0x77FF],
   "URO3": [0x7800, 0x8CFF],
-  "URO4": [0x8E00, 0x9FFF],
+  "URO4": [0x8D00, 0x9FFF],
   "CI": [0xF900, 0xFAD9],
   "ExtB1": [0x20000, 0x215FF],
   "ExtB2": [0x21600, 0x230FF],
@@ -447,6 +447,7 @@ const matchCode = q.match(/^[uU] ?/);
 const code = matchCode
   ? parseInt("0x" + q.slice(matchCode[0].length))
   : q.codePointAt(0);
+console.log(code);
 loadMainGlyph(code);
 
 const nameIndex = getUnicodeNameIndex(code);
