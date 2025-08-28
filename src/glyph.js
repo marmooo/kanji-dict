@@ -447,7 +447,6 @@ const matchCode = q.match(/^[uU] ?/);
 const code = matchCode
   ? parseInt("0x" + q.slice(matchCode[0].length))
   : q.codePointAt(0);
-console.log(code);
 loadMainGlyph(code);
 
 const nameIndex = getUnicodeNameIndex(code);
