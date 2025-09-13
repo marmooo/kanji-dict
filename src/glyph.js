@@ -36,6 +36,7 @@ const ranges = {
   "CIS": [0x2F800, 0x2FA1D],
   "ExtG": [0x30000, 0x3134A],
   "ExtH": [0x31350, 0x323AF],
+  "ExtJ": [0x323B0, 0x33479],
 };
 
 function getUnicodeNameIndex(code) {
@@ -130,6 +131,7 @@ const unicodeNames = [
   "CJK統合漢字拡張G",
   "CJK統合漢字拡張H",
   "CJK統合漢字拡張I",
+  "CJK統合漢字拡張J",
 ];
 const jisCodeNames = [
   "表外",
@@ -178,13 +180,6 @@ function getReferenceLink(name, url) {
   a.rel = "noopener noreferer";
   li.appendChild(a);
   return li;
-}
-
-function getLink(url, text) {
-  const a = document.createElement("a");
-  a.href = url;
-  a.textContent = text;
-  return a;
 }
 
 function getDictReferences(kanji) {
@@ -395,14 +390,14 @@ async function addKanjiInfo(kanji, hex, tsv) {
   for (let i = 0; i <= 6; i++) { // Variants
     tds[i].innerHTML = await getKanjiComponent(arr[i + 12]);
   }
-  for (let i = 7; i <= 15; i++) { // Readings
+  for (let i = 7; i <= 17; i++) { // Readings
     tds[i].textContent = arr[i + 12];
   }
   const examples = document.getElementById("examples");
   const divs = examples.querySelectorAll("div");
-  divs[0].appendChild(getExampleLinks(arr[28])); // 用例
-  divs[1].appendChild(getExampleLinks(arr[29])); // 熟語
-  divs[2].appendChild(getExampleLinks(arr[30])); // 学習例
+  divs[0].appendChild(getExampleLinks(arr[30])); // 用例
+  divs[1].appendChild(getExampleLinks(arr[31])); // 熟語
+  divs[2].appendChild(getExampleLinks(arr[32])); // 学習例
   if (grade != 0) {
     const kidsURL = `/kanji-dict/${dirNames[grade - 1]}/${kanji}/`;
     const a = document.getElementById("kids");
