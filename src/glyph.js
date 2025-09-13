@@ -194,6 +194,10 @@ function getDictReferences(kanji) {
     `https://zi.tools/zi/${kanji}`,
   ));
   fragment.appendChild(getReferenceLink(
+    "漢典",
+    `https://www.zdic.net/hans/${kanji}`,
+  ));
+  fragment.appendChild(getReferenceLink(
     "漢語多功能字庫",
     `https://humanum.arts.cuhk.edu.hk//Lexis/lexi-mf/search.php?word=${kanji}`,
   ));
@@ -201,18 +205,19 @@ function getDictReferences(kanji) {
     "國學大師",
     `https://www.guoxuedashi.net/zidian/${hex}.html`,
   ));
-  fragment.appendChild(getReferenceLink(
-    "說文解字第一網",
-    `http://www.shuowen.net/jiezi/${hex}/`,
-  ));
   return fragment;
 }
 
 function getMeaningReferences(kanji) {
   const fragment = new DocumentFragment();
+  const hex = kanji.codePointAt(0).toString(16).toUpperCase();
   fragment.appendChild(getReferenceLink(
     "康熙字典網上版",
     `https://www.kangxizidian.com/kxhans/${kanji}`,
+  ));
+  fragment.appendChild(getReferenceLink(
+    "說文解字第一網",
+    `http://www.shuowen.net/jiezi/${hex}/`,
   ));
   fragment.appendChild(getReferenceLink(
     "中華語文知識庫",
@@ -225,10 +230,6 @@ function getMeaningReferences(kanji) {
   fragment.appendChild(getReferenceLink(
     "古今文字集成",
     `http://www.ccamc.co/cjkv.php?cjkv=${kanji}`,
-  ));
-  fragment.appendChild(getReferenceLink(
-    "漢典",
-    `https://www.zdic.net/hans/${kanji}`,
   ));
   return fragment;
 }
