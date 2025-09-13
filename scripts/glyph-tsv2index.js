@@ -38,3 +38,4 @@ getIndex("src/glyph/ExtF.tsv");
 getIndex("src/glyph/ExtG.tsv");
 getIndex("src/glyph/ExtH.tsv");
 getIndex("src/glyph/ExtI.tsv");
+getIndex("src/glyph/ExtJ.tsv");

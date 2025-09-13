@@ -9,9 +9,9 @@ function build(inFile, outFile, options) {
     Deno.writeTextFile(outFile, "");
     return;
   }
-  const ttf1 = Deno.readFileSync("fonts/Jigmo-20230816/Jigmo.ttf");
-  const ttf2 = Deno.readFileSync("fonts/Jigmo-20230816/Jigmo2.ttf");
-  const ttf3 = Deno.readFileSync("fonts/Jigmo-20230816/Jigmo3.ttf");
+  const ttf1 = Deno.readFileSync("fonts/Jigmo/Jigmo.ttf");
+  const ttf2 = Deno.readFileSync("fonts/Jigmo/Jigmo2.ttf");
+  const ttf3 = Deno.readFileSync("fonts/Jigmo/Jigmo3.ttf");
   options.text = text.replaceAll(/\n/g, "");
   const svg1 = ttf2svgFont(ttf1, options);
   const svg2 = ttf2svgFont(ttf2, options);

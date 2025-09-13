@@ -49,6 +49,7 @@ const names = [
   "CIS",
   "ExtG",
   "ExtH",
+  "ExtJ",
 ];
 
 const splitRange = [0, 64, 128, 256, 512, 1024, 2048];

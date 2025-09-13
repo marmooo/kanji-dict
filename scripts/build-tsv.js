@@ -195,7 +195,7 @@ const gradedIdioms = initGradedIdioms();
 const onkunDict = new Onkun();
 await onkunDict.loadJoyo("onkun/data/joyo-2017.csv");
 await onkunDict.load("Joyo", "onkun/data/joyo-2010.csv");
-await onkunDict.load("Unihan", "onkun/data/Unihan-2024-07-31.csv");
+await onkunDict.load("Unihan", "onkun/data/Unihan-2025-07-24.csv");
 
 const chartNames = [
   "URO1",
@@ -219,11 +219,11 @@ const chartNames = [
   "ExtG",
   "ExtH",
   "ExtI",
+  "ExtJ",
 ];
 
 function getRadicals(kanji) {
   const radicals = unicodeRadical.dict[kanji];
-  if (kanji === "𱶿") console.log("zzz", radicals);
   if (!radicals) return "";
   return radicals.join(" ");
 }
@@ -261,7 +261,7 @@ function getUnihan(kanji) {
   if (kanji in unihanDB) {
     return unihanDB[kanji];
   } else {
-    const arr = new Array(16);
+    const arr = new Array(18);
     for (let i = 0; i < arr.length; i++) {
       arr[i] = "";
     }

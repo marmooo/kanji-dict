@@ -12,9 +12,9 @@ function range(start, end) {
 // TODO: opentype.js 1.3.4 does not support IVS/IVD (HEAD is supported)
 // ex: font.charToGlyph("\u82a6\ue0100");
 const options = { removeNotdef: true, removeLigatures: true };
-const jigmo1 = Deno.readFileSync("fonts/Jigmo-20230816/Jigmo.ttf");
-const jigmo2 = Deno.readFileSync("fonts/Jigmo-20230816/Jigmo2.ttf");
-const jigmo3 = Deno.readFileSync("fonts/Jigmo-20230816/Jigmo3.ttf");
+const jigmo1 = Deno.readFileSync("fonts/Jigmo/Jigmo.ttf");
+const jigmo2 = Deno.readFileSync("fonts/Jigmo/Jigmo2.ttf");
+const jigmo3 = Deno.readFileSync("fonts/Jigmo/Jigmo3.ttf");
 
 const URO1 = range(Number(0x4E00), Number(0x62FF) + 1);
 options.text = URO1.join("");
@@ -86,7 +86,7 @@ options.text = ExtB7.join("");
 const ExtB7SVG = ttf2svgFont(jigmo2, options);
 Deno.writeTextFile("src/glyph/ExtB7.svg", string("image/svg+xml", ExtB7SVG));
 
-const ExtC = range(Number(0x2A700), Number(0x2B739) + 1);
+const ExtC = range(Number(0x2A700), Number(0x2B73F) + 1);
 options.text = ExtC.join("");
 const ExtCSVG = ttf2svgFont(jigmo2, options);
 Deno.writeTextFile("src/glyph/ExtC.svg", string("image/svg+xml", ExtCSVG));
@@ -96,7 +96,7 @@ options.text = ExtD.join("");
 const ExtDSVG = ttf2svgFont(jigmo2, options);
 Deno.writeTextFile("src/glyph/ExtD.svg", string("image/svg+xml", ExtDSVG));
 
-const ExtE = range(Number(0x2B820), Number(0x2CEA1) + 1);
+const ExtE = range(Number(0x2B820), Number(0x2CEAD) + 1);
 options.text = ExtE.join("");
 const ExtESVG = ttf2svgFont(jigmo2, options);
 Deno.writeTextFile("src/glyph/ExtE.svg", string("image/svg+xml", ExtESVG));
@@ -120,3 +120,8 @@ const ExtI = range(Number(0x2EBF0), Number(0x2EE5D) + 1);
 options.text = ExtI.join("");
 const ExtISVG = ttf2svgFont(jigmo2, options);
 Deno.writeTextFile("src/glyph/ExtI.svg", string("image/svg+xml", ExtISVG));
+
+const ExtJ = range(Number(0x323B0), Number(0x33479) + 1);
+options.text = ExtJ.join("");
+const ExtJSVG = ttf2svgFont(jigmo3, options);
+Deno.writeTextFile("src/glyph/ExtJ.svg", string("image/svg+xml", ExtJSVG));

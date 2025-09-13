@@ -54,3 +54,4 @@ getIndex("src/glyph/ExtF.svg");
 getIndex("src/glyph/ExtG.svg");
 getIndex("src/glyph/ExtH.svg");
 getIndex("src/glyph/ExtI.svg");
+getIndex("src/glyph/ExtJ.svg");

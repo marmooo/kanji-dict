@@ -121,11 +121,11 @@ const charts = [
   {
     dir: "ExtC",
     name: "CJK統合漢字拡張C",
-    range: [Number(0x2A700), Number(0x2B739)],
+    range: [Number(0x2A700), Number(0x2B73F)],
     description:
       "Unicode のブロックの1つである CJK統合漢字拡張C に収録されている文字の一覧です。",
     lead:
-      "CJK統合漢字拡張C は追加漢字面 (第2面) の U+2A700-2B739 の範囲に定義されています。",
+      "CJK統合漢字拡張C は追加漢字面 (第2面) の U+2A700-2B73F の範囲に定義されています。",
   },
   {
     dir: "ExtD",
@@ -139,11 +139,11 @@ const charts = [
   {
     dir: "ExtE",
     name: "CJK統合漢字拡張E",
-    range: [Number(0x2B820), Number(0x2CEA1)],
+    range: [Number(0x2B820), Number(0x2CEAD)],
     description:
       "Unicode のブロックの1つである CJK統合漢字拡張E に収録されている文字の一覧です。",
     lead:
-      "CJK統合漢字拡張E は追加漢字面 (第2面) の U+2B820-2CEA1 の範囲に定義されています。",
+      "CJK統合漢字拡張E は追加漢字面 (第2面) の U+2B820-2CEAD の範囲に定義されています。",
   },
   {
     dir: "ExtF",
@@ -189,6 +189,15 @@ const charts = [
       "Unicode のブロックの1つである CJK統合漢字拡張H に収録されている文字の一覧です。",
     lead:
       "CJK互換漢字補助 は第三漢字面 (第3面) の U+31350-323AF の範囲に定義されています。",
+  },
+  {
+    dir: "ExtJ",
+    name: "CJK統合漢字拡張J",
+    range: [Number(0x323B0), Number(0x33479)],
+    description:
+      "Unicode のブロックの1つである CJK統合漢字拡張H に収録されている文字の一覧です。",
+    lead:
+      "CJK互換漢字補助 は第三漢字面 (第3面) の U+323B0-33479 の範囲に定義されています。",
   },
 ];
 
