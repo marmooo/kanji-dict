@@ -5,6 +5,8 @@ import { TextLineStream } from "@std/streams";
 //   return /[\u{E0100}-\u{E01EF}]/u.test(str);
 // }
 
+const kanjiRegexp = /[\u3400-\u9FFF\uF900-\uFAFF\u{20000}-\u{37FFF}]/gu;
+
 async function parse(dict, filePath) {
   const file = await Deno.open(filePath);
   const lineStream = file.readable
@@ -42,8 +44,10 @@ async function parse(dict, filePath) {
     b = b.replace(/[\u{E0100}-\u{E01EF}]/gu, "");
     b = [...b];
 
+    if (!a.match(kanjiRegexp)) continue;
     for (let i = 0; i < b.length; i++) {
       if (a === b[i]) continue;
+      if (!b[i].match(kanjiRegexp)) continue;
       const code = b[i].codePointAt(0);
       if (code < Number(0x3400)) continue;
       if (dict.has(a)) {
@@ -71,8 +75,35 @@ function dump(dict) {
   return str.trimEnd();
 }
 
+const filePaths = [
+  // "cjkvi-simplified.txt",
+  "cjkvi-variants.txt",
+  // "duplicate-chars.txt",
+  "dypytz-variants.txt",
+  "hydzd-borrowed.txt",
+  "hydzd-variants.txt",
+  "hyogai-variants.txt",
+  "jinmei-variants.txt",
+  "jisx0212-variants.txt",
+  "jisx0213-variants.txt",
+  "joyo-variants.txt",
+  "jp-borrowed.txt",
+  "jp-old-style.txt",
+  "koseki-variants.txt",
+  "koseki-variants.txt",
+  "koseki-variants.txt",
+  // "non-cjk.txt",
+  "non-cognates.txt",
+  "numeric-variants.txt",
+  "radical-variants.txt",
+  "sawndip-variants.txt",
+  "twedu-variants.txt",
+  "ucs-scs.txt",
+  "x0212-x0213-variants.txt",
+];
 const dict = new Map();
-for await (const file of expandGlob("cjkvi-variants/*.txt")) {
-  await parse(dict, file.path);
+for (let i = 0; i < filePaths.length; i++) {
+  const filePath = `cjkvi-variants/${filePaths[i]}`;
+  await parse(dict, filePath);
 }
 Deno.writeTextFileSync("data/variants.csv", dump(dict));
