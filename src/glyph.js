@@ -184,7 +184,6 @@ function getReferenceLink(name, url) {
 
 function getDictReferences(kanji) {
   const fragment = new DocumentFragment();
-  const hex = kanji.codePointAt(0).toString(16).toUpperCase();
   fragment.appendChild(getReferenceLink(
     "Wiktionary",
     `https://ja.wiktionary.org/wiki/${kanji}`,
@@ -200,10 +199,6 @@ function getDictReferences(kanji) {
   fragment.appendChild(getReferenceLink(
     "漢語多功能字庫",
     `https://humanum.arts.cuhk.edu.hk//Lexis/lexi-mf/search.php?word=${kanji}`,
-  ));
-  fragment.appendChild(getReferenceLink(
-    "國學大師",
-    `https://www.guoxuedashi.net/zidian/${hex}.html`,
   ));
   return fragment;
 }
@@ -222,10 +217,6 @@ function getMeaningReferences(kanji) {
   fragment.appendChild(getReferenceLink(
     "中華語文知識庫",
     `https://www.chinese-linguipedia.org/search_results.html?query=${kanji}`,
-  ));
-  fragment.appendChild(getReferenceLink(
-    "異體字詞典",
-    `https://jf.xmu.edu.cn/variants/cc.html?q=${kanji}`,
   ));
   fragment.appendChild(getReferenceLink(
     "古今文字集成",
