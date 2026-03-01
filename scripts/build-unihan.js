@@ -19,7 +19,7 @@ const keys = [
   "kJapaneseOn",
   "kJapaneseKun",
   "kMandarin",
-  "kCantonese", 
+  "kCantonese",
   "kZhuang",
   "kFanqie",
   "kHangul",
@@ -69,7 +69,7 @@ for await (const line of lineStream) {
   if (!line.startsWith("U")) continue;
   const [fromCode, type, readings] = line.split("\t");
   const index = keys.indexOf(type);
-    if (index === -1) continue;
+  if (index === -1) continue;
   const fromKanji = unicodeToChar(fromCode);
   if (fromKanji in dict === false) {
     const dataArray = new Array(keys.length);
