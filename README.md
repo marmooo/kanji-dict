@@ -25,6 +25,7 @@ Unicode 17.0 のすべての漢字 102,998字を収録しています。
 ## Build
 
 ```
+go install github.com/tdewolff/minify/v2/cmd/minify@latest
 bash install-unihan.sh
 bash install-fonts.sh
 deno task build-csv
