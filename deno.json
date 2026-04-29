@@ -43,6 +43,7 @@
     "glyph-ttf2svg": "deno run -RWE --allow-run scripts/glyph-ttf2svg.js",
     "glyph-svg2index": "deno run -RW scripts/glyph-svg2index.js",
     "glyph-tsv2index": "deno run -RW scripts/glyph-tsv2index.js",
-    "update-sudachi-dict": "deno task build-tsv && deno task grade-html && deno task glyph-tsv2index"
+    "update-sudachi-dict": "deno task build-tsv && deno task grade-html && deno task glyph-tsv2index",
+    "update-ids": "deno task build-ids && deno task build-tsv && deno task glyph-tsv2index"
   }
 }
