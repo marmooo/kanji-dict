@@ -1,12 +1,30 @@
 import { ttf2svgFont } from "@marmooo/ttf2svg";
-import { string } from "@tdewolff/minify";
+// import { minify } from "@tdewolff/minify";
 
-function build(inFile, outFile, options) {
+export async function minify(_mimeType, svg) {
+  const command = new Deno.Command("minify", {
+    args: ["--type", "svg"],
+    stdin: "piped",
+    stdout: "piped",
+    stderr: "inherit",
+  });
+  const child = command.spawn();
+  const writer = child.stdin.getWriter();
+  await writer.write(new TextEncoder().encode(svg));
+  await writer.close();
+  const { code, stdout } = await child.output();
+  if (code !== 0) {
+    throw new Error("minify failed");
+  }
+  return new TextDecoder().decode(stdout);
+}
+
+async function build(inFile, outFile, baseOptions) {
   const text = Deno.readTextFileSync(inFile);
   const ttf1 = Deno.readFileSync("fonts/Jigmo/Jigmo.ttf");
   const ttf2 = Deno.readFileSync("fonts/Jigmo/Jigmo2.ttf");
   const ttf3 = Deno.readFileSync("fonts/Jigmo/Jigmo3.ttf");
-  options.text = text.replaceAll(/\n/g, "");
+  const options = { ...baseOptions, text: text.replaceAll(/\n/g, "") };
   const svg1 = ttf2svgFont(ttf1, options);
   const svg2 = ttf2svgFont(ttf2, options);
   const svg3 = ttf2svgFont(ttf3, options);
@@ -16,7 +34,8 @@ function build(inFile, outFile, options) {
     getGlyphs(svg2, fromRegExp, toRegExp) +
     getGlyphs(svg3, fromRegExp, toRegExp) +
     footer;
-  Deno.writeTextFile(outFile, string("image/svg+xml", svg));
+  const minified = await minify("image/svg+xml", svg);
+  Deno.writeTextFileSync(outFile, minified);
 }
 
 function getHeaderFooter(svgs) {
@@ -37,22 +56,22 @@ function getGlyphs(svg, fromRegExp, toRegExp) {
   return svg.slice(fromResult.index, svg.match(toRegExp).index);
 }
 
-// TODO: opentype.js 1.3.4 does not support IVS/IVD (HEAD is supported)
-// ex: font.charToGlyph("\u82a6\ue0100");
-const options = { removeNotdef: true, removeLigatures: true };
+const baseOptions = {
+  removeNotdef: true,
+  removeLigatures: true,
+};
 const strokesThreshold = 35;
 const fromRegExp = /<glyph [^\/>]*\/>/;
 const toRegExp = /<\/font>/;
-
 for (let i = 1; i < strokesThreshold; i++) {
-  build(
+  await build(
     `src/画数/${i}画/font.lst`,
     `src/画数/${i}画/font.svg`,
-    options,
+    baseOptions,
   );
 }
-build(
+await build(
   `src/画数/${strokesThreshold}画〜/font.lst`,
   `src/画数/${strokesThreshold}画〜/font.svg`,
-  options,
+  baseOptions,
 );
