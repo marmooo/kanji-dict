@@ -97,7 +97,7 @@ function getSVG(xml) {
   const horizAdvX = glyph.getAttribute("horiz-adv-x");
   const vertAdvY = glyph.getAttribute("vert-adv-y");
   return `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-  width="1em" height="1em" viewBox="0 0 ${horizAdvX} ${vertAdvY}">
+  width="1em" height="1em" viewBox="0 0 ${horizAdvX} ${horizAdvX}">
   <g transform="scale(1, -1) translate(0, -${vertAdvY})"><path d="${d}"></g>
 </svg>
 `;
