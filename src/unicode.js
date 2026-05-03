@@ -1,17 +1,10 @@
-function loadConfig() {
-  if (localStorage.getItem("darkMode") == 1) {
-    document.documentElement.setAttribute("data-bs-theme", "dark");
-  }
-}
-
 function toggleDarkMode() {
-  if (localStorage.getItem("darkMode") == 1) {
-    localStorage.setItem("darkMode", 0);
-    document.documentElement.setAttribute("data-bs-theme", "light");
-  } else {
-    localStorage.setItem("darkMode", 1);
-    document.documentElement.setAttribute("data-bs-theme", "dark");
-  }
+  const html = document.documentElement;
+  const newTheme = html.getAttribute("data-bs-theme") === "dark"
+    ? "light"
+    : "dark";
+  html.setAttribute("data-bs-theme", newTheme);
+  localStorage.setItem("darkMode", newTheme);
 }
 
 function checkCharacters(chars) {
@@ -53,7 +46,6 @@ async function checkSupportInViewport() {
   running = false;
 }
 
-loadConfig();
 let scrollTimeout;
 let running = false;
 const worker = new Worker("/kanji-dict/unicode-worker.js", { type: "module" });

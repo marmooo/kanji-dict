@@ -1,17 +1,10 @@
-function loadConfig() {
-  if (localStorage.getItem("darkMode") == 1) {
-    document.documentElement.setAttribute("data-bs-theme", "dark");
-  }
-}
-
 function toggleDarkMode() {
-  if (localStorage.getItem("darkMode") == 1) {
-    localStorage.setItem("darkMode", 0);
-    document.documentElement.setAttribute("data-bs-theme", "light");
-  } else {
-    localStorage.setItem("darkMode", 1);
-    document.documentElement.setAttribute("data-bs-theme", "dark");
-  }
+  const html = document.documentElement;
+  const newTheme = html.getAttribute("data-bs-theme") === "dark"
+    ? "light"
+    : "dark";
+  html.setAttribute("data-bs-theme", newTheme);
+  localStorage.setItem("darkMode", newTheme);
 }
 
 const ranges = {
@@ -427,7 +420,6 @@ async function loadMainGlyph(code) {
   document.getElementById("kanji").innerHTML = glyph;
 }
 
-loadConfig();
 const params = new URLSearchParams(location.search);
 const q = params.get("q");
 const matchCode = q.match(/^[uU] ?/);

@@ -1,22 +1,48 @@
 function loadConfig() {
-  if (localStorage.getItem("darkMode") == 1) {
-    document.documentElement.setAttribute("data-bs-theme", "dark");
-  }
+  const isDark =
+    document.documentElement.getAttribute("data-bs-theme") === "dark";
+  applySvgTheme(isDark);
 }
 
 function toggleDarkMode() {
-  const svg = document.getElementById("kanji").contentDocument.documentElement;
-  if (localStorage.getItem("darkMode") == 1) {
-    localStorage.setItem("darkMode", 0);
-    document.documentElement.setAttribute("data-bs-theme", "light");
-    svg.style.background = "#fff";
-    svg.firstElementChild.style.stroke = "#000";
-  } else {
-    localStorage.setItem("darkMode", 1);
-    document.documentElement.setAttribute("data-bs-theme", "dark");
-    svg.style.background = "#212529";
-    svg.firstElementChild.style.stroke = "#fff";
-  }
+  const html = document.documentElement;
+  const newTheme = html.getAttribute("data-bs-theme") === "dark"
+    ? "light"
+    : "dark";
+  html.setAttribute("data-bs-theme", newTheme);
+  localStorage.setItem("darkMode", newTheme);
+  applySvgTheme(newTheme === "dark");
+}
+
+function applySvgTheme(isDark) {
+  document.querySelectorAll("object").forEach((object) => {
+    applyOrWait(object, isDark);
+  });
+}
+
+function applyOrWait(object, isDark) {
+  if (applyToObject(object, isDark)) return;
+  if (themedObjects.has(object)) return;
+  themedObjects.add(object);
+  object.addEventListener("load", () => {
+    const currentDark =
+      document.documentElement.getAttribute("data-bs-theme") === "dark";
+    applyToObject(object, currentDark);
+  }, { once: true });
+}
+
+function applyToObject(object, isDark) {
+  const doc = object.contentDocument;
+  if (!doc || doc.documentURI === "about:blank") return false;
+  const svg = doc.documentElement;
+  if (!svg) return false;
+  svg.style.background = isDark ? "#212529" : "#fff";
+  const paths = doc.querySelectorAll("path");
+  paths.forEach((path) => {
+    path.style.stroke = isDark ? "#fff" : "#000";
+  });
+  object.style.visibility = "visible";
+  return true;
 }
 
 function prev() {
@@ -173,7 +199,7 @@ function init(object) {
   }
 }
 
-loadConfig();
+const themedObjects = new WeakSet();
 const object = document.getElementById("kanji");
 const kanjiId = object.data.split("/").at(-1).split(".")[0];
 let animator;
@@ -181,6 +207,7 @@ let kanjiSvg;
 let kakusu;
 let currPos = 1;
 init(object);
+loadConfig();
 
 document.getElementById("toggleDarkMode").onclick = toggleDarkMode;
 document.getElementById("next").onclick = next;
