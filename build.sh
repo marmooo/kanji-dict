@@ -4,6 +4,7 @@ deno task onkun-html
 deno task radical-html
 deno task strokes-html
 deno task unicode-html
+deno task ivd-html
 cp -r src/* docs
 drop-inline-css -d src/小1/一/index.html > inline.css
 drop-inline-css -r src -o docs -c inline.css
