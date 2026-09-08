@@ -16,6 +16,8 @@ drop-inline-css -d src/音訓/あ/index.html > inline.css
 drop-inline-css -r src/音訓 -o docs/音訓 -c inline.css
 drop-inline-css -d src/unicode/URO1/index.html > inline.css
 drop-inline-css -r src/unicode -o docs/unicode -c inline.css
+drop-inline-css -d src/ivd/URO1/index.html > inline.css
+drop-inline-css -r src/ivd -o docs/ivd -c inline.css
 drop-inline-css src/index.html -o docs/index.html
 drop-inline-css src/glyph/index.html -o docs/glyph/index.html
 rm inline.css
