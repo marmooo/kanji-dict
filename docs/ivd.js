@@ -1,0 +1,1 @@
+function toggleDarkMode(){const e=document.documentElement,t=e.getAttribute("data-bs-theme")==="dark"?"light":"dark";e.setAttribute("data-bs-theme",t),localStorage.setItem("darkMode",t)}document.getElementById("toggleDarkMode").onclick=toggleDarkMode

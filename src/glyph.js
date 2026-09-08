@@ -397,6 +397,74 @@ async function addKanjiInfo(kanji, hex, tsv) {
     });
 }
 
+// cache so a repeated block (unlikely on this page, but cheap to
+// guard) doesn't refetch the same {name}.json
+const ivdIndexCache = {};
+
+async function fetchIvdIndex(name) {
+  if (name in ivdIndexCache) {
+    return ivdIndexCache[name];
+  }
+  const response = await fetch(`/kanji-dict/ivd/${name}.json`);
+  // most blocks have plenty of kanji with zero IVD variants, so
+  // there may be no {name}.json at all for this block
+  const index = response.ok ? await response.json() : {};
+  ivdIndexCache[name] = index;
+  return index;
+}
+
+// Same byte-range scheme as fetchGlyphIndex()/fetchGlyph() above, but
+// against src/ivd/ (e.g. src/ivd/URO1.svg) rather than src/glyph/ —
+// IVD variant glyphs live alongside the IVD preview pages
+// (src/ivd/URO1/index.html), the same way src/unicode/'s block fonts
+// (src/unicode/URO1.3.woff2) sit next to its own preview pages.
+const ivdGlyphIndexCache = {};
+
+async function fetchIvdGlyphIndex(name) {
+  if (name in ivdGlyphIndexCache) {
+    return ivdGlyphIndexCache[name];
+  }
+  const response = await fetch(`/kanji-dict/ivd/${name}.svg.idx`);
+  const buffer = await response.arrayBuffer();
+  const arr = new Uint16Array(buffer);
+  let sum = 0;
+  const result = Array.from(arr, (x) => sum += x);
+  ivdGlyphIndexCache[name] = result;
+  return result;
+}
+
+async function fetchIvdGlyph(name, index) {
+  const arr = await fetchIvdGlyphIndex(name);
+  const from = arr[index];
+  const to = arr[index + 1] - 1;
+  const response = await fetch(`/kanji-dict/ivd/${name}.svg`, {
+    headers: {
+      "content-type": "multipart/byteranges",
+      "range": `bytes=${from}-${to}`,
+    },
+  });
+  return await response.text();
+}
+
+async function loadIvdVariants(code) {
+  const nameIndex = getUnicodeNameIndex(code);
+  if (!nameIndex) return "";
+  const [name] = nameIndex;
+  const index = await fetchIvdIndex(name);
+  const entries = index[code.toString(16)];
+  if (!entries) return "";
+  const tiles = await Promise.all(entries.map(async (entry) => {
+    const xml = await fetchIvdGlyph(entry.file, entry.index);
+    const svg = getSVG(xml).replace(
+      'width="1em" height="1em"',
+      'width="32px" height="32px"',
+    );
+    const vsHex = entry.vs.toUpperCase();
+    return `<div class="tile">${svg}<br><small>U+${vsHex}</small></div>`;
+  }));
+  return tiles.join("\n");
+}
+
 async function loadSVG(code) {
   const nameIndex = getUnicodeNameIndex(code);
   if (nameIndex) {
@@ -437,6 +505,14 @@ if (nameIndex) {
   const tsv = await fetchTSV(name, index);
   await addKanjiInfo(kanji, hex, tsv);
   addReferences(kanji);
+  const ivdHTML = await loadIvdVariants(code);
+  const ivdSection = document.getElementById("ivdSection");
+  if (ivdHTML) {
+    document.getElementById("ivd").innerHTML = ivdHTML;
+    ivdSection.classList.remove("d-none");
+  } else {
+    ivdSection.classList.add("d-none");
+  }
 } else {
   document.title = `\ufffd (U+FFFD) | ${document.title}`;
 }
