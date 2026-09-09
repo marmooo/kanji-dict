@@ -117,7 +117,7 @@ function build() {
       const text = list.map((entry) =>
         baseChar + String.fromCodePoint(entry.vs)
       ).join(" ");
-      return `<div class="ivd-row d-flex flex-wrap align-items-center gap-3">
+      return `<div class="ivd-row text-center d-flex flex-wrap align-items-center gap-3">
         <div class="base">${baseSVG}<br><small><a href="/kanji-dict/glyph/?q=U+${hex}">U+${hex}</a></small></div>
         <div class="d-flex flex-wrap">${cells}</div>
         <div class="ivd-text notranslate text-muted small ms-auto">${text}</div>
