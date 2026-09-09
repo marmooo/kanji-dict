@@ -347,9 +347,9 @@ async function getKanjiComponent(kanjiString) {
   }
   const glyphs = await Promise.all(promises);
   for (let i = 0; i < glyphs.length; i++) {
-    html += `<a class="p-1" href="/kanji-dict/glyph/?q=${
-      arr[i]
-    }">${glyphs[i]}</a>`;
+    html += `<a class="p-1" href="/kanji-dict/glyph/?q=${arr[i]}">${
+      glyphs[i]
+    }</a>`;
   }
   return html;
 }
@@ -369,7 +369,9 @@ async function addKanjiInfo(kanji, hex, tsv) {
   trs[7].children[1].innerHTML = getRadicalComponent(arr[8]);
   trs[8].children[1].textContent = arr[9]; // 部首
   document.getElementById("ids").innerHTML = getIDSComponent(arr[10]); // IDS
-  document.getElementById("variants").innerHTML = await getKanjiComponent(arr[11]); // Variants
+  document.getElementById("variants").innerHTML = await getKanjiComponent(
+    arr[11],
+  ); // Variants
   const unihan = document.getElementById("unihan");
   const tds = unihan.querySelectorAll("td:nth-of-type(2)");
   for (let i = 0; i <= 6; i++) { // Variants
