@@ -1,4 +1,3 @@
-import { expandGlob } from "@std/fs";
 import { TextLineStream } from "@std/streams";
 
 // function hasIVS(str) {
