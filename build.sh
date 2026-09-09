@@ -4,6 +4,7 @@ deno task onkun-html
 deno task radical-html
 deno task strokes-html
 deno task unicode-html
+deno task variants-html
 deno task ivd-html
 cp -r src/* docs
 drop-inline-css -d src/小1/一/index.html > inline.css
@@ -16,6 +17,8 @@ drop-inline-css -d src/音訓/あ/index.html > inline.css
 drop-inline-css -r src/音訓 -o docs/音訓 -c inline.css
 drop-inline-css -d src/unicode/URO1/index.html > inline.css
 drop-inline-css -r src/unicode -o docs/unicode -c inline.css
+drop-inline-css -d src/variants/URO1/index.html > inline.css
+drop-inline-css -r src/variants -o docs/variants -c inline.css
 drop-inline-css -d src/ivd/URO1/index.html > inline.css
 drop-inline-css -r src/ivd -o docs/ivd -c inline.css
 drop-inline-css src/index.html -o docs/index.html
