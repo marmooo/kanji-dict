@@ -49,7 +49,10 @@
     "ivd-ttf2svg": "deno run -RWE --allow-run scripts/ivd-ttf2svg.js",
     "ivd-svg2index": "deno run -RW scripts/ivd-svg2index.js",
     "ivd-html": "deno run -RWE scripts/ivd-html.js",
+    "ids": "deno task build-ids-index && deno task build-ids-strokes",
+    "build-ids-index": "deno run -RW scripts/build-ids-index.js",
+    "build-ids-strokes": "deno run -RW scripts/build-ids-strokes.js",
     "update-sudachi-dict": "deno task build-tsv && deno task grade-html && deno task glyph-tsv2index",
-    "update-ids": "deno task build-ids && deno task build-tsv && deno task glyph-tsv2index"
+    "update-ids": "deno task build-ids && deno task build-tsv && deno task glyph-tsv2index && deno task ids"
   }
 }

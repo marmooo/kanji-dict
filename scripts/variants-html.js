@@ -25,7 +25,12 @@
 import { Eta } from "eta";
 import { toSVG } from "@marmooo/ttf2svg";
 import { loadJigmoFonts } from "./lib/ivd-entries.js";
-import { blockInfo, blocks, getBlock, sidebarRows } from "./lib/variants-blocks.js";
+import {
+  blockInfo,
+  blocks,
+  getBlock,
+  sidebarRows,
+} from "./lib/variants-blocks.js";
 
 function withCurrentColor(svg) {
   return svg.replace("<svg ", '<svg fill="currentColor" ');

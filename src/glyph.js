@@ -1,3 +1,5 @@
+import { getSVG, getUnicodeNameIndex, loadGlyph } from "./glyph-loader.js";
+
 function toggleDarkMode() {
   const html = document.documentElement;
   const newTheme = html.getAttribute("data-bs-theme") === "dark"
@@ -5,61 +7,6 @@ function toggleDarkMode() {
     : "dark";
   html.setAttribute("data-bs-theme", newTheme);
   localStorage.setItem("darkMode", newTheme);
-}
-
-const ranges = {
-  "ExtA": [0x3400, 0x4DBF],
-  "URO1": [0x4E00, 0x62FF],
-  "URO2": [0x6300, 0x77FF],
-  "URO3": [0x7800, 0x8CFF],
-  "URO4": [0x8D00, 0x9FFF],
-  "CI": [0xF900, 0xFAD9],
-  "ExtB1": [0x20000, 0x215FF],
-  "ExtB2": [0x21600, 0x230FF],
-  "ExtB3": [0x23100, 0x245FF],
-  "ExtB4": [0x24600, 0x260FF],
-  "ExtB5": [0x26100, 0x275FF],
-  "ExtB6": [0x27600, 0x290FF],
-  "ExtB7": [0x29100, 0x2A6DF],
-  "ExtC": [0x2A700, 0x2B739],
-  "ExtD": [0x2B740, 0x2B81D],
-  "ExtE": [0x2B820, 0x2CEA1],
-  "ExtF": [0x2CEB0, 0x2EBE0],
-  "ExtI": [0x2EBF0, 0x2EE5D],
-  "CIS": [0x2F800, 0x2FA1D],
-  "ExtG": [0x30000, 0x3134A],
-  "ExtH": [0x31350, 0x323AF],
-  "ExtJ": [0x323B0, 0x33479],
-};
-
-function getUnicodeNameIndex(code) {
-  for (const [name, [start, end]] of Object.entries(ranges)) {
-    if (code >= start && code <= end) {
-      return [name, code - start];
-    }
-  }
-  return undefined;
-}
-
-async function fetchGlyphIndex(name) {
-  const response = await fetch(`/kanji-dict/glyph/${name}.svg.idx`);
-  const buffer = await response.arrayBuffer();
-  const arr = new Uint16Array(buffer);
-  let sum = 0;
-  return Array.from(arr, (x) => sum += x);
-}
-
-async function fetchGlyph(name, index) {
-  const arr = await fetchGlyphIndex(name);
-  const from = arr[index];
-  const to = arr[index + 1] - 1;
-  const response = await fetch(`/kanji-dict/glyph/${name}.svg`, {
-    headers: {
-      "content-type": "multipart/byteranges",
-      "range": `bytes=${from}-${to}`,
-    },
-  });
-  return await response.text();
 }
 
 async function fetchTSVIndex(name) {
@@ -81,19 +28,6 @@ async function fetchTSV(name, index) {
     },
   });
   return await response.text();
-}
-
-function getSVG(xml) {
-  const doc = new DOMParser().parseFromString(xml, "text/xml");
-  const glyph = doc.querySelector("glyph");
-  const d = glyph.getAttribute("d");
-  const horizAdvX = glyph.getAttribute("horiz-adv-x");
-  const vertAdvY = glyph.getAttribute("vert-adv-y");
-  return `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-  width="1em" height="1em" viewBox="0 0 ${horizAdvX} ${horizAdvX}">
-  <g transform="scale(1, -1) translate(0, -${vertAdvY})"><path d="${d}"></g>
-</svg>
-`;
 }
 
 const dirNames = [
@@ -323,14 +257,30 @@ function getRadicalComponent(radicalText) {
   return components.join(" または ");
 }
 
+// Links to /kanji-dict/ids/?q=... (src/ids.js), which fetches the
+// component->kanji index once and does the matching client-side —
+// no per-component/per-combination pages to keep in sync, so every
+// component can just be linked unconditionally.
+function getIDSComponentLink(component) {
+  return `<a href="/kanji-dict/ids/?q=${component}">${component}</a>`;
+}
+
 function getIDSComponent(idsString) {
   let html = "";
   if (idsString.length === 0) return "";
   idsString.split(" ").forEach((kanjis) => {
+    const components = Array.from(kanjis);
     html += "<li>";
-    html += Array.from(kanjis).map((kanji) => {
-      return `<span>${kanji}</span>`;
-    }).join(" ＋ ");
+    html += components.map(getIDSComponentLink).join(" ＋ ");
+    // A kanji with 2+ components in its decomposition can also be
+    // searched as a whole combination (e.g. 彳＋亍 for 行 ->
+    // /kanji-dict/ids/?q=彳亍); a single-component decomposition has
+    // nothing left to combine with.
+    if (components.length >= 2) {
+      const q = components.join("");
+      html +=
+        ` <a href="/kanji-dict/ids/?q=${q}" class="text-muted small">(この組み合わせで検索)</a>`;
+    }
     html += "</li>";
   });
   return html;
@@ -465,24 +415,6 @@ async function loadIvdVariants(code) {
     return `<div class="tile">${svg}<br><small>U+${vsHex}</small></div>`;
   }));
   return tiles.join("\n");
-}
-
-async function loadSVG(code) {
-  const nameIndex = getUnicodeNameIndex(code);
-  if (nameIndex) {
-    const [name, index] = nameIndex;
-    const xml = await fetchGlyph(name, index);
-    return getSVG(xml);
-  }
-}
-
-async function loadGlyph(code) {
-  const svg = await loadSVG(code);
-  if (svg) {
-    return svg;
-  } else {
-    return `<span>\ufffd</span>`;
-  }
 }
 
 async function loadMainGlyph(code) {
