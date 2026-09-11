@@ -6,7 +6,12 @@
 // by scripts/build-variants.js from cjkvi-variants and friends) —
 // not the Jigmo IVS glyphs src/ivd/ shows.
 
-import { blockInfo as ivdBlockInfo, blocks, getBlock, sidebarRows } from "./ivd-blocks.js";
+import {
+  blockInfo as ivdBlockInfo,
+  blocks,
+  getBlock,
+  sidebarRows,
+} from "./ivd-blocks.js";
 
 export { blocks, getBlock, sidebarRows };
 
