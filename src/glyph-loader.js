@@ -6,7 +6,6 @@
 // hundreds or thousands of glyphs from the same block (e.g. URO1),
 // so fetching and re-summing that block's .idx file every single
 // time would be wasteful.
-
 export const ranges = {
   "ExtA": [0x3400, 0x4DBF],
   "URO1": [0x4E00, 0x62FF],
@@ -14,6 +13,9 @@ export const ranges = {
   "URO3": [0x7800, 0x8CFF],
   "URO4": [0x8D00, 0x9FFF],
   "CI": [0xF900, 0xFAD9],
+  "Radicals": [0x2E80, 0x2FDF],
+  "CJKStrokes": [0x31C0, 0x31EF],
+  "IDC": [0x2FF0, 0x2FFF],
   "ExtB1": [0x20000, 0x215FF],
   "ExtB2": [0x21600, 0x230FF],
   "ExtB3": [0x23100, 0x245FF],
@@ -21,9 +23,9 @@ export const ranges = {
   "ExtB5": [0x26100, 0x275FF],
   "ExtB6": [0x27600, 0x290FF],
   "ExtB7": [0x29100, 0x2A6DF],
-  "ExtC": [0x2A700, 0x2B739],
+  "ExtC": [0x2A700, 0x2B73F],
   "ExtD": [0x2B740, 0x2B81D],
-  "ExtE": [0x2B820, 0x2CEA1],
+  "ExtE": [0x2B820, 0x2CEAD],
   "ExtF": [0x2CEB0, 0x2EBE0],
   "ExtI": [0x2EBF0, 0x2EE5D],
   "CIS": [0x2F800, 0x2FA1D],
@@ -96,6 +98,10 @@ export async function loadGlyph(code) {
   if (svg) {
     return svg;
   } else {
-    return `<span>\ufffd</span>`;
+    // Not in any Jigmo-backed block above — most likely an ordinary
+    // character (ASCII, kana, general punctuation, ...) that every
+    // browser already renders fine on its own, so fall back to
+    // plain text instead of a "missing glyph" placeholder.
+    return `<span>${String.fromCodePoint(code)}</span>`;
   }
 }
