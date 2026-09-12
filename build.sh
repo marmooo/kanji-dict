@@ -23,6 +23,7 @@ drop-inline-css -d src/ivd/URO1/index.html > inline.css
 drop-inline-css -r src/ivd -o docs/ivd -c inline.css
 drop-inline-css src/index.html -o docs/index.html
 drop-inline-css src/glyph/index.html -o docs/glyph/index.html
+drop-inline-css src/ids/index.html -o docs/ids/index.html
 rm inline.css
 deno run -A bundle.js ./src/index.js > docs/index.js
 minify -r docs -o .
