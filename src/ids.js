@@ -140,6 +140,7 @@ function buildStrokeSidebar(groups) {
     summary.textContent = `${strokes}画 (${components.length})`;
     details.appendChild(summary);
     const body = document.createElement("div");
+    body.className = "pb-3";
     details.appendChild(body);
     let loaded = false;
     const load = () => {
