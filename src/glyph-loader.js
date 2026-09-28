@@ -64,7 +64,6 @@ export async function fetchGlyph(name, index) {
   const to = arr[index + 1] - 1;
   const response = await fetch(`/kanji-dict/glyph/${name}.svg`, {
     headers: {
-      "content-type": "multipart/byteranges",
       "range": `bytes=${from}-${to}`,
     },
   });

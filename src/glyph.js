@@ -23,7 +23,6 @@ async function fetchTSV(name, index) {
   const to = arr[index + 1] - 1;
   const response = await fetch(`/kanji-dict/glyph/${name}.tsv`, {
     headers: {
-      "content-type": "multipart/byteranges",
       "range": `bytes=${from}-${to}`,
     },
   });
@@ -391,7 +390,6 @@ async function fetchIvdGlyph(name, index) {
   const to = arr[index + 1] - 1;
   const response = await fetch(`/kanji-dict/ivd/${name}.svg`, {
     headers: {
-      "content-type": "multipart/byteranges",
       "range": `bytes=${from}-${to}`,
     },
   });
